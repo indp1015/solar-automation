@@ -52,146 +52,179 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1>Interactive Solar Calculator</h1>
-<p>Select a state to see estimated savings for a 6kW system.</p>
+<div class="max-w-3xl mx-auto">
+    <div class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-brand mb-4">Interactive Solar Calculator</h1>
+        <p class="text-lg text-gray-600">Select a state to see estimated savings and payback periods for a standard 6kW system.</p>
+    </div>
 
-<div style="margin-bottom: 20px;">
-    <label for="stateSelect">Select State: </label>
-    <select id="stateSelect" onchange="loadState()">
-        <option value="">-- Choose --</option>
-        
-        <option value="AL">Alabama</option>
-        
-        <option value="AK">Alaska</option>
-        
-        <option value="AZ">Arizona</option>
-        
-        <option value="AR">Arkansas</option>
-        
-        <option value="CA">California</option>
-        
-        <option value="CO">Colorado</option>
-        
-        <option value="CT">Connecticut</option>
-        
-        <option value="DE">Delaware</option>
-        
-        <option value="DC">District of Columbia</option>
-        
-        <option value="FL">Florida</option>
-        
-        <option value="GA">Georgia</option>
-        
-        <option value="HI">Hawaii</option>
-        
-        <option value="ID">Idaho</option>
-        
-        <option value="IL">Illinois</option>
-        
-        <option value="IN">Indiana</option>
-        
-        <option value="IA">Iowa</option>
-        
-        <option value="KS">Kansas</option>
-        
-        <option value="KY">Kentucky</option>
-        
-        <option value="LA">Louisiana</option>
-        
-        <option value="ME">Maine</option>
-        
-        <option value="MD">Maryland</option>
-        
-        <option value="MA">Massachusetts</option>
-        
-        <option value="MI">Michigan</option>
-        
-        <option value="MN">Minnesota</option>
-        
-        <option value="MS">Mississippi</option>
-        
-        <option value="MO">Missouri</option>
-        
-        <option value="MT">Montana</option>
-        
-        <option value="NE">Nebraska</option>
-        
-        <option value="NV">Nevada</option>
-        
-        <option value="NH">New Hampshire</option>
-        
-        <option value="NJ">New Jersey</option>
-        
-        <option value="NM">New Mexico</option>
-        
-        <option value="NY">New York</option>
-        
-        <option value="NC">North Carolina</option>
-        
-        <option value="ND">North Dakota</option>
-        
-        <option value="OH">Ohio</option>
-        
-        <option value="OK">Oklahoma</option>
-        
-        <option value="OR">Oregon</option>
-        
-        <option value="PA">Pennsylvania</option>
-        
-        <option value="RI">Rhode Island</option>
-        
-        <option value="SC">South Carolina</option>
-        
-        <option value="SD">South Dakota</option>
-        
-        <option value="TN">Tennessee</option>
-        
-        <option value="TX">Texas</option>
-        
-        <option value="UT">Utah</option>
-        
-        <option value="VT">Vermont</option>
-        
-        <option value="VA">Virginia</option>
-        
-        <option value="WA">Washington</option>
-        
-        <option value="WV">West Virginia</option>
-        
-        <option value="WI">Wisconsin</option>
-        
-        <option value="WY">Wyoming</option>
-        
-    </select>
-</div>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <div class="mb-8">
+            <label for="stateSelect" class="block text-sm font-medium text-gray-700 mb-2">Select a State</label>
+            <div class="relative">
+                <select id="stateSelect" onchange="loadState()" class="block w-full appearance-none rounded-md border border-gray-300 bg-white px-4 py-3 pr-10 text-base focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand sm:text-sm shadow-sm">
+                    <option value="">-- Choose a State --</option>
+                    
+                    <option value="AL">Alabama</option>
+                    
+                    <option value="AK">Alaska</option>
+                    
+                    <option value="AZ">Arizona</option>
+                    
+                    <option value="AR">Arkansas</option>
+                    
+                    <option value="CA">California</option>
+                    
+                    <option value="CO">Colorado</option>
+                    
+                    <option value="CT">Connecticut</option>
+                    
+                    <option value="DE">Delaware</option>
+                    
+                    <option value="DC">District of Columbia</option>
+                    
+                    <option value="FL">Florida</option>
+                    
+                    <option value="GA">Georgia</option>
+                    
+                    <option value="HI">Hawaii</option>
+                    
+                    <option value="ID">Idaho</option>
+                    
+                    <option value="IL">Illinois</option>
+                    
+                    <option value="IN">Indiana</option>
+                    
+                    <option value="IA">Iowa</option>
+                    
+                    <option value="KS">Kansas</option>
+                    
+                    <option value="KY">Kentucky</option>
+                    
+                    <option value="LA">Louisiana</option>
+                    
+                    <option value="ME">Maine</option>
+                    
+                    <option value="MD">Maryland</option>
+                    
+                    <option value="MA">Massachusetts</option>
+                    
+                    <option value="MI">Michigan</option>
+                    
+                    <option value="MN">Minnesota</option>
+                    
+                    <option value="MS">Mississippi</option>
+                    
+                    <option value="MO">Missouri</option>
+                    
+                    <option value="MT">Montana</option>
+                    
+                    <option value="NE">Nebraska</option>
+                    
+                    <option value="NV">Nevada</option>
+                    
+                    <option value="NH">New Hampshire</option>
+                    
+                    <option value="NJ">New Jersey</option>
+                    
+                    <option value="NM">New Mexico</option>
+                    
+                    <option value="NY">New York</option>
+                    
+                    <option value="NC">North Carolina</option>
+                    
+                    <option value="ND">North Dakota</option>
+                    
+                    <option value="OH">Ohio</option>
+                    
+                    <option value="OK">Oklahoma</option>
+                    
+                    <option value="OR">Oregon</option>
+                    
+                    <option value="PA">Pennsylvania</option>
+                    
+                    <option value="RI">Rhode Island</option>
+                    
+                    <option value="SC">South Carolina</option>
+                    
+                    <option value="SD">South Dakota</option>
+                    
+                    <option value="TN">Tennessee</option>
+                    
+                    <option value="TX">Texas</option>
+                    
+                    <option value="UT">Utah</option>
+                    
+                    <option value="VT">Vermont</option>
+                    
+                    <option value="VA">Virginia</option>
+                    
+                    <option value="WA">Washington</option>
+                    
+                    <option value="WV">West Virginia</option>
+                    
+                    <option value="WI">Wisconsin</option>
+                    
+                    <option value="WY">Wyoming</option>
+                    
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+            </div>
+        </div>
 
-<div id="results" style="display: none; background: #f9f9f9; padding: 20px; border-radius: 5px;">
-    <h3>State: <span id="resState"></span></h3>
-    <p>Average Electricity Rate: <strong><span id="resRate"></span> ¢/kWh</strong></p>
-    <p>Top County (Best Payback): <strong><span id="resCounty"></span></strong> (<span id="resPayback"></span> years)</p>
-    <p><small>*This is a simplified preview. See county pages for full details.</small></p>
+        <!-- 결과 화면 (초기에는 숨김) -->
+        <div id="results" class="hidden bg-blue-50 rounded-lg p-6 border border-blue-100">
+            <div class="flex items-center justify-between border-b border-blue-200 pb-4 mb-4">
+                <h3 class="text-xl font-bold text-brand">State: <span id="resState" class="text-accent"></span></h3>
+                <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">EIA 2025 Data</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-sm text-gray-600 mb-1">Average Electricity Rate</p>
+                    <p class="text-3xl font-extrabold text-gray-900"><span id="resRate"></span><span class="text-xl text-gray-500"> ¢/kWh</span></p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 mb-1">Top County (Best Payback)</p>
+                    <p class="text-xl font-bold text-green-600" id="resCounty"></p>
+                    <p class="text-sm text-gray-700 font-medium"><span id="resPayback" class="text-2xl text-green-600"></span> Years</p>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-blue-200 text-sm text-gray-600">
+                <p>💡 <em>This is a simplified state-level preview. See specific county pages for detailed 4kW-10kW ROI scenarios and charts.</em></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
 async function loadState() {
     const abbr = document.getElementById('stateSelect').value;
     if (!abbr) {
-        document.getElementById('results').style.display = 'none';
+        document.getElementById('results').classList.add('hidden');
         return;
     }
-    document.getElementById('results').style.display = 'block';
     
     // Fetch JSON API we generated earlier
-    const res = await fetch(`/api/state/${abbr}.json`);
-    const data = await res.json();
-    
-    document.getElementById('resState').innerText = abbr;
-    document.getElementById('resRate').innerText = data.rate.toFixed(2);
-    
-    if (data.counties && data.counties.length > 0) {
-        const top = data.counties[0];
-        document.getElementById('resCounty').innerText = top.name;
-        document.getElementById('resPayback').innerText = top.payback.toFixed(1);
+    try {
+        const res = await fetch(`/api/state/${abbr}.json`);
+        const data = await res.json();
+        
+        document.getElementById('resState').innerText = abbr;
+        document.getElementById('resRate').innerText = data.rate.toFixed(2);
+        
+        if (data.counties && data.counties.length > 0) {
+            const top = data.counties[0];
+            document.getElementById('resCounty').innerText = top.name;
+            document.getElementById('resPayback').innerText = top.payback.toFixed(1);
+        }
+        
+        document.getElementById('results').classList.remove('hidden');
+    } catch(e) {
+        alert("Error loading data. Please try again.");
     }
 }
 </script>

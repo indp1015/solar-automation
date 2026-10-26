@@ -52,19 +52,52 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1>About Solar ROI Calculator</h1>
-<p>Our mission is to provide transparent, data-driven estimates for solar panel investments across the United States.</p>
+<div class="max-w-4xl mx-auto">
+    <div class="mb-10 text-center">
+        <h1 class="text-4xl font-extrabold text-brand mb-4">About Solar Data Hub</h1>
+        <p class="text-lg text-gray-600">Our mission is to provide transparent, data-driven estimates for solar panel investments across the United States.</p>
+    </div>
 
-<h2>Methodology & Data Sources</h2>
-<ul>
-    <li><strong>Electricity Rates:</strong> U.S. Energy Information Administration (EIA) 2025 state averages.</li>
-    <li><strong>Solar Production:</strong> PVGIS v5.2 (European Commission JRC) using NSRDB (NREL) data. <em>Note: US radiation data is based on a 2005-2015 average.</em></li>
-    <li><strong>Incentives:</strong> Referenced from DSIRE (CC-BY-SA 4.0).</li>
-</ul>
-<p>Our ROI calculations use a 25-year projection, accounting for a 0.5% annual panel degradation and a 2.5% annual electricity rate increase.</p>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
+        <h2 class="text-2xl font-bold text-brand mb-6">Methodology & Data Sources</h2>
+        
+        <div class="space-y-6">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-xl">⚡</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-gray-900">Electricity Rates</h3>
+                    <p class="text-gray-600 mt-1">Sourced from the U.S. Energy Information Administration (EIA) 2025 state averages. We use the residential sector (RES) annual data.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-xl">☀️</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-gray-900">Solar Production</h3>
+                    <p class="text-gray-600 mt-1">Generated via PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em class="text-sm text-gray-500">Note: US radiation data is based on a 2005-2015 average.</em></p>
+                </div>
+            </div>
 
-<h2>Contact Us</h2>
-<p>If you have questions or feedback, please email us at: <strong>contact@dataindp.com</strong></p>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-xl">🏛️</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-gray-900">Incentives</h3>
+                    <p class="text-gray-600 mt-1">Referenced from DSIRE (CC-BY-SA 4.0). Includes federal Investment Tax Credit (ITC) and state-level policies.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 p-4 bg-gray-50 rounded-md border border-gray-200">
+            <p class="text-sm text-gray-700">Our ROI calculations use a 25-year projection, accounting for a 0.5% annual panel degradation and a 2.5% annual electricity rate increase. The default system cost is $2.70 per watt before the 30% ITC.</p>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+        <h2 class="text-xl font-bold text-brand mb-2">Contact Us</h2>
+        <p class="text-gray-600">If you have questions or feedback, please email us at:</p>
+        <a href="mailto:contact@dataindp.com" class="text-lg font-bold text-blue-600 hover:underline">contact@dataindp.com</a>
+    </div>
+</div>
 
     </main>
 
