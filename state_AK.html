@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in Alaska (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Alaska</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">26.11 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Alaska (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02066.html" class="text-brand hover:underline">Copper River Census Area</a></td>
+                <td class="p-3 border-b">788</td>
+                <td class="p-3 border-b">10.6</td>
+                <td class="p-3 border-b">212.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02068.html" class="text-brand hover:underline">Denali Borough</a></td>
+                <td class="p-3 border-b">780</td>
+                <td class="p-3 border-b">10.7</td>
+                <td class="p-3 border-b">208.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02188.html" class="text-brand hover:underline">Northwest Arctic Borough</a></td>
+                <td class="p-3 border-b">763</td>
+                <td class="p-3 border-b">11.0</td>
+                <td class="p-3 border-b">201.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02240.html" class="text-brand hover:underline">Southeast Fairbanks Census Area</a></td>
+                <td class="p-3 border-b">755</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">197.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02230.html" class="text-brand hover:underline">Skagway Municipality</a></td>
+                <td class="p-3 border-b">749</td>
+                <td class="p-3 border-b">11.2</td>
+                <td class="p-3 border-b">195.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02122.html" class="text-brand hover:underline">Kenai Peninsula Borough</a></td>
+                <td class="p-3 border-b">745</td>
+                <td class="p-3 border-b">11.3</td>
+                <td class="p-3 border-b">193.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02090.html" class="text-brand hover:underline">Fairbanks North Star Borough</a></td>
+                <td class="p-3 border-b">736</td>
+                <td class="p-3 border-b">11.4</td>
+                <td class="p-3 border-b">189.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02020.html" class="text-brand hover:underline">Anchorage Municipality</a></td>
+                <td class="p-3 border-b">728</td>
+                <td class="p-3 border-b">11.6</td>
+                <td class="p-3 border-b">185.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02050.html" class="text-brand hover:underline">Bethel Census Area</a></td>
+                <td class="p-3 border-b">715</td>
+                <td class="p-3 border-b">11.8</td>
+                <td class="p-3 border-b">180.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02290.html" class="text-brand hover:underline">Yukon-Koyukuk Census Area</a></td>
+                <td class="p-3 border-b">714</td>
+                <td class="p-3 border-b">11.8</td>
+                <td class="p-3 border-b">179.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02063.html" class="text-brand hover:underline">Chugach Census Area</a></td>
+                <td class="p-3 border-b">700</td>
+                <td class="p-3 border-b">12.1</td>
+                <td class="p-3 border-b">173.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02158.html" class="text-brand hover:underline">Kusilvak Census Area</a></td>
+                <td class="p-3 border-b">694</td>
+                <td class="p-3 border-b">12.2</td>
+                <td class="p-3 border-b">171.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02060.html" class="text-brand hover:underline">Bristol Bay Borough</a></td>
+                <td class="p-3 border-b">660</td>
+                <td class="p-3 border-b">13.0</td>
+                <td class="p-3 border-b">155.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02070.html" class="text-brand hover:underline">Dillingham Census Area</a></td>
+                <td class="p-3 border-b">649</td>
+                <td class="p-3 border-b">13.3</td>
+                <td class="p-3 border-b">151.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/02164.html" class="text-brand hover:underline">Lake and Peninsula Borough</a></td>
+                <td class="p-3 border-b">641</td>
+                <td class="p-3 border-b">13.5</td>
+                <td class="p-3 border-b">147.4%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 787.63, "fips": "02066", "name": "Copper River Census Area", "payback": 10.58, "roi_25y": 212.25}, {"ac_annual": 780.16, "fips": "02068", "name": "Denali Borough", "payback": 10.7, "roi_25y": 208.95}, {"ac_annual": 763.45, "fips": "02188", "name": "Northwest Arctic Borough", "payback": 10.97, "roi_25y": 201.57}, {"ac_annual": 754.99, "fips": "02240", "name": "Southeast Fairbanks Census Area", "payback": 11.11, "roi_25y": 197.83}, {"ac_annual": 748.57, "fips": "02230", "name": "Skagway Municipality", "payback": 11.22, "roi_25y": 194.99}, {"ac_annual": 745.09, "fips": "02122", "name": "Kenai Peninsula Borough", "payback": 11.28, "roi_25y": 193.46}, {"ac_annual": 735.74, "fips": "02090", "name": "Fairbanks North Star Borough", "payback": 11.45, "roi_25y": 189.33}, {"ac_annual": 728.08, "fips": "02020", "name": "Anchorage Municipality", "payback": 11.59, "roi_25y": 185.94}, {"ac_annual": 714.66, "fips": "02050", "name": "Bethel Census Area", "payback": 11.84, "roi_25y": 180.01}, {"ac_annual": 714.5, "fips": "02290", "name": "Yukon-Koyukuk Census Area", "payback": 11.85, "roi_25y": 179.94}, {"ac_annual": 699.68, "fips": "02063", "name": "Chugach Census Area", "payback": 12.14, "roi_25y": 173.4}, {"ac_annual": 694.2, "fips": "02158", "name": "Kusilvak Census Area", "payback": 12.25, "roi_25y": 170.97}, {"ac_annual": 659.89, "fips": "02060", "name": "Bristol Bay Borough", "payback": 13.01, "roi_25y": 155.82}, {"ac_annual": 649.06, "fips": "02070", "name": "Dillingham Census Area", "payback": 13.27, "roi_25y": 151.03}, {"ac_annual": 640.95, "fips": "02164", "name": "Lake and Peninsula Borough", "payback": 13.47, "roi_25y": 147.45}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

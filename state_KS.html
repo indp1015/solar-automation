@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in Kansas (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Kansas</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">14.44 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Kansas (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20129.html" class="text-brand hover:underline">Morton County</a></td>
+                <td class="p-3 border-b">1471</td>
+                <td class="p-3 border-b">10.2</td>
+                <td class="p-3 border-b">223.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20189.html" class="text-brand hover:underline">Stevens County</a></td>
+                <td class="p-3 border-b">1457</td>
+                <td class="p-3 border-b">10.3</td>
+                <td class="p-3 border-b">220.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20187.html" class="text-brand hover:underline">Stanton County</a></td>
+                <td class="p-3 border-b">1453</td>
+                <td class="p-3 border-b">10.3</td>
+                <td class="p-3 border-b">219.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20175.html" class="text-brand hover:underline">Seward County</a></td>
+                <td class="p-3 border-b">1452</td>
+                <td class="p-3 border-b">10.3</td>
+                <td class="p-3 border-b">219.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20067.html" class="text-brand hover:underline">Grant County</a></td>
+                <td class="p-3 border-b">1441</td>
+                <td class="p-3 border-b">10.4</td>
+                <td class="p-3 border-b">216.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20075.html" class="text-brand hover:underline">Hamilton County</a></td>
+                <td class="p-3 border-b">1434</td>
+                <td class="p-3 border-b">10.5</td>
+                <td class="p-3 border-b">214.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20081.html" class="text-brand hover:underline">Haskell County</a></td>
+                <td class="p-3 border-b">1433</td>
+                <td class="p-3 border-b">10.5</td>
+                <td class="p-3 border-b">214.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20071.html" class="text-brand hover:underline">Greeley County</a></td>
+                <td class="p-3 border-b">1431</td>
+                <td class="p-3 border-b">10.5</td>
+                <td class="p-3 border-b">213.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20093.html" class="text-brand hover:underline">Kearny County</a></td>
+                <td class="p-3 border-b">1422</td>
+                <td class="p-3 border-b">10.6</td>
+                <td class="p-3 border-b">211.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20069.html" class="text-brand hover:underline">Gray County</a></td>
+                <td class="p-3 border-b">1418</td>
+                <td class="p-3 border-b">10.6</td>
+                <td class="p-3 border-b">210.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20119.html" class="text-brand hover:underline">Meade County</a></td>
+                <td class="p-3 border-b">1418</td>
+                <td class="p-3 border-b">10.6</td>
+                <td class="p-3 border-b">210.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20199.html" class="text-brand hover:underline">Wallace County</a></td>
+                <td class="p-3 border-b">1411</td>
+                <td class="p-3 border-b">10.7</td>
+                <td class="p-3 border-b">209.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20055.html" class="text-brand hover:underline">Finney County</a></td>
+                <td class="p-3 border-b">1411</td>
+                <td class="p-3 border-b">10.7</td>
+                <td class="p-3 border-b">209.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20203.html" class="text-brand hover:underline">Wichita County</a></td>
+                <td class="p-3 border-b">1412</td>
+                <td class="p-3 border-b">10.7</td>
+                <td class="p-3 border-b">209.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/20057.html" class="text-brand hover:underline">Ford County</a></td>
+                <td class="p-3 border-b">1407</td>
+                <td class="p-3 border-b">10.7</td>
+                <td class="p-3 border-b">208.0%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 1470.73, "fips": "20129", "name": "Morton County", "payback": 10.2, "roi_25y": 223.63}, {"ac_annual": 1457.18, "fips": "20189", "name": "Stevens County", "payback": 10.3, "roi_25y": 220.32}, {"ac_annual": 1453.49, "fips": "20187", "name": "Stanton County", "payback": 10.33, "roi_25y": 219.41}, {"ac_annual": 1452.15, "fips": "20175", "name": "Seward County", "payback": 10.35, "roi_25y": 219.09}, {"ac_annual": 1440.9, "fips": "20067", "name": "Grant County", "payback": 10.44, "roi_25y": 216.34}, {"ac_annual": 1433.77, "fips": "20075", "name": "Hamilton County", "payback": 10.5, "roi_25y": 214.6}, {"ac_annual": 1433.29, "fips": "20081", "name": "Haskell County", "payback": 10.5, "roi_25y": 214.48}, {"ac_annual": 1430.84, "fips": "20071", "name": "Greeley County", "payback": 10.52, "roi_25y": 213.88}, {"ac_annual": 1422.11, "fips": "20093", "name": "Kearny County", "payback": 10.6, "roi_25y": 211.75}, {"ac_annual": 1418.35, "fips": "20069", "name": "Gray County", "payback": 10.63, "roi_25y": 210.83}, {"ac_annual": 1418.3, "fips": "20119", "name": "Meade County", "payback": 10.63, "roi_25y": 210.82}, {"ac_annual": 1410.83, "fips": "20199", "name": "Wallace County", "payback": 10.69, "roi_25y": 208.99}, {"ac_annual": 1411.09, "fips": "20055", "name": "Finney County", "payback": 10.69, "roi_25y": 209.05}, {"ac_annual": 1411.89, "fips": "20203", "name": "Wichita County", "payback": 10.69, "roi_25y": 209.25}, {"ac_annual": 1406.71, "fips": "20057", "name": "Ford County", "payback": 10.73, "roi_25y": 207.98}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

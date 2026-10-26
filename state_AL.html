@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in Alabama (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Alabama</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">16.09 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Alabama (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01061.html" class="text-brand hover:underline">Geneva County</a></td>
+                <td class="p-3 border-b">1367</td>
+                <td class="p-3 border-b">9.8</td>
+                <td class="p-3 border-b">236.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01003.html" class="text-brand hover:underline">Baldwin County</a></td>
+                <td class="p-3 border-b">1360</td>
+                <td class="p-3 border-b">9.8</td>
+                <td class="p-3 border-b">234.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01069.html" class="text-brand hover:underline">Houston County</a></td>
+                <td class="p-3 border-b">1356</td>
+                <td class="p-3 border-b">9.9</td>
+                <td class="p-3 border-b">233.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01031.html" class="text-brand hover:underline">Coffee County</a></td>
+                <td class="p-3 border-b">1352</td>
+                <td class="p-3 border-b">9.9</td>
+                <td class="p-3 border-b">232.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01045.html" class="text-brand hover:underline">Dale County</a></td>
+                <td class="p-3 border-b">1352</td>
+                <td class="p-3 border-b">9.9</td>
+                <td class="p-3 border-b">232.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01067.html" class="text-brand hover:underline">Henry County</a></td>
+                <td class="p-3 border-b">1342</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">229.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01011.html" class="text-brand hover:underline">Bullock County</a></td>
+                <td class="p-3 border-b">1338</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">228.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01039.html" class="text-brand hover:underline">Covington County</a></td>
+                <td class="p-3 border-b">1336</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">228.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01099.html" class="text-brand hover:underline">Monroe County</a></td>
+                <td class="p-3 border-b">1335</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">227.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01097.html" class="text-brand hover:underline">Mobile County</a></td>
+                <td class="p-3 border-b">1335</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">227.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01005.html" class="text-brand hover:underline">Barbour County</a></td>
+                <td class="p-3 border-b">1332</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">227.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01053.html" class="text-brand hover:underline">Escambia County</a></td>
+                <td class="p-3 border-b">1332</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">227.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01109.html" class="text-brand hover:underline">Pike County</a></td>
+                <td class="p-3 border-b">1330</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">226.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01041.html" class="text-brand hover:underline">Crenshaw County</a></td>
+                <td class="p-3 border-b">1330</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">226.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/01085.html" class="text-brand hover:underline">Lowndes County</a></td>
+                <td class="p-3 border-b">1329</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">226.1%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 1367.43, "fips": "01061", "name": "Geneva County", "payback": 9.79, "roi_25y": 236.56}, {"ac_annual": 1359.88, "fips": "01003", "name": "Baldwin County", "payback": 9.85, "roi_25y": 234.51}, {"ac_annual": 1355.9, "fips": "01069", "name": "Houston County", "payback": 9.89, "roi_25y": 233.42}, {"ac_annual": 1352.28, "fips": "01031", "name": "Coffee County", "payback": 9.92, "roi_25y": 232.44}, {"ac_annual": 1352.13, "fips": "01045", "name": "Dale County", "payback": 9.92, "roi_25y": 232.4}, {"ac_annual": 1342.11, "fips": "01067", "name": "Henry County", "payback": 10.0, "roi_25y": 229.67}, {"ac_annual": 1338.41, "fips": "01011", "name": "Bullock County", "payback": 10.03, "roi_25y": 228.66}, {"ac_annual": 1336.37, "fips": "01039", "name": "Covington County", "payback": 10.05, "roi_25y": 228.11}, {"ac_annual": 1334.81, "fips": "01099", "name": "Monroe County", "payback": 10.07, "roi_25y": 227.68}, {"ac_annual": 1334.74, "fips": "01097", "name": "Mobile County", "payback": 10.07, "roi_25y": 227.66}, {"ac_annual": 1332.28, "fips": "01005", "name": "Barbour County", "payback": 10.09, "roi_25y": 226.99}, {"ac_annual": 1332.19, "fips": "01053", "name": "Escambia County", "payback": 10.09, "roi_25y": 226.97}, {"ac_annual": 1330.37, "fips": "01109", "name": "Pike County", "payback": 10.1, "roi_25y": 226.47}, {"ac_annual": 1330.39, "fips": "01041", "name": "Crenshaw County", "payback": 10.1, "roi_25y": 226.48}, {"ac_annual": 1329.0, "fips": "01085", "name": "Lowndes County", "payback": 10.12, "roi_25y": 226.1}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

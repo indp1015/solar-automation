@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in Oregon (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Oregon</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">15.46 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Oregon (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41037.html" class="text-brand hover:underline">Lake County</a></td>
+                <td class="p-3 border-b">1332</td>
+                <td class="p-3 border-b">10.6</td>
+                <td class="p-3 border-b">212.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41025.html" class="text-brand hover:underline">Harney County</a></td>
+                <td class="p-3 border-b">1303</td>
+                <td class="p-3 border-b">10.8</td>
+                <td class="p-3 border-b">205.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41035.html" class="text-brand hover:underline">Klamath County</a></td>
+                <td class="p-3 border-b">1299</td>
+                <td class="p-3 border-b">10.9</td>
+                <td class="p-3 border-b">204.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41017.html" class="text-brand hover:underline">Deschutes County</a></td>
+                <td class="p-3 border-b">1290</td>
+                <td class="p-3 border-b">11.0</td>
+                <td class="p-3 border-b">201.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41029.html" class="text-brand hover:underline">Jackson County</a></td>
+                <td class="p-3 border-b">1251</td>
+                <td class="p-3 border-b">11.3</td>
+                <td class="p-3 border-b">191.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41013.html" class="text-brand hover:underline">Crook County</a></td>
+                <td class="p-3 border-b">1251</td>
+                <td class="p-3 border-b">11.4</td>
+                <td class="p-3 border-b">191.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41031.html" class="text-brand hover:underline">Jefferson County</a></td>
+                <td class="p-3 border-b">1249</td>
+                <td class="p-3 border-b">11.4</td>
+                <td class="p-3 border-b">190.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41021.html" class="text-brand hover:underline">Gilliam County</a></td>
+                <td class="p-3 border-b">1242</td>
+                <td class="p-3 border-b">11.4</td>
+                <td class="p-3 border-b">189.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41045.html" class="text-brand hover:underline">Malheur County</a></td>
+                <td class="p-3 border-b">1241</td>
+                <td class="p-3 border-b">11.5</td>
+                <td class="p-3 border-b">188.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41055.html" class="text-brand hover:underline">Sherman County</a></td>
+                <td class="p-3 border-b">1238</td>
+                <td class="p-3 border-b">11.5</td>
+                <td class="p-3 border-b">188.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41015.html" class="text-brand hover:underline">Curry County</a></td>
+                <td class="p-3 border-b">1227</td>
+                <td class="p-3 border-b">11.6</td>
+                <td class="p-3 border-b">185.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41001.html" class="text-brand hover:underline">Baker County</a></td>
+                <td class="p-3 border-b">1219</td>
+                <td class="p-3 border-b">11.7</td>
+                <td class="p-3 border-b">183.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41049.html" class="text-brand hover:underline">Morrow County</a></td>
+                <td class="p-3 border-b">1207</td>
+                <td class="p-3 border-b">11.8</td>
+                <td class="p-3 border-b">179.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41069.html" class="text-brand hover:underline">Wheeler County</a></td>
+                <td class="p-3 border-b">1201</td>
+                <td class="p-3 border-b">11.9</td>
+                <td class="p-3 border-b">178.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41065.html" class="text-brand hover:underline">Wasco County</a></td>
+                <td class="p-3 border-b">1195</td>
+                <td class="p-3 border-b">12.0</td>
+                <td class="p-3 border-b">176.9%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 1332.0, "fips": "41037", "name": "Lake County", "payback": 10.56, "roi_25y": 212.72}, {"ac_annual": 1303.49, "fips": "41025", "name": "Harney County", "payback": 10.83, "roi_25y": 205.26}, {"ac_annual": 1299.11, "fips": "41035", "name": "Klamath County", "payback": 10.87, "roi_25y": 204.12}, {"ac_annual": 1290.15, "fips": "41017", "name": "Deschutes County", "payback": 10.96, "roi_25y": 201.77}, {"ac_annual": 1251.33, "fips": "41029", "name": "Jackson County", "payback": 11.35, "roi_25y": 191.62}, {"ac_annual": 1250.96, "fips": "41013", "name": "Crook County", "payback": 11.36, "roi_25y": 191.52}, {"ac_annual": 1248.57, "fips": "41031", "name": "Jefferson County", "payback": 11.38, "roi_25y": 190.89}, {"ac_annual": 1241.9, "fips": "41021", "name": "Gilliam County", "payback": 11.45, "roi_25y": 189.15}, {"ac_annual": 1240.95, "fips": "41045", "name": "Malheur County", "payback": 11.46, "roi_25y": 188.9}, {"ac_annual": 1237.94, "fips": "41055", "name": "Sherman County", "payback": 11.5, "roi_25y": 188.11}, {"ac_annual": 1226.79, "fips": "41015", "name": "Curry County", "payback": 11.62, "roi_25y": 185.2}, {"ac_annual": 1218.88, "fips": "41001", "name": "Baker County", "payback": 11.71, "roi_25y": 183.13}, {"ac_annual": 1206.67, "fips": "41049", "name": "Morrow County", "payback": 11.85, "roi_25y": 179.93}, {"ac_annual": 1201.14, "fips": "41069", "name": "Wheeler County", "payback": 11.91, "roi_25y": 178.49}, {"ac_annual": 1195.11, "fips": "41065", "name": "Wasco County", "payback": 11.98, "roi_25y": 176.91}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

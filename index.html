@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. Solar ROI & Electricity Rate Data Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<!-- 히어로 섹션 -->
+<div class="text-center mb-12">
+    <h1 class="text-4xl font-extrabold text-brand tracking-tight sm:text-5xl mb-4">
+        U.S. Solar ROI & Electricity Rate Data Hub
+    </h1>
+    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties — all sourced from official public data.
+    </p>
+</div>
+
+<!-- 4개 카드 그리드 메뉴 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+        <h2 class="text-xl font-bold text-brand mb-2">☀️ Solar ROI by State</h2>
+        <p class="text-gray-600 text-sm mb-4">Find the best payback periods and 25-year ROI for solar installations in your state based on local electricity rates.</p>
+        <a href="#top-counties" class="text-brand font-medium hover:text-blue-800">View State Rankings &rarr;</a>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+        <h2 class="text-xl font-bold text-brand mb-2">⚡ Electricity Rates</h2>
+        <p class="text-gray-600 text-sm mb-4">Compare average residential electricity costs (cents/kWh) across the U.S., sourced from the EIA (2025).</p>
+        <a href="/state_CA.html" class="text-brand font-medium hover:text-blue-800">Explore Rates &rarr;</a>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+        <h2 class="text-xl font-bold text-brand mb-2">🧮 Interactive Calculator</h2>
+        <p class="text-gray-600 text-sm mb-4">Calculate your specific monthly savings and payback period by adjusting system size and electricity rates.</p>
+        <a href="/calculator.html" class="text-brand font-medium hover:text-blue-800">Use Calculator &rarr;</a>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+        <h2 class="text-xl font-bold text-brand mb-2">📊 Data & Methodology</h2>
+        <p class="text-gray-600 text-sm mb-4">Learn how we combine PVGIS solar radiation data with EIA rates and DSIRE incentives to compute accurate estimates.</p>
+        <a href="/about.html" class="text-brand font-medium hover:text-blue-800">Read Methodology &rarr;</a>
+    </div>
+</div>
+
+<!-- Top Counties 테이블 -->
+<div id="top-counties" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-12">
+    <h2 class="text-2xl font-bold text-brand mb-2">🏆 Top Solar Payback Counties (6kW System)</h2>
+    <p class="text-gray-600 text-sm mb-4">Ranked by fastest payback period (Years). <br><small class="text-gray-400">Note: Based on a 6kW system, 30% federal ITC, and 2025 EIA state rates.</small></p>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-50 text-brand text-sm">
+                    <th class="p-3 border-b">#</th>
+                    <th class="p-3 border-b">County</th>
+                    <th class="p-3 border-b">State</th>
+                    <th class="p-3 border-b">Electricity Rate (¢/kWh)</th>
+                    <th class="p-3 border-b">Payback Period</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b font-medium text-gray-500">1</td>
+                    <td class="p-3 border-b"><a href="/county/15003.html" class="text-brand hover:underline font-medium">Honolulu County</a></td>
+                    <td class="p-3 border-b">HI</td>
+                    <td class="p-3 border-b">40.40</td>
+                    <td class="p-3 border-b font-bold text-green-600">3.2 years</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b font-medium text-gray-500">2</td>
+                    <td class="p-3 border-b"><a href="/county/15001.html" class="text-brand hover:underline font-medium">Hawaii County</a></td>
+                    <td class="p-3 border-b">HI</td>
+                    <td class="p-3 border-b">40.40</td>
+                    <td class="p-3 border-b font-bold text-green-600">3.2 years</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b font-medium text-gray-500">3</td>
+                    <td class="p-3 border-b"><a href="/county/15009.html" class="text-brand hover:underline font-medium">Maui County</a></td>
+                    <td class="p-3 border-b">HI</td>
+                    <td class="p-3 border-b">40.40</td>
+                    <td class="p-3 border-b font-bold text-green-600">3.3 years</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b font-medium text-gray-500">4</td>
+                    <td class="p-3 border-b"><a href="/county/15005.html" class="text-brand hover:underline font-medium">Kalawao County</a></td>
+                    <td class="p-3 border-b">HI</td>
+                    <td class="p-3 border-b">40.40</td>
+                    <td class="p-3 border-b font-bold text-green-600">3.3 years</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b font-medium text-gray-500">5</td>
+                    <td class="p-3 border-b"><a href="/county/15007.html" class="text-brand hover:underline font-medium">Kauai County</a></td>
+                    <td class="p-3 border-b">HI</td>
+                    <td class="p-3 border-b">40.40</td>
+                    <td class="p-3 border-b font-bold text-green-600">3.9 years</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- 🚨 전기요금 비교 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-12">
+    <h2 class="text-2xl font-bold text-brand mb-4">⚡ Electricity Rates: Top 5 Most vs. Least Expensive States</h2>
+    <div class="relative w-full h-64 md:h-80">
+        <canvas id="rateChart"></canvas>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 서버(Jinja2)에서 전달받은 전체 주 데이터
+    const statesData = [{"abbr": "AL", "elec_rate_cents": 16.09, "elec_rate_year": 2025, "name": "Alabama", "state_fips": "01", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AK", "elec_rate_cents": 26.11, "elec_rate_year": 2025, "name": "Alaska", "state_fips": "02", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AZ", "elec_rate_cents": 15.26, "elec_rate_year": 2025, "name": "Arizona", "state_fips": "04", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AR", "elec_rate_cents": 12.87, "elec_rate_year": 2025, "name": "Arkansas", "state_fips": "05", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CA", "elec_rate_cents": 31.35, "elec_rate_year": 2025, "name": "California", "state_fips": "06", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CO", "elec_rate_cents": 15.69, "elec_rate_year": 2025, "name": "Colorado", "state_fips": "08", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CT", "elec_rate_cents": 29.31, "elec_rate_year": 2025, "name": "Connecticut", "state_fips": "09", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DE", "elec_rate_cents": 17.15, "elec_rate_year": 2025, "name": "Delaware", "state_fips": "10", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DC", "elec_rate_cents": 21.92, "elec_rate_year": 2025, "name": "District of Columbia", "state_fips": "11", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "FL", "elec_rate_cents": 15.21, "elec_rate_year": 2025, "name": "Florida", "state_fips": "12", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "GA", "elec_rate_cents": 14.74, "elec_rate_year": 2025, "name": "Georgia", "state_fips": "13", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "HI", "elec_rate_cents": 40.4, "elec_rate_year": 2025, "name": "Hawaii", "state_fips": "15", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ID", "elec_rate_cents": 11.83, "elec_rate_year": 2025, "name": "Idaho", "state_fips": "16", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IL", "elec_rate_cents": 17.67, "elec_rate_year": 2025, "name": "Illinois", "state_fips": "17", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IN", "elec_rate_cents": 15.96, "elec_rate_year": 2025, "name": "Indiana", "state_fips": "18", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IA", "elec_rate_cents": 13.62, "elec_rate_year": 2025, "name": "Iowa", "state_fips": "19", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KS", "elec_rate_cents": 14.44, "elec_rate_year": 2025, "name": "Kansas", "state_fips": "20", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KY", "elec_rate_cents": 13.13, "elec_rate_year": 2025, "name": "Kentucky", "state_fips": "21", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "LA", "elec_rate_cents": 12.52, "elec_rate_year": 2025, "name": "Louisiana", "state_fips": "22", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ME", "elec_rate_cents": 27.69, "elec_rate_year": 2025, "name": "Maine", "state_fips": "23", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MD", "elec_rate_cents": 19.53, "elec_rate_year": 2025, "name": "Maryland", "state_fips": "24", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MA", "elec_rate_cents": 30.41, "elec_rate_year": 2025, "name": "Massachusetts", "state_fips": "25", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MI", "elec_rate_cents": 20.03, "elec_rate_year": 2025, "name": "Michigan", "state_fips": "26", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MN", "elec_rate_cents": 15.83, "elec_rate_year": 2025, "name": "Minnesota", "state_fips": "27", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MS", "elec_rate_cents": 14.03, "elec_rate_year": 2025, "name": "Mississippi", "state_fips": "28", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MO", "elec_rate_cents": 13.3, "elec_rate_year": 2025, "name": "Missouri", "state_fips": "29", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MT", "elec_rate_cents": 12.99, "elec_rate_year": 2025, "name": "Montana", "state_fips": "30", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NE", "elec_rate_cents": 12.05, "elec_rate_year": 2025, "name": "Nebraska", "state_fips": "31", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NV", "elec_rate_cents": 13.26, "elec_rate_year": 2025, "name": "Nevada", "state_fips": "32", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NH", "elec_rate_cents": 24.53, "elec_rate_year": 2025, "name": "New Hampshire", "state_fips": "33", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NJ", "elec_rate_cents": 22.48, "elec_rate_year": 2025, "name": "New Jersey", "state_fips": "34", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NM", "elec_rate_cents": 14.85, "elec_rate_year": 2025, "name": "New Mexico", "state_fips": "35", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NY", "elec_rate_cents": 26.39, "elec_rate_year": 2025, "name": "New York", "state_fips": "36", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NC", "elec_rate_cents": 14.0, "elec_rate_year": 2025, "name": "North Carolina", "state_fips": "37", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ND", "elec_rate_cents": 11.82, "elec_rate_year": 2025, "name": "North Dakota", "state_fips": "38", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OH", "elec_rate_cents": 16.9, "elec_rate_year": 2025, "name": "Ohio", "state_fips": "39", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OK", "elec_rate_cents": 13.21, "elec_rate_year": 2025, "name": "Oklahoma", "state_fips": "40", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OR", "elec_rate_cents": 15.46, "elec_rate_year": 2025, "name": "Oregon", "state_fips": "41", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "PA", "elec_rate_cents": 19.29, "elec_rate_year": 2025, "name": "Pennsylvania", "state_fips": "42", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "RI", "elec_rate_cents": 29.48, "elec_rate_year": 2025, "name": "Rhode Island", "state_fips": "44", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SC", "elec_rate_cents": 15.12, "elec_rate_year": 2025, "name": "South Carolina", "state_fips": "45", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SD", "elec_rate_cents": 13.32, "elec_rate_year": 2025, "name": "South Dakota", "state_fips": "46", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TN", "elec_rate_cents": 13.22, "elec_rate_year": 2025, "name": "Tennessee", "state_fips": "47", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TX", "elec_rate_cents": 15.4, "elec_rate_year": 2025, "name": "Texas", "state_fips": "48", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "UT", "elec_rate_cents": 13.02, "elec_rate_year": 2025, "name": "Utah", "state_fips": "49", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VT", "elec_rate_cents": 22.79, "elec_rate_year": 2025, "name": "Vermont", "state_fips": "50", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VA", "elec_rate_cents": 15.28, "elec_rate_year": 2025, "name": "Virginia", "state_fips": "51", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WA", "elec_rate_cents": 13.17, "elec_rate_year": 2025, "name": "Washington", "state_fips": "53", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WV", "elec_rate_cents": 15.39, "elec_rate_year": 2025, "name": "West Virginia", "state_fips": "54", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WI", "elec_rate_cents": 18.08, "elec_rate_year": 2025, "name": "Wisconsin", "state_fips": "55", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WY", "elec_rate_cents": 13.37, "elec_rate_year": 2025, "name": "Wyoming", "state_fips": "56", "updated_at": "2026-10-26T07:26:47+00:00"}];
+    
+    // 전기요금 기준 정렬
+    const sorted = [...statesData].sort((a, b) => b.elec_rate_cents - a.elec_rate_cents);
+    const top5High = sorted.slice(0, 5);
+    const top5Low = sorted.slice(-5).reverse();
+    
+    const labels = [...top5High.map(s => s.abbr), ...top5Low.map(s => s.abbr)];
+    const data = [...top5High.map(s => s.elec_rate_cents), ...top5Low.map(s => s.elec_rate_cents)];
+    const colors = [...Array(5).fill('#ef4444'), ...Array(5).fill('#22c55e')]; // 빨강(비쌈), 초록(쌈)
+
+    const ctx = document.getElementById('rateChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Electricity Rate (¢/kWh)',
+                data: data,
+                backgroundColor: colors,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Cents per kWh' } } }
+        }
+    });
+});
+</script>
+<!-- 시장 스냅샷 & 퀵 계산기 (좌우 분할) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+    <!-- 스냅샷 -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <h2 class="text-xl font-bold text-brand mb-4">📈 Market Snapshot (2025)</h2>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center border-b pb-2">
+                <span class="text-gray-600">Avg. US Residential Rate</span>
+                <span class="font-bold text-gray-900">17.86 ¢/kWh</span>
+            </div>
+            <div class="flex justify-between items-center border-b pb-2">
+                <span class="text-gray-600">Highest Rate State</span>
+                <span class="font-bold text-gray-900">HI (40.40 ¢/kWh)</span>
+            </div>
+            <div class="flex justify-between items-center border-b pb-2">
+                <span class="text-gray-600">Lowest Rate State</span>
+                <span class="font-bold text-gray-900">ND (11.82 ¢/kWh)</span>
+            </div>
+            <div class="flex justify-between items-center pb-2">
+                <span class="text-gray-600">Federal ITC (2026)</span>
+                <span class="font-bold text-gray-900">30%</span>
+            </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-4">*Data fetched from EIA (2025) and official federal guidelines.</p>
+    </div>
+
+    <!-- 퀵 계산기 -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <h2 class="text-xl font-bold text-brand mb-4">🧮 Quick Payback Calculator</h2>
+        <form id="quick-calc" class="space-y-4" onsubmit="calculateQuick(event)">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Select State (Rate)</label>
+                <select id="state-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-brand focus:ring-brand text-sm" onchange="updateRate()">
+                    
+                    <option value="AL" data-rate="16.09">Alabama (16.09 ¢)</option>
+                    
+                    <option value="AK" data-rate="26.11">Alaska (26.11 ¢)</option>
+                    
+                    <option value="AZ" data-rate="15.26">Arizona (15.26 ¢)</option>
+                    
+                    <option value="AR" data-rate="12.87">Arkansas (12.87 ¢)</option>
+                    
+                    <option value="CA" data-rate="31.35">California (31.35 ¢)</option>
+                    
+                    <option value="CO" data-rate="15.69">Colorado (15.69 ¢)</option>
+                    
+                    <option value="CT" data-rate="29.31">Connecticut (29.31 ¢)</option>
+                    
+                    <option value="DE" data-rate="17.15">Delaware (17.15 ¢)</option>
+                    
+                    <option value="DC" data-rate="21.92">District of Columbia (21.92 ¢)</option>
+                    
+                    <option value="FL" data-rate="15.21">Florida (15.21 ¢)</option>
+                    
+                    <option value="GA" data-rate="14.74">Georgia (14.74 ¢)</option>
+                    
+                    <option value="HI" data-rate="40.4">Hawaii (40.40 ¢)</option>
+                    
+                    <option value="ID" data-rate="11.83">Idaho (11.83 ¢)</option>
+                    
+                    <option value="IL" data-rate="17.67">Illinois (17.67 ¢)</option>
+                    
+                    <option value="IN" data-rate="15.96">Indiana (15.96 ¢)</option>
+                    
+                    <option value="IA" data-rate="13.62">Iowa (13.62 ¢)</option>
+                    
+                    <option value="KS" data-rate="14.44">Kansas (14.44 ¢)</option>
+                    
+                    <option value="KY" data-rate="13.13">Kentucky (13.13 ¢)</option>
+                    
+                    <option value="LA" data-rate="12.52">Louisiana (12.52 ¢)</option>
+                    
+                    <option value="ME" data-rate="27.69">Maine (27.69 ¢)</option>
+                    
+                    <option value="MD" data-rate="19.53">Maryland (19.53 ¢)</option>
+                    
+                    <option value="MA" data-rate="30.41">Massachusetts (30.41 ¢)</option>
+                    
+                    <option value="MI" data-rate="20.03">Michigan (20.03 ¢)</option>
+                    
+                    <option value="MN" data-rate="15.83">Minnesota (15.83 ¢)</option>
+                    
+                    <option value="MS" data-rate="14.03">Mississippi (14.03 ¢)</option>
+                    
+                    <option value="MO" data-rate="13.3">Missouri (13.30 ¢)</option>
+                    
+                    <option value="MT" data-rate="12.99">Montana (12.99 ¢)</option>
+                    
+                    <option value="NE" data-rate="12.05">Nebraska (12.05 ¢)</option>
+                    
+                    <option value="NV" data-rate="13.26">Nevada (13.26 ¢)</option>
+                    
+                    <option value="NH" data-rate="24.53">New Hampshire (24.53 ¢)</option>
+                    
+                    <option value="NJ" data-rate="22.48">New Jersey (22.48 ¢)</option>
+                    
+                    <option value="NM" data-rate="14.85">New Mexico (14.85 ¢)</option>
+                    
+                    <option value="NY" data-rate="26.39">New York (26.39 ¢)</option>
+                    
+                    <option value="NC" data-rate="14.0">North Carolina (14.00 ¢)</option>
+                    
+                    <option value="ND" data-rate="11.82">North Dakota (11.82 ¢)</option>
+                    
+                    <option value="OH" data-rate="16.9">Ohio (16.90 ¢)</option>
+                    
+                    <option value="OK" data-rate="13.21">Oklahoma (13.21 ¢)</option>
+                    
+                    <option value="OR" data-rate="15.46">Oregon (15.46 ¢)</option>
+                    
+                    <option value="PA" data-rate="19.29">Pennsylvania (19.29 ¢)</option>
+                    
+                    <option value="RI" data-rate="29.48">Rhode Island (29.48 ¢)</option>
+                    
+                    <option value="SC" data-rate="15.12">South Carolina (15.12 ¢)</option>
+                    
+                    <option value="SD" data-rate="13.32">South Dakota (13.32 ¢)</option>
+                    
+                    <option value="TN" data-rate="13.22">Tennessee (13.22 ¢)</option>
+                    
+                    <option value="TX" data-rate="15.4">Texas (15.40 ¢)</option>
+                    
+                    <option value="UT" data-rate="13.02">Utah (13.02 ¢)</option>
+                    
+                    <option value="VT" data-rate="22.79">Vermont (22.79 ¢)</option>
+                    
+                    <option value="VA" data-rate="15.28">Virginia (15.28 ¢)</option>
+                    
+                    <option value="WA" data-rate="13.17">Washington (13.17 ¢)</option>
+                    
+                    <option value="WV" data-rate="15.39">West Virginia (15.39 ¢)</option>
+                    
+                    <option value="WI" data-rate="18.08">Wisconsin (18.08 ¢)</option>
+                    
+                    <option value="WY" data-rate="13.37">Wyoming (13.37 ¢)</option>
+                    
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">System Size (kW)</label>
+                <input type="number" id="sys-size" value="6" min="1" max="20" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-brand focus:ring-brand text-sm">
+            </div>
+            <button type="submit" class="w-full bg-accent hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition">
+                Calculate Payback
+            </button>
+        </form>
+        
+        <div id="calc-result" class="mt-4 bg-orange-50 rounded-md p-4 border border-orange-200 hidden">
+            <div class="flex justify-between items-center mb-1">
+                <span class="text-gray-700 text-sm">Est. System Cost (after 30% ITC)</span>
+                <span class="font-bold text-gray-900" id="res-cost">$0</span>
+            </div>
+            <div class="flex justify-between items-center mb-1">
+                <span class="text-gray-700 text-sm">Est. Annual Savings</span>
+                <span class="font-bold text-green-600" id="res-savings">$0</span>
+            </div>
+            <div class="flex justify-between items-center mt-2 pt-2 border-t border-orange-200">
+                <span class="text-gray-900 font-bold">Payback Period</span>
+                <span class="text-xl font-extrabold text-brand" id="res-payback">0 Years</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SEO 텍스트 영역 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-12">
+    <h2 class="text-2xl font-bold text-brand mb-4">Current U.S. Solar Market Insights</h2>
+    <p class="text-gray-700 mb-4">Navigating the solar market requires understanding the balance between installation costs, local electricity rates, and available incentives. In today's dynamic environment, homeowners must look beyond the sticker price to grasp the full financial picture.</p>
+    
+    <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">1. The Impact of Electricity Rates on ROI</h3>
+    <p class="text-gray-700">Your solar payback period is heavily dictated by how much you currently pay for electricity. States with high rates (like California and New York) often see significantly faster payback periods compared to states with cheap grid power. Our <a href="/calculator.html" class="text-brand hover:underline">Calculator</a> uses precise EIA data to model your specific situation.</p>
+
+    <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">2. Solar Radiation and Production</h3>
+    <p class="text-gray-700">While sunshine is abundant across the U.S., actual solar production varies by region. We utilize PVGIS (NREL) data to accurately estimate the kWh output of a system based on your specific county's latitude and longitude. <em>(Note: US radiation data is a 10-year average from 2005-2015).</em></p>
+</div>
+
+<script>
+    function updateRate() {
+        document.getElementById('calc-result').classList.add('hidden');
+    }
+
+    function calculateQuick(e) {
+        e.preventDefault();
+        const select = document.getElementById('state-select');
+        const rate = parseFloat(select.options[select.selectedIndex].getAttribute('data-rate'));
+        const kw = parseFloat(document.getElementById('sys-size').value);
+        
+        const costPerWatt = 2.70;
+        const grossCost = kw * 1000 * costPerWatt;
+        const netCost = grossCost * 0.70; // 30% ITC 적용
+        
+        const annualProd = kw * 1450; // 미국 평균 발전량 근사치
+        const annualSavings = annualProd * (rate / 100);
+        const payback = netCost / annualSavings;
+
+        document.getElementById('res-cost').innerText = '$' + netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('res-savings').innerText = '$' + annualSavings.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('res-payback').innerText = payback.toFixed(1) + ' Years';
+        
+        document.getElementById('calc-result').classList.remove('hidden');
+    }
+</script>
+<!-- FAQ Section -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-12">
+    <h2 class="text-2xl font-bold text-brand mb-4">Frequently Asked Questions (FAQ)</h2>
+    <div class="space-y-4">
+        <div>
+            <h3 class="font-bold text-gray-900">How is the payback period calculated?</h3>
+            <p class="text-gray-600 text-sm mt-1">We calculate the net cost of the system (after the 30% federal ITC) and divide it by the estimated annual electricity savings, which are based on EIA state rates and PVGIS solar radiation data for your specific county.</p>
+        </div>
+        <div>
+            <h3 class="font-bold text-gray-900">Why does the solar radiation data date back to 2015?</h3>
+            <p class="text-gray-600 text-sm mt-1">Our data provider (PVGIS) uses a 10-year average from the National Solar Radiation Database (NSRDB) covering 2005-2015. This provides a reliable long-term baseline for estimating system performance.</p>
+        </div>
+        <div>
+            <h3 class="font-bold text-gray-900">Does this include state or local incentives?</h3>
+            <p class="text-gray-600 text-sm mt-1">Currently, our calculations factor in the 30% federal Investment Tax Credit (ITC). State and local incentives (DSIRE) are provided for reference, but you should consult a local installer for specific financial advice.</p>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

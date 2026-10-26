@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All U.S. States - Solar ROI Data</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-6">Explore Solar ROI by State</h1>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    
+    <a href="/state_AL.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">AL</div>
+        <div class="text-sm text-gray-600">Alabama</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">16.09 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_AK.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">AK</div>
+        <div class="text-sm text-gray-600">Alaska</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">26.11 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_AZ.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">AZ</div>
+        <div class="text-sm text-gray-600">Arizona</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.26 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_AR.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">AR</div>
+        <div class="text-sm text-gray-600">Arkansas</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">12.87 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_CA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">CA</div>
+        <div class="text-sm text-gray-600">California</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">31.35 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_CO.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">CO</div>
+        <div class="text-sm text-gray-600">Colorado</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.69 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_CT.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">CT</div>
+        <div class="text-sm text-gray-600">Connecticut</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">29.31 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_DE.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">DE</div>
+        <div class="text-sm text-gray-600">Delaware</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">17.15 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_DC.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">DC</div>
+        <div class="text-sm text-gray-600">District of Columbia</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">21.92 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_FL.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">FL</div>
+        <div class="text-sm text-gray-600">Florida</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.21 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_GA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">GA</div>
+        <div class="text-sm text-gray-600">Georgia</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">14.74 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_HI.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">HI</div>
+        <div class="text-sm text-gray-600">Hawaii</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">40.40 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_ID.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">ID</div>
+        <div class="text-sm text-gray-600">Idaho</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">11.83 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_IL.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">IL</div>
+        <div class="text-sm text-gray-600">Illinois</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">17.67 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_IN.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">IN</div>
+        <div class="text-sm text-gray-600">Indiana</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.96 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_IA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">IA</div>
+        <div class="text-sm text-gray-600">Iowa</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.62 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_KS.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">KS</div>
+        <div class="text-sm text-gray-600">Kansas</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">14.44 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_KY.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">KY</div>
+        <div class="text-sm text-gray-600">Kentucky</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.13 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_LA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">LA</div>
+        <div class="text-sm text-gray-600">Louisiana</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">12.52 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_ME.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">ME</div>
+        <div class="text-sm text-gray-600">Maine</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">27.69 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_MD.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">MD</div>
+        <div class="text-sm text-gray-600">Maryland</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">19.53 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_MA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">MA</div>
+        <div class="text-sm text-gray-600">Massachusetts</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">30.41 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_MI.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">MI</div>
+        <div class="text-sm text-gray-600">Michigan</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">20.03 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_MN.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">MN</div>
+        <div class="text-sm text-gray-600">Minnesota</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.83 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_MS.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">MS</div>
+        <div class="text-sm text-gray-600">Mississippi</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">14.03 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_MO.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">MO</div>
+        <div class="text-sm text-gray-600">Missouri</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.30 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_MT.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">MT</div>
+        <div class="text-sm text-gray-600">Montana</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">12.99 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_NE.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">NE</div>
+        <div class="text-sm text-gray-600">Nebraska</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">12.05 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_NV.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">NV</div>
+        <div class="text-sm text-gray-600">Nevada</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.26 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_NH.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">NH</div>
+        <div class="text-sm text-gray-600">New Hampshire</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">24.53 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_NJ.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">NJ</div>
+        <div class="text-sm text-gray-600">New Jersey</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">22.48 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_NM.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">NM</div>
+        <div class="text-sm text-gray-600">New Mexico</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">14.85 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_NY.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">NY</div>
+        <div class="text-sm text-gray-600">New York</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">26.39 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_NC.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">NC</div>
+        <div class="text-sm text-gray-600">North Carolina</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">14.00 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_ND.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">ND</div>
+        <div class="text-sm text-gray-600">North Dakota</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">11.82 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_OH.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">OH</div>
+        <div class="text-sm text-gray-600">Ohio</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">16.90 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_OK.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">OK</div>
+        <div class="text-sm text-gray-600">Oklahoma</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.21 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_OR.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">OR</div>
+        <div class="text-sm text-gray-600">Oregon</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.46 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_PA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">PA</div>
+        <div class="text-sm text-gray-600">Pennsylvania</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">19.29 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_RI.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">RI</div>
+        <div class="text-sm text-gray-600">Rhode Island</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">29.48 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_SC.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">SC</div>
+        <div class="text-sm text-gray-600">South Carolina</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.12 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_SD.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">SD</div>
+        <div class="text-sm text-gray-600">South Dakota</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.32 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_TN.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">TN</div>
+        <div class="text-sm text-gray-600">Tennessee</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.22 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_TX.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">TX</div>
+        <div class="text-sm text-gray-600">Texas</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.40 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_UT.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">UT</div>
+        <div class="text-sm text-gray-600">Utah</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.02 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_VT.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">VT</div>
+        <div class="text-sm text-gray-600">Vermont</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">22.79 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_VA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">VA</div>
+        <div class="text-sm text-gray-600">Virginia</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.28 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_WA.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">WA</div>
+        <div class="text-sm text-gray-600">Washington</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.17 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_WV.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">WV</div>
+        <div class="text-sm text-gray-600">West Virginia</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">15.39 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_WI.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">WI</div>
+        <div class="text-sm text-gray-600">Wisconsin</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">18.08 ¢/kWh</div>
+    </a>
+    
+    <a href="/state_WY.html" class="block bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition text-center">
+        <div class="font-bold text-lg text-brand">WY</div>
+        <div class="text-sm text-gray-600">Wyoming</div>
+        <div class="text-xs text-green-600 mt-1 font-medium">13.37 ¢/kWh</div>
+    </a>
+    
+</div>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

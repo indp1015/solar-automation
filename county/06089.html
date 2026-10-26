@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar ROI & Electricity Cost in Shasta County, CA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+
+<!-- 상단 헤더 -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-brand mb-2">Solar Savings in Shasta County, CA</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div class="bg-blue-50 p-4 rounded border border-blue-100">
+            <p class="text-sm text-blue-800">Electricity Rate (State Avg)</p>
+            <p class="text-2xl font-bold text-brand">31.35 ¢/kWh</p>
+        </div>
+        <div class="bg-orange-50 p-4 rounded border border-orange-100">
+            <p class="text-sm text-orange-800">Solar Radiation (10-Yr Avg)</p>
+            <p class="text-2xl font-bold text-accent">1770 kWh/m²/yr</p>
+        </div>
+    </div>
+</div>
+
+<!-- 🚨 특별 기능: What-If 시뮬레이터 & 게이지 차트 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- 게이지 차트 (본전 회수 기간) -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 flex flex-col items-center justify-center">
+        <h2 class="text-lg font-bold text-brand mb-2">Estimated Payback Period</h2>
+        <p class="text-xs text-gray-500 mb-4">Based on 6kW system & 30% ITC</p>
+        <div class="relative w-full h-40">
+            <canvas id="gaugeChart"></canvas>
+        </div>
+        <div class="mt-4 text-center">
+            <span id="paybackDisplay" class="text-4xl font-extrabold text-brand">0.0</span>
+            <span class="text-xl text-gray-500">Years</span>
+        </div>
+    </div>
+
+    <!-- What-If 슬라이더 -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <h2 class="text-lg font-bold text-brand mb-2">What-If Simulator</h2>
+        <p class="text-sm text-gray-600 mb-4">Electricity rates usually rise over time. Adjust the expected <strong>annual rate increase</strong> to see how it accelerates your ROI.</p>
+        
+        <div class="mb-4">
+            <label class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                <span>Rate Escalation</span>
+                <span id="escalationVal" class="text-accent font-bold">2.5%</span>
+            </label>
+            <input type="range" id="escalationSlider" min="1" max="7" step="0.5" value="2.5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                <span>1%</span><span>4%</span><span>7%</span>
+            </div>
+        </div>
+        
+        <div class="bg-gray-50 p-3 rounded text-sm text-gray-700">
+            <p class="mb-1"><strong>Net Initial Cost:</strong> $<span id="netCostDisplay">0</span></p>
+            <p><strong>25-Year Total Savings:</strong> $<span id="savingsDisplay" class="text-green-600 font-bold">0</span></p>
+        </div>
+    </div>
+</div>
+
+<!-- 시스템 크기별 상세 테이블 -->
+<h2 class="text-xl font-bold text-brand mb-4">ROI by System Size (at 2.5% Escalation)</h2>
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">System Size</th>
+                <th class="p-3 border-b">Est. Annual Savings</th>
+                <th class="p-3 border-b">Payback Period</th>
+                <th class="p-3 border-b">25-Year ROI</th>
+                <th class="p-3 border-b">IRR</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b">4.0 kW</td>
+                <td class="p-3 border-b">$1540</td>
+                <td class="p-3 border-b font-medium">4.9 years</td>
+                <td class="p-3 border-b text-green-600">561.3%</td>
+                <td class="p-3 border-b">22.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b">6.0 kW</td>
+                <td class="p-3 border-b">$2310</td>
+                <td class="p-3 border-b font-medium">4.9 years</td>
+                <td class="p-3 border-b text-green-600">561.3%</td>
+                <td class="p-3 border-b">22.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b">8.0 kW</td>
+                <td class="p-3 border-b">$3080</td>
+                <td class="p-3 border-b font-medium">4.9 years</td>
+                <td class="p-3 border-b text-green-600">561.3%</td>
+                <td class="p-3 border-b">22.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b">10.0 kW</td>
+                <td class="p-3 border-b">$3850</td>
+                <td class="p-3 border-b font-medium">4.9 years</td>
+                <td class="p-3 border-b text-green-600">561.3%</td>
+                <td class="p-3 border-b">22.3%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const results = [{"irr": 0.2226, "kw": 4.0, "payback": 4.91, "roi": 561.33, "savings": 1539.84}, {"irr": 0.2226, "kw": 6.0, "payback": 4.91, "roi": 561.33, "savings": 2309.77}, {"irr": 0.2226, "kw": 8.0, "payback": 4.91, "roi": 561.33, "savings": 3079.69}, {"irr": 0.2226, "kw": 10.0, "payback": 4.91, "roi": 561.33, "savings": 3849.61}];
+    // 기본 6kW 시나리오 선택 (없으면 첫 번째)
+    const baseData = results.find(r => r.kw === 6.0) || results[0]; 
+    if(!baseData) return;
+
+    const RATE_CENTS = 31.35;
+    const COST_PER_WATT = 2.70;
+    const ITC = 0.30;
+    const DEGRADATION = 0.005;
+    
+    const grossCost = baseData.kw * 1000 * COST_PER_WATT;
+    const netCost = grossCost * (1 - ITC);
+    const annualProduction = (baseData.savings / (RATE_CENTS / 100)); // 역산하여 연간 발전량 추정
+
+    let gaugeChart;
+
+    // ROI 계산 함수 (파이썬 roi.py의 로직을 JS로 포팅)
+    function calculateRoi(escalationRate) {
+        let cumulativeSavings = 0;
+        let paybackYear = null;
+        let cashflow = -netCost;
+
+        for (let t = 1; t <= 25; t++) {
+            const prod = annualProduction * Math.pow(1 - DEGRADATION, t - 1);
+            const rate = (RATE_CENTS / 100) * Math.pow(1 + escalationRate, t - 1);
+            const yearlySave = prod * rate;
+            cumulativeSavings += yearlySave;
+            
+            if (paybackYear === null && cumulativeSavings >= netCost) {
+                paybackYear = t - ((cumulativeSavings - netCost) / yearlySave); // 정밀 보간
+            }
+        }
+        return { payback: paybackYear || 25, totalSavings: cumulativeSavings };
+    }
+
+    // 게이지 차트 그리기
+    function updateGauge(payback) {
+        const ctx = document.getElementById('gaugeChart').getContext('2d');
+        const color = payback < 6 ? '#22c55e' : (payback < 10 ? '#f97316' : '#ef4444');
+        
+        if (gaugeChart) gaugeChart.destroy();
+        
+        gaugeChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [payback, 25 - payback],
+                    backgroundColor: [color, '#e5e7eb'],
+                    circumference: 180,
+                    rotation: 270,
+                    borderWidth: 0,
+                    cutout: '80%'
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { tooltip: { enabled: false }, legend: { display: false } }
+            }
+        });
+        document.getElementById('paybackDisplay').innerText = payback.toFixed(1);
+    }
+
+    // UI 업데이트 로직
+    function updateUI(escalation) {
+        const res = calculateRoi(escalation / 100);
+        updateGauge(res.payback);
+        document.getElementById('netCostDisplay').innerText = netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('savingsDisplay').innerText = res.totalSavings.toLocaleString(undefined, {maximumFractionDigits: 0});
+    }
+
+    // 슬라이더 이벤트 연결
+    const slider = document.getElementById('escalationSlider');
+    slider.addEventListener('input', function() {
+        document.getElementById('escalationVal').innerText = this.value + '%';
+        updateUI(parseFloat(this.value));
+    });
+
+    // 초기 렌더링 (기본 2.5%)
+    updateUI(2.5);
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in South Carolina (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in South Carolina</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">15.12 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in South Carolina (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45019.html" class="text-brand hover:underline">Charleston County</a></td>
+                <td class="p-3 border-b">1337</td>
+                <td class="p-3 border-b">10.8</td>
+                <td class="p-3 border-b">206.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45013.html" class="text-brand hover:underline">Beaufort County</a></td>
+                <td class="p-3 border-b">1337</td>
+                <td class="p-3 border-b">10.8</td>
+                <td class="p-3 border-b">206.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45005.html" class="text-brand hover:underline">Allendale County</a></td>
+                <td class="p-3 border-b">1321</td>
+                <td class="p-3 border-b">10.9</td>
+                <td class="p-3 border-b">202.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45027.html" class="text-brand hover:underline">Clarendon County</a></td>
+                <td class="p-3 border-b">1317</td>
+                <td class="p-3 border-b">11.0</td>
+                <td class="p-3 border-b">201.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45049.html" class="text-brand hover:underline">Hampton County</a></td>
+                <td class="p-3 border-b">1312</td>
+                <td class="p-3 border-b">11.0</td>
+                <td class="p-3 border-b">199.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45029.html" class="text-brand hover:underline">Colleton County</a></td>
+                <td class="p-3 border-b">1309</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">199.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45011.html" class="text-brand hover:underline">Barnwell County</a></td>
+                <td class="p-3 border-b">1310</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">199.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45053.html" class="text-brand hover:underline">Jasper County</a></td>
+                <td class="p-3 border-b">1309</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">199.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45031.html" class="text-brand hover:underline">Darlington County</a></td>
+                <td class="p-3 border-b">1309</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">199.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45075.html" class="text-brand hover:underline">Orangeburg County</a></td>
+                <td class="p-3 border-b">1308</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">198.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45051.html" class="text-brand hover:underline">Horry County</a></td>
+                <td class="p-3 border-b">1307</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">198.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45009.html" class="text-brand hover:underline">Bamberg County</a></td>
+                <td class="p-3 border-b">1307</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">198.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45089.html" class="text-brand hover:underline">Williamsburg County</a></td>
+                <td class="p-3 border-b">1306</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">198.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45043.html" class="text-brand hover:underline">Georgetown County</a></td>
+                <td class="p-3 border-b">1305</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">198.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45041.html" class="text-brand hover:underline">Florence County</a></td>
+                <td class="p-3 border-b">1303</td>
+                <td class="p-3 border-b">11.1</td>
+                <td class="p-3 border-b">197.7%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 1337.24, "fips": "45019", "name": "Charleston County", "payback": 10.79, "roi_25y": 206.4}, {"ac_annual": 1337.07, "fips": "45013", "name": "Beaufort County", "payback": 10.79, "roi_25y": 206.35}, {"ac_annual": 1321.1, "fips": "45005", "name": "Allendale County", "payback": 10.94, "roi_25y": 202.27}, {"ac_annual": 1317.05, "fips": "45027", "name": "Clarendon County", "payback": 10.98, "roi_25y": 201.23}, {"ac_annual": 1311.7, "fips": "45049", "name": "Hampton County", "payback": 11.03, "roi_25y": 199.86}, {"ac_annual": 1309.29, "fips": "45029", "name": "Colleton County", "payback": 11.05, "roi_25y": 199.25}, {"ac_annual": 1309.76, "fips": "45011", "name": "Barnwell County", "payback": 11.05, "roi_25y": 199.37}, {"ac_annual": 1309.41, "fips": "45053", "name": "Jasper County", "payback": 11.05, "roi_25y": 199.28}, {"ac_annual": 1308.58, "fips": "45031", "name": "Darlington County", "payback": 11.06, "roi_25y": 199.06}, {"ac_annual": 1307.64, "fips": "45075", "name": "Orangeburg County", "payback": 11.07, "roi_25y": 198.82}, {"ac_annual": 1307.44, "fips": "45051", "name": "Horry County", "payback": 11.07, "roi_25y": 198.77}, {"ac_annual": 1306.71, "fips": "45009", "name": "Bamberg County", "payback": 11.08, "roi_25y": 198.59}, {"ac_annual": 1305.7, "fips": "45089", "name": "Williamsburg County", "payback": 11.09, "roi_25y": 198.33}, {"ac_annual": 1304.69, "fips": "45043", "name": "Georgetown County", "payback": 11.1, "roi_25y": 198.07}, {"ac_annual": 1303.2, "fips": "45041", "name": "Florence County", "payback": 11.11, "roi_25y": 197.69}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

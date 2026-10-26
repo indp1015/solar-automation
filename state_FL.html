@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in Florida (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Florida</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">15.21 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Florida (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12071.html" class="text-brand hover:underline">Lee County</a></td>
+                <td class="p-3 border-b">1487</td>
+                <td class="p-3 border-b">9.5</td>
+                <td class="p-3 border-b">247.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12103.html" class="text-brand hover:underline">Pinellas County</a></td>
+                <td class="p-3 border-b">1466</td>
+                <td class="p-3 border-b">9.6</td>
+                <td class="p-3 border-b">241.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12115.html" class="text-brand hover:underline">Sarasota County</a></td>
+                <td class="p-3 border-b">1454</td>
+                <td class="p-3 border-b">9.7</td>
+                <td class="p-3 border-b">238.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12081.html" class="text-brand hover:underline">Manatee County</a></td>
+                <td class="p-3 border-b">1452</td>
+                <td class="p-3 border-b">9.8</td>
+                <td class="p-3 border-b">238.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12009.html" class="text-brand hover:underline">Brevard County</a></td>
+                <td class="p-3 border-b">1435</td>
+                <td class="p-3 border-b">9.9</td>
+                <td class="p-3 border-b">233.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12043.html" class="text-brand hover:underline">Glades County</a></td>
+                <td class="p-3 border-b">1435</td>
+                <td class="p-3 border-b">9.9</td>
+                <td class="p-3 border-b">233.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12021.html" class="text-brand hover:underline">Collier County</a></td>
+                <td class="p-3 border-b">1424</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">230.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12027.html" class="text-brand hover:underline">DeSoto County</a></td>
+                <td class="p-3 border-b">1422</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">230.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12099.html" class="text-brand hover:underline">Palm Beach County</a></td>
+                <td class="p-3 border-b">1421</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">230.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12011.html" class="text-brand hover:underline">Broward County</a></td>
+                <td class="p-3 border-b">1420</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">229.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12057.html" class="text-brand hover:underline">Hillsborough County</a></td>
+                <td class="p-3 border-b">1420</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">229.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12105.html" class="text-brand hover:underline">Polk County</a></td>
+                <td class="p-3 border-b">1418</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">229.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12037.html" class="text-brand hover:underline">Franklin County</a></td>
+                <td class="p-3 border-b">1415</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">228.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12051.html" class="text-brand hover:underline">Hendry County</a></td>
+                <td class="p-3 border-b">1412</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">227.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/12111.html" class="text-brand hover:underline">St. Lucie County</a></td>
+                <td class="p-3 border-b">1412</td>
+                <td class="p-3 border-b">10.1</td>
+                <td class="p-3 border-b">227.6%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 1487.25, "fips": "12071", "name": "Lee County", "payback": 9.49, "roi_25y": 247.04}, {"ac_annual": 1465.91, "fips": "12103", "name": "Pinellas County", "payback": 9.64, "roi_25y": 241.55}, {"ac_annual": 1453.83, "fips": "12115", "name": "Sarasota County", "payback": 9.74, "roi_25y": 238.44}, {"ac_annual": 1452.23, "fips": "12081", "name": "Manatee County", "payback": 9.75, "roi_25y": 238.03}, {"ac_annual": 1435.37, "fips": "12009", "name": "Brevard County", "payback": 9.88, "roi_25y": 233.69}, {"ac_annual": 1434.67, "fips": "12043", "name": "Glades County", "payback": 9.88, "roi_25y": 233.51}, {"ac_annual": 1423.68, "fips": "12021", "name": "Collier County", "payback": 9.97, "roi_25y": 230.68}, {"ac_annual": 1422.17, "fips": "12027", "name": "DeSoto County", "payback": 9.98, "roi_25y": 230.29}, {"ac_annual": 1421.31, "fips": "12099", "name": "Palm Beach County", "payback": 9.99, "roi_25y": 230.07}, {"ac_annual": 1420.31, "fips": "12011", "name": "Broward County", "payback": 10.0, "roi_25y": 229.81}, {"ac_annual": 1420.37, "fips": "12057", "name": "Hillsborough County", "payback": 10.0, "roi_25y": 229.83}, {"ac_annual": 1417.79, "fips": "12105", "name": "Polk County", "payback": 10.02, "roi_25y": 229.16}, {"ac_annual": 1415.45, "fips": "12037", "name": "Franklin County", "payback": 10.04, "roi_25y": 228.56}, {"ac_annual": 1412.26, "fips": "12051", "name": "Hendry County", "payback": 10.06, "roi_25y": 227.74}, {"ac_annual": 1411.64, "fips": "12111", "name": "St. Lucie County", "payback": 10.07, "roi_25y": 227.58}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

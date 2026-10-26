@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in Colorado (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Colorado</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">15.69 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Colorado (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08003.html" class="text-brand hover:underline">Alamosa County</a></td>
+                <td class="p-3 border-b">1533</td>
+                <td class="p-3 border-b">8.8</td>
+                <td class="p-3 border-b">271.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08021.html" class="text-brand hover:underline">Conejos County</a></td>
+                <td class="p-3 border-b">1524</td>
+                <td class="p-3 border-b">8.9</td>
+                <td class="p-3 border-b">268.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08023.html" class="text-brand hover:underline">Costilla County</a></td>
+                <td class="p-3 border-b">1512</td>
+                <td class="p-3 border-b">9.0</td>
+                <td class="p-3 border-b">265.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08109.html" class="text-brand hover:underline">Saguache County</a></td>
+                <td class="p-3 border-b">1506</td>
+                <td class="p-3 border-b">9.0</td>
+                <td class="p-3 border-b">264.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08083.html" class="text-brand hover:underline">Montezuma County</a></td>
+                <td class="p-3 border-b">1486</td>
+                <td class="p-3 border-b">9.2</td>
+                <td class="p-3 border-b">258.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08009.html" class="text-brand hover:underline">Baca County</a></td>
+                <td class="p-3 border-b">1479</td>
+                <td class="p-3 border-b">9.2</td>
+                <td class="p-3 border-b">257.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08071.html" class="text-brand hover:underline">Las Animas County</a></td>
+                <td class="p-3 border-b">1470</td>
+                <td class="p-3 border-b">9.3</td>
+                <td class="p-3 border-b">254.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08105.html" class="text-brand hover:underline">Rio Grande County</a></td>
+                <td class="p-3 border-b">1468</td>
+                <td class="p-3 border-b">9.3</td>
+                <td class="p-3 border-b">254.1%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08011.html" class="text-brand hover:underline">Bent County</a></td>
+                <td class="p-3 border-b">1468</td>
+                <td class="p-3 border-b">9.3</td>
+                <td class="p-3 border-b">253.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08067.html" class="text-brand hover:underline">La Plata County</a></td>
+                <td class="p-3 border-b">1466</td>
+                <td class="p-3 border-b">9.3</td>
+                <td class="p-3 border-b">253.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08089.html" class="text-brand hover:underline">Otero County</a></td>
+                <td class="p-3 border-b">1463</td>
+                <td class="p-3 border-b">9.3</td>
+                <td class="p-3 border-b">252.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08007.html" class="text-brand hover:underline">Archuleta County</a></td>
+                <td class="p-3 border-b">1462</td>
+                <td class="p-3 border-b">9.3</td>
+                <td class="p-3 border-b">252.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08033.html" class="text-brand hover:underline">Dolores County</a></td>
+                <td class="p-3 border-b">1459</td>
+                <td class="p-3 border-b">9.4</td>
+                <td class="p-3 border-b">251.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08101.html" class="text-brand hover:underline">Pueblo County</a></td>
+                <td class="p-3 border-b">1453</td>
+                <td class="p-3 border-b">9.4</td>
+                <td class="p-3 border-b">250.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/08061.html" class="text-brand hover:underline">Kiowa County</a></td>
+                <td class="p-3 border-b">1453</td>
+                <td class="p-3 border-b">9.4</td>
+                <td class="p-3 border-b">250.1%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 1532.88, "fips": "08003", "name": "Alamosa County", "payback": 8.85, "roi_25y": 271.23}, {"ac_annual": 1523.63, "fips": "08021", "name": "Conejos County", "payback": 8.91, "roi_25y": 268.78}, {"ac_annual": 1512.23, "fips": "08023", "name": "Costilla County", "payback": 8.99, "roi_25y": 265.75}, {"ac_annual": 1506.33, "fips": "08109", "name": "Saguache County", "payback": 9.03, "roi_25y": 264.18}, {"ac_annual": 1486.33, "fips": "08083", "name": "Montezuma County", "payback": 9.17, "roi_25y": 258.87}, {"ac_annual": 1479.38, "fips": "08009", "name": "Baca County", "payback": 9.21, "roi_25y": 257.03}, {"ac_annual": 1470.26, "fips": "08071", "name": "Las Animas County", "payback": 9.28, "roi_25y": 254.61}, {"ac_annual": 1468.19, "fips": "08105", "name": "Rio Grande County", "payback": 9.29, "roi_25y": 254.06}, {"ac_annual": 1467.62, "fips": "08011", "name": "Bent County", "payback": 9.3, "roi_25y": 253.91}, {"ac_annual": 1465.82, "fips": "08067", "name": "La Plata County", "payback": 9.31, "roi_25y": 253.43}, {"ac_annual": 1463.4, "fips": "08089", "name": "Otero County", "payback": 9.33, "roi_25y": 252.79}, {"ac_annual": 1462.32, "fips": "08007", "name": "Archuleta County", "payback": 9.34, "roi_25y": 252.5}, {"ac_annual": 1458.87, "fips": "08033", "name": "Dolores County", "payback": 9.36, "roi_25y": 251.58}, {"ac_annual": 1453.02, "fips": "08101", "name": "Pueblo County", "payback": 9.4, "roi_25y": 250.03}, {"ac_annual": 1453.1, "fips": "08061", "name": "Kiowa County", "payback": 9.4, "roi_25y": 250.05}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

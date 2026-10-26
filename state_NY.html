@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel ROI in New York (2025)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 🚨 Chart.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+        <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in New York</h1>
+<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">26.39 ¢/kWh</strong> (EIA 2025).</p>
+
+<!-- 🚨 주(State) 내 카운티 차트 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in New York (6kW System)</h2>
+    <div class="relative w-full h-96">
+        <canvas id="countyChart"></canvas>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-blue-50 text-brand text-sm">
+                <th class="p-3 border-b">County</th>
+                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Est. Payback (Years)</th>
+                <th class="p-3 border-b">25-Year ROI (%)</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36059.html" class="text-brand hover:underline">Nassau County</a></td>
+                <td class="p-3 border-b">1178</td>
+                <td class="p-3 border-b">6.7</td>
+                <td class="p-3 border-b">390.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36103.html" class="text-brand hover:underline">Suffolk County</a></td>
+                <td class="p-3 border-b">1176</td>
+                <td class="p-3 border-b">6.7</td>
+                <td class="p-3 border-b">389.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36047.html" class="text-brand hover:underline">Kings County</a></td>
+                <td class="p-3 border-b">1168</td>
+                <td class="p-3 border-b">6.7</td>
+                <td class="p-3 border-b">385.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36061.html" class="text-brand hover:underline">New York County</a></td>
+                <td class="p-3 border-b">1163</td>
+                <td class="p-3 border-b">6.8</td>
+                <td class="p-3 border-b">383.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36081.html" class="text-brand hover:underline">Queens County</a></td>
+                <td class="p-3 border-b">1153</td>
+                <td class="p-3 border-b">6.8</td>
+                <td class="p-3 border-b">379.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36005.html" class="text-brand hover:underline">Bronx County</a></td>
+                <td class="p-3 border-b">1149</td>
+                <td class="p-3 border-b">6.8</td>
+                <td class="p-3 border-b">377.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36119.html" class="text-brand hover:underline">Westchester County</a></td>
+                <td class="p-3 border-b">1134</td>
+                <td class="p-3 border-b">6.9</td>
+                <td class="p-3 border-b">370.7%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36087.html" class="text-brand hover:underline">Rockland County</a></td>
+                <td class="p-3 border-b">1129</td>
+                <td class="p-3 border-b">7.0</td>
+                <td class="p-3 border-b">368.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36085.html" class="text-brand hover:underline">Richmond County</a></td>
+                <td class="p-3 border-b">1129</td>
+                <td class="p-3 border-b">7.0</td>
+                <td class="p-3 border-b">368.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36079.html" class="text-brand hover:underline">Putnam County</a></td>
+                <td class="p-3 border-b">1127</td>
+                <td class="p-3 border-b">7.0</td>
+                <td class="p-3 border-b">367.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36027.html" class="text-brand hover:underline">Dutchess County</a></td>
+                <td class="p-3 border-b">1110</td>
+                <td class="p-3 border-b">7.1</td>
+                <td class="p-3 border-b">359.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36071.html" class="text-brand hover:underline">Orange County</a></td>
+                <td class="p-3 border-b">1110</td>
+                <td class="p-3 border-b">7.1</td>
+                <td class="p-3 border-b">360.0%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36105.html" class="text-brand hover:underline">Sullivan County</a></td>
+                <td class="p-3 border-b">1105</td>
+                <td class="p-3 border-b">7.1</td>
+                <td class="p-3 border-b">357.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36111.html" class="text-brand hover:underline">Ulster County</a></td>
+                <td class="p-3 border-b">1101</td>
+                <td class="p-3 border-b">7.2</td>
+                <td class="p-3 border-b">355.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/36093.html" class="text-brand hover:underline">Schenectady County</a></td>
+                <td class="p-3 border-b">1091</td>
+                <td class="p-3 border-b">7.2</td>
+                <td class="p-3 border-b">351.3%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const countyData = [{"ac_annual": 1178.26, "fips": "36059", "name": "Nassau County", "payback": 6.66, "roi_25y": 390.41}, {"ac_annual": 1175.8, "fips": "36103", "name": "Suffolk County", "payback": 6.67, "roi_25y": 389.31}, {"ac_annual": 1167.8, "fips": "36047", "name": "Kings County", "payback": 6.72, "roi_25y": 385.74}, {"ac_annual": 1162.92, "fips": "36061", "name": "New York County", "payback": 6.75, "roi_25y": 383.56}, {"ac_annual": 1153.45, "fips": "36081", "name": "Queens County", "payback": 6.81, "roi_25y": 379.33}, {"ac_annual": 1149.09, "fips": "36005", "name": "Bronx County", "payback": 6.84, "roi_25y": 377.38}, {"ac_annual": 1134.04, "fips": "36119", "name": "Westchester County", "payback": 6.94, "roi_25y": 370.66}, {"ac_annual": 1129.48, "fips": "36087", "name": "Rockland County", "payback": 6.97, "roi_25y": 368.63}, {"ac_annual": 1128.71, "fips": "36085", "name": "Richmond County", "payback": 6.98, "roi_25y": 368.28}, {"ac_annual": 1126.84, "fips": "36079", "name": "Putnam County", "payback": 6.99, "roi_25y": 367.45}, {"ac_annual": 1109.65, "fips": "36027", "name": "Dutchess County", "payback": 7.11, "roi_25y": 359.77}, {"ac_annual": 1110.18, "fips": "36071", "name": "Orange County", "payback": 7.11, "roi_25y": 360.01}, {"ac_annual": 1104.72, "fips": "36105", "name": "Sullivan County", "payback": 7.14, "roi_25y": 357.57}, {"ac_annual": 1100.97, "fips": "36111", "name": "Ulster County", "payback": 7.17, "roi_25y": 355.9}, {"ac_annual": 1090.63, "fips": "36093", "name": "Schenectady County", "payback": 7.25, "roi_25y": 351.28}];
+    const labels = countyData.map(c => c.name);
+    const data = countyData.map(c => c.payback);
+
+    const ctx = document.getElementById('countyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Payback Period (Years)',
+                data: data,
+                backgroundColor: '#3b82f6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 가로 막대
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+        }
+    });
+});
+</script>
+
+    </main>
+
+    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            
+            <!-- 면책 조항 본문 -->
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
