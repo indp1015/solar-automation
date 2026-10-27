@@ -332,8 +332,8 @@ async function recalc() {
     const annualValues = r.annuals.map(a => Math.round(a.net));
 
     // 양수는 파랑, 음수는 빨강
-    const barColors  = annualValues.map(v => v >= 0 ? 'rgba(147,197,253,0.75)' : 'rgba(239,68,68,0.70)');
-    const barBorders = annualValues.map(v => v >= 0 ? 'rgba(59,130,246,0.90)' : 'rgba(220,38,38,0.90)');
+    const barColors  = annualValues.map(v => v >= 0 ? 'rgba(59,130,246,0.85)' : 'rgba(220,38,38,0.85)');
+    const barBorders = annualValues.map(v => v >= 0 ? '#1d4ed8' : '#b91c1c');
 
     if (cfChart) cfChart.destroy();
     cfChart = new Chart(document.getElementById('cfChart'), {
@@ -355,7 +355,7 @@ async function recalc() {
                     label: 'Cumulative net ($)',
                     data: cumValues,
                     borderColor: '#f97316',
-                    backgroundColor: 'rgba(249,115,22,0.1)',
+                    backgroundColor: 'rgba(249,115,22,0.05)',  // 0.1 → 0.05
                     fill: true,
                     tension: 0.3,
                     pointRadius: 0,
