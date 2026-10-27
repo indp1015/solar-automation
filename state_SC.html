@@ -161,6 +161,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/45061.html" class="text-brand hover:underline">Lee County</a></td>
+                <td class="p-3 border-b">7843</td>
+                <td class="p-3 border-b">10.0</td>
+                <td class="p-3 border-b">182.8%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/45089.html" class="text-brand hover:underline">Williamsburg County</a></td>
                 <td class="p-3 border-b">7834</td>
                 <td class="p-3 border-b">10.0</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">182.2%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/45033.html" class="text-brand hover:underline">Dillon County</a></td>
-                <td class="p-3 border-b">7823</td>
-                <td class="p-3 border-b">10.0</td>
-                <td class="p-3 border-b">182.0%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1337.24, "fips": "45019", "name": "Charleston County", "payback": 9.75, "roi_25y": 190.52}, {"ac_annual": 1337.07, "fips": "45013", "name": "Beaufort County", "payback": 9.76, "roi_25y": 190.48}, {"ac_annual": 1321.1, "fips": "45005", "name": "Allendale County", "payback": 9.88, "roi_25y": 186.39}, {"ac_annual": 1317.05, "fips": "45027", "name": "Clarendon County", "payback": 9.91, "roi_25y": 185.36}, {"ac_annual": 1311.7, "fips": "45049", "name": "Hampton County", "payback": 9.95, "roi_25y": 183.99}, {"ac_annual": 1308.58, "fips": "45031", "name": "Darlington County", "payback": 9.97, "roi_25y": 183.19}, {"ac_annual": 1309.29, "fips": "45029", "name": "Colleton County", "payback": 9.97, "roi_25y": 183.37}, {"ac_annual": 1309.76, "fips": "45011", "name": "Barnwell County", "payback": 9.97, "roi_25y": 183.49}, {"ac_annual": 1309.41, "fips": "45053", "name": "Jasper County", "payback": 9.97, "roi_25y": 183.4}, {"ac_annual": 1307.64, "fips": "45075", "name": "Orangeburg County", "payback": 9.98, "roi_25y": 182.95}, {"ac_annual": 1307.44, "fips": "45051", "name": "Horry County", "payback": 9.98, "roi_25y": 182.9}, {"ac_annual": 1306.71, "fips": "45009", "name": "Bamberg County", "payback": 9.99, "roi_25y": 182.71}, {"ac_annual": 1305.7, "fips": "45089", "name": "Williamsburg County", "payback": 10.0, "roi_25y": 182.45}, {"ac_annual": 1304.69, "fips": "45043", "name": "Georgetown County", "payback": 10.01, "roi_25y": 182.2}, {"ac_annual": 1303.77, "fips": "45033", "name": "Dillon County", "payback": 10.01, "roi_25y": 181.96}];
+    const countyData = [{"ac_annual": 1337.24, "fips": "45019", "name": "Charleston County", "payback": 9.75, "roi_25y": 190.52}, {"ac_annual": 1337.07, "fips": "45013", "name": "Beaufort County", "payback": 9.76, "roi_25y": 190.48}, {"ac_annual": 1321.1, "fips": "45005", "name": "Allendale County", "payback": 9.88, "roi_25y": 186.39}, {"ac_annual": 1317.05, "fips": "45027", "name": "Clarendon County", "payback": 9.91, "roi_25y": 185.36}, {"ac_annual": 1311.7, "fips": "45049", "name": "Hampton County", "payback": 9.95, "roi_25y": 183.99}, {"ac_annual": 1308.58, "fips": "45031", "name": "Darlington County", "payback": 9.97, "roi_25y": 183.19}, {"ac_annual": 1309.29, "fips": "45029", "name": "Colleton County", "payback": 9.97, "roi_25y": 183.37}, {"ac_annual": 1309.76, "fips": "45011", "name": "Barnwell County", "payback": 9.97, "roi_25y": 183.49}, {"ac_annual": 1309.41, "fips": "45053", "name": "Jasper County", "payback": 9.97, "roi_25y": 183.4}, {"ac_annual": 1307.64, "fips": "45075", "name": "Orangeburg County", "payback": 9.98, "roi_25y": 182.95}, {"ac_annual": 1307.44, "fips": "45051", "name": "Horry County", "payback": 9.98, "roi_25y": 182.9}, {"ac_annual": 1306.71, "fips": "45009", "name": "Bamberg County", "payback": 9.99, "roi_25y": 182.71}, {"ac_annual": 1307.19, "fips": "45061", "name": "Lee County", "payback": 9.99, "roi_25y": 182.84}, {"ac_annual": 1305.7, "fips": "45089", "name": "Williamsburg County", "payback": 10.0, "roi_25y": 182.45}, {"ac_annual": 1304.69, "fips": "45043", "name": "Georgetown County", "payback": 10.01, "roi_25y": 182.2}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

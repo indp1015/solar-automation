@@ -77,6 +77,13 @@
         <tbody class="text-sm">
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/04003.html" class="text-brand hover:underline">Cochise County</a></td>
+                <td class="p-3 border-b">9795</td>
+                <td class="p-3 border-b">7.9</td>
+                <td class="p-3 border-b">269.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/04023.html" class="text-brand hover:underline">Santa Cruz County</a></td>
                 <td class="p-3 border-b">9685</td>
                 <td class="p-3 border-b">8.0</td>
@@ -180,7 +187,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1614.14, "fips": "04023", "name": "Santa Cruz County", "payback": 7.97, "roi_25y": 265.19}, {"ac_annual": 1610.46, "fips": "04017", "name": "Navajo County", "payback": 7.99, "roi_25y": 264.24}, {"ac_annual": 1604.29, "fips": "04009", "name": "Graham County", "payback": 8.02, "roi_25y": 262.64}, {"ac_annual": 1603.38, "fips": "04019", "name": "Pima County", "payback": 8.03, "roi_25y": 262.41}, {"ac_annual": 1601.98, "fips": "04012", "name": "La Paz County", "payback": 8.03, "roi_25y": 262.05}, {"ac_annual": 1602.11, "fips": "04015", "name": "Mohave County", "payback": 8.03, "roi_25y": 262.08}, {"ac_annual": 1599.68, "fips": "04027", "name": "Yuma County", "payback": 8.05, "roi_25y": 261.45}, {"ac_annual": 1598.56, "fips": "04011", "name": "Greenlee County", "payback": 8.05, "roi_25y": 261.17}, {"ac_annual": 1578.61, "fips": "04021", "name": "Pinal County", "payback": 8.15, "roi_25y": 256.01}, {"ac_annual": 1567.52, "fips": "04013", "name": "Maricopa County", "payback": 8.21, "roi_25y": 253.15}, {"ac_annual": 1558.15, "fips": "04007", "name": "Gila County", "payback": 8.26, "roi_25y": 250.73}, {"ac_annual": 1558.96, "fips": "04025", "name": "Yavapai County", "payback": 8.26, "roi_25y": 250.94}, {"ac_annual": 1549.55, "fips": "04001", "name": "Apache County", "payback": 8.31, "roi_25y": 248.51}, {"ac_annual": 1545.13, "fips": "04005", "name": "Coconino County", "payback": 8.33, "roi_25y": 247.37}];
+    const countyData = [{"ac_annual": 1632.51, "fips": "04003", "name": "Cochise County", "payback": 7.88, "roi_25y": 269.93}, {"ac_annual": 1614.14, "fips": "04023", "name": "Santa Cruz County", "payback": 7.97, "roi_25y": 265.19}, {"ac_annual": 1610.46, "fips": "04017", "name": "Navajo County", "payback": 7.99, "roi_25y": 264.24}, {"ac_annual": 1604.29, "fips": "04009", "name": "Graham County", "payback": 8.02, "roi_25y": 262.64}, {"ac_annual": 1603.38, "fips": "04019", "name": "Pima County", "payback": 8.03, "roi_25y": 262.41}, {"ac_annual": 1601.98, "fips": "04012", "name": "La Paz County", "payback": 8.03, "roi_25y": 262.05}, {"ac_annual": 1602.11, "fips": "04015", "name": "Mohave County", "payback": 8.03, "roi_25y": 262.08}, {"ac_annual": 1599.68, "fips": "04027", "name": "Yuma County", "payback": 8.05, "roi_25y": 261.45}, {"ac_annual": 1598.56, "fips": "04011", "name": "Greenlee County", "payback": 8.05, "roi_25y": 261.17}, {"ac_annual": 1578.61, "fips": "04021", "name": "Pinal County", "payback": 8.15, "roi_25y": 256.01}, {"ac_annual": 1567.52, "fips": "04013", "name": "Maricopa County", "payback": 8.21, "roi_25y": 253.15}, {"ac_annual": 1558.15, "fips": "04007", "name": "Gila County", "payback": 8.26, "roi_25y": 250.73}, {"ac_annual": 1558.96, "fips": "04025", "name": "Yavapai County", "payback": 8.26, "roi_25y": 250.94}, {"ac_annual": 1549.55, "fips": "04001", "name": "Apache County", "payback": 8.31, "roi_25y": 248.51}, {"ac_annual": 1545.13, "fips": "04005", "name": "Coconino County", "payback": 8.33, "roi_25y": 247.37}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

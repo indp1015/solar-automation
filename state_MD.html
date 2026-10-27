@@ -91,6 +91,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/24019.html" class="text-brand hover:underline">Dorchester County</a></td>
+                <td class="p-3 border-b">7333</td>
+                <td class="p-3 border-b">8.2</td>
+                <td class="p-3 border-b">252.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/24035.html" class="text-brand hover:underline">Queen Anne's County</a></td>
                 <td class="p-3 border-b">7315</td>
                 <td class="p-3 border-b">8.2</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">236.8%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/24510.html" class="text-brand hover:underline">Baltimore city</a></td>
-                <td class="p-3 border-b">7030</td>
-                <td class="p-3 border-b">8.6</td>
-                <td class="p-3 border-b">235.6%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1242.98, "fips": "24039", "name": "Somerset County", "payback": 8.09, "roi_25y": 259.16}, {"ac_annual": 1223.2, "fips": "24041", "name": "Talbot County", "payback": 8.22, "roi_25y": 252.62}, {"ac_annual": 1219.22, "fips": "24035", "name": "Queen Anne\u0027s County", "payback": 8.25, "roi_25y": 251.31}, {"ac_annual": 1214.15, "fips": "24037", "name": "St. Mary\u0027s County", "payback": 8.29, "roi_25y": 249.63}, {"ac_annual": 1213.63, "fips": "24009", "name": "Calvert County", "payback": 8.29, "roi_25y": 249.46}, {"ac_annual": 1213.97, "fips": "24045", "name": "Wicomico County", "payback": 8.29, "roi_25y": 249.57}, {"ac_annual": 1209.38, "fips": "24029", "name": "Kent County", "payback": 8.32, "roi_25y": 248.05}, {"ac_annual": 1206.51, "fips": "24047", "name": "Worcester County", "payback": 8.34, "roi_25y": 247.11}, {"ac_annual": 1204.73, "fips": "24011", "name": "Caroline County", "payback": 8.35, "roi_25y": 246.52}, {"ac_annual": 1191.61, "fips": "24017", "name": "Charles County", "payback": 8.45, "roi_25y": 242.18}, {"ac_annual": 1182.67, "fips": "24003", "name": "Anne Arundel County", "payback": 8.51, "roi_25y": 239.23}, {"ac_annual": 1180.95, "fips": "24033", "name": "Prince George\u0027s County", "payback": 8.52, "roi_25y": 238.66}, {"ac_annual": 1178.44, "fips": "24031", "name": "Montgomery County", "payback": 8.54, "roi_25y": 237.83}, {"ac_annual": 1175.46, "fips": "24005", "name": "Baltimore County", "payback": 8.56, "roi_25y": 236.85}, {"ac_annual": 1171.69, "fips": "24510", "name": "Baltimore city", "payback": 8.59, "roi_25y": 235.6}];
+    const countyData = [{"ac_annual": 1242.98, "fips": "24039", "name": "Somerset County", "payback": 8.09, "roi_25y": 259.16}, {"ac_annual": 1223.2, "fips": "24041", "name": "Talbot County", "payback": 8.22, "roi_25y": 252.62}, {"ac_annual": 1222.1, "fips": "24019", "name": "Dorchester County", "payback": 8.23, "roi_25y": 252.26}, {"ac_annual": 1219.22, "fips": "24035", "name": "Queen Anne\u0027s County", "payback": 8.25, "roi_25y": 251.31}, {"ac_annual": 1214.15, "fips": "24037", "name": "St. Mary\u0027s County", "payback": 8.29, "roi_25y": 249.63}, {"ac_annual": 1213.63, "fips": "24009", "name": "Calvert County", "payback": 8.29, "roi_25y": 249.46}, {"ac_annual": 1213.97, "fips": "24045", "name": "Wicomico County", "payback": 8.29, "roi_25y": 249.57}, {"ac_annual": 1209.38, "fips": "24029", "name": "Kent County", "payback": 8.32, "roi_25y": 248.05}, {"ac_annual": 1206.51, "fips": "24047", "name": "Worcester County", "payback": 8.34, "roi_25y": 247.11}, {"ac_annual": 1204.73, "fips": "24011", "name": "Caroline County", "payback": 8.35, "roi_25y": 246.52}, {"ac_annual": 1191.61, "fips": "24017", "name": "Charles County", "payback": 8.45, "roi_25y": 242.18}, {"ac_annual": 1182.67, "fips": "24003", "name": "Anne Arundel County", "payback": 8.51, "roi_25y": 239.23}, {"ac_annual": 1180.95, "fips": "24033", "name": "Prince George\u0027s County", "payback": 8.52, "roi_25y": 238.66}, {"ac_annual": 1178.44, "fips": "24031", "name": "Montgomery County", "payback": 8.54, "roi_25y": 237.83}, {"ac_annual": 1175.46, "fips": "24005", "name": "Baltimore County", "payback": 8.56, "roi_25y": 236.85}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

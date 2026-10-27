@@ -112,6 +112,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/25027.html" class="text-brand hover:underline">Worcester County</a></td>
+                <td class="p-3 border-b">6753</td>
+                <td class="p-3 border-b">5.7</td>
+                <td class="p-3 border-b">427.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/25021.html" class="text-brand hover:underline">Norfolk County</a></td>
                 <td class="p-3 border-b">6717</td>
                 <td class="p-3 border-b">5.7</td>
@@ -173,7 +180,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1213.8, "fips": "25019", "name": "Nantucket County", "payback": 5.28, "roi_25y": 472.97}, {"ac_annual": 1187.37, "fips": "25007", "name": "Dukes County", "payback": 5.39, "roi_25y": 459.37}, {"ac_annual": 1169.66, "fips": "25001", "name": "Barnstable County", "payback": 5.48, "roi_25y": 450.25}, {"ac_annual": 1133.95, "fips": "25025", "name": "Suffolk County", "payback": 5.65, "roi_25y": 431.88}, {"ac_annual": 1129.04, "fips": "25005", "name": "Bristol County", "payback": 5.68, "roi_25y": 429.35}, {"ac_annual": 1119.55, "fips": "25021", "name": "Norfolk County", "payback": 5.73, "roi_25y": 424.47}, {"ac_annual": 1117.7, "fips": "25009", "name": "Essex County", "payback": 5.74, "roi_25y": 423.52}, {"ac_annual": 1114.88, "fips": "25017", "name": "Middlesex County", "payback": 5.75, "roi_25y": 422.07}, {"ac_annual": 1115.5, "fips": "25023", "name": "Plymouth County", "payback": 5.75, "roi_25y": 422.39}, {"ac_annual": 1106.8, "fips": "25013", "name": "Hampden County", "payback": 5.8, "roi_25y": 417.91}, {"ac_annual": 1080.48, "fips": "25015", "name": "Hampshire County", "payback": 5.94, "roi_25y": 404.37}, {"ac_annual": 1075.1, "fips": "25011", "name": "Franklin County", "payback": 5.97, "roi_25y": 401.6}, {"ac_annual": 1064.55, "fips": "25003", "name": "Berkshire County", "payback": 6.03, "roi_25y": 396.17}];
+    const countyData = [{"ac_annual": 1213.8, "fips": "25019", "name": "Nantucket County", "payback": 5.28, "roi_25y": 472.97}, {"ac_annual": 1187.37, "fips": "25007", "name": "Dukes County", "payback": 5.39, "roi_25y": 459.37}, {"ac_annual": 1169.66, "fips": "25001", "name": "Barnstable County", "payback": 5.48, "roi_25y": 450.25}, {"ac_annual": 1133.95, "fips": "25025", "name": "Suffolk County", "payback": 5.65, "roi_25y": 431.88}, {"ac_annual": 1129.04, "fips": "25005", "name": "Bristol County", "payback": 5.68, "roi_25y": 429.35}, {"ac_annual": 1125.47, "fips": "25027", "name": "Worcester County", "payback": 5.7, "roi_25y": 427.52}, {"ac_annual": 1119.55, "fips": "25021", "name": "Norfolk County", "payback": 5.73, "roi_25y": 424.47}, {"ac_annual": 1117.7, "fips": "25009", "name": "Essex County", "payback": 5.74, "roi_25y": 423.52}, {"ac_annual": 1114.88, "fips": "25017", "name": "Middlesex County", "payback": 5.75, "roi_25y": 422.07}, {"ac_annual": 1115.5, "fips": "25023", "name": "Plymouth County", "payback": 5.75, "roi_25y": 422.39}, {"ac_annual": 1106.8, "fips": "25013", "name": "Hampden County", "payback": 5.8, "roi_25y": 417.91}, {"ac_annual": 1080.48, "fips": "25015", "name": "Hampshire County", "payback": 5.94, "roi_25y": 404.37}, {"ac_annual": 1075.1, "fips": "25011", "name": "Franklin County", "payback": 5.97, "roi_25y": 401.6}, {"ac_annual": 1064.55, "fips": "25003", "name": "Berkshire County", "payback": 6.03, "roi_25y": 396.17}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

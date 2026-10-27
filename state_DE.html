@@ -84,6 +84,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/10001.html" class="text-brand hover:underline">Kent County</a></td>
+                <td class="p-3 border-b">7137</td>
+                <td class="p-3 border-b">9.7</td>
+                <td class="p-3 border-b">193.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/10003.html" class="text-brand hover:underline">New Castle County</a></td>
                 <td class="p-3 border-b">7059</td>
                 <td class="p-3 border-b">9.8</td>
@@ -96,7 +103,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1199.5, "fips": "10005", "name": "Sussex County", "payback": 9.58, "roi_25y": 196.49}, {"ac_annual": 1176.47, "fips": "10003", "name": "New Castle County", "payback": 9.78, "roi_25y": 189.8}];
+    const countyData = [{"ac_annual": 1199.5, "fips": "10005", "name": "Sussex County", "payback": 9.58, "roi_25y": 196.49}, {"ac_annual": 1189.58, "fips": "10001", "name": "Kent County", "payback": 9.66, "roi_25y": 193.61}, {"ac_annual": 1176.47, "fips": "10003", "name": "New Castle County", "payback": 9.78, "roi_25y": 189.8}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

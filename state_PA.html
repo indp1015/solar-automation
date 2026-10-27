@@ -161,6 +161,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/42043.html" class="text-brand hover:underline">Dauphin County</a></td>
+                <td class="p-3 border-b">6701</td>
+                <td class="p-3 border-b">9.1</td>
+                <td class="p-3 border-b">212.9%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/42041.html" class="text-brand hover:underline">Cumberland County</a></td>
                 <td class="p-3 border-b">6694</td>
                 <td class="p-3 border-b">9.2</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">210.6%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/42011.html" class="text-brand hover:underline">Berks County</a></td>
-                <td class="p-3 border-b">6643</td>
-                <td class="p-3 border-b">9.2</td>
-                <td class="p-3 border-b">209.8%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1166.12, "fips": "42101", "name": "Philadelphia County", "payback": 8.75, "roi_25y": 229.02}, {"ac_annual": 1158.06, "fips": "42045", "name": "Delaware County", "payback": 8.81, "roi_25y": 226.39}, {"ac_annual": 1143.63, "fips": "42029", "name": "Chester County", "payback": 8.92, "roi_25y": 221.68}, {"ac_annual": 1143.21, "fips": "42071", "name": "Lancaster County", "payback": 8.93, "roi_25y": 221.55}, {"ac_annual": 1140.31, "fips": "42017", "name": "Bucks County", "payback": 8.95, "roi_25y": 220.6}, {"ac_annual": 1138.82, "fips": "42133", "name": "York County", "payback": 8.96, "roi_25y": 220.11}, {"ac_annual": 1137.7, "fips": "42091", "name": "Montgomery County", "payback": 8.97, "roi_25y": 219.75}, {"ac_annual": 1131.19, "fips": "42001", "name": "Adams County", "payback": 9.02, "roi_25y": 217.62}, {"ac_annual": 1127.18, "fips": "42055", "name": "Franklin County", "payback": 9.06, "roi_25y": 216.31}, {"ac_annual": 1124.88, "fips": "42077", "name": "Lehigh County", "payback": 9.08, "roi_25y": 215.56}, {"ac_annual": 1121.75, "fips": "42075", "name": "Lebanon County", "payback": 9.1, "roi_25y": 214.54}, {"ac_annual": 1117.86, "fips": "42095", "name": "Northampton County", "payback": 9.13, "roi_25y": 213.27}, {"ac_annual": 1115.68, "fips": "42041", "name": "Cumberland County", "payback": 9.15, "roi_25y": 212.56}, {"ac_annual": 1109.61, "fips": "42089", "name": "Monroe County", "payback": 9.2, "roi_25y": 210.58}, {"ac_annual": 1107.24, "fips": "42011", "name": "Berks County", "payback": 9.22, "roi_25y": 209.81}];
+    const countyData = [{"ac_annual": 1166.12, "fips": "42101", "name": "Philadelphia County", "payback": 8.75, "roi_25y": 229.02}, {"ac_annual": 1158.06, "fips": "42045", "name": "Delaware County", "payback": 8.81, "roi_25y": 226.39}, {"ac_annual": 1143.63, "fips": "42029", "name": "Chester County", "payback": 8.92, "roi_25y": 221.68}, {"ac_annual": 1143.21, "fips": "42071", "name": "Lancaster County", "payback": 8.93, "roi_25y": 221.55}, {"ac_annual": 1140.31, "fips": "42017", "name": "Bucks County", "payback": 8.95, "roi_25y": 220.6}, {"ac_annual": 1138.82, "fips": "42133", "name": "York County", "payback": 8.96, "roi_25y": 220.11}, {"ac_annual": 1137.7, "fips": "42091", "name": "Montgomery County", "payback": 8.97, "roi_25y": 219.75}, {"ac_annual": 1131.19, "fips": "42001", "name": "Adams County", "payback": 9.02, "roi_25y": 217.62}, {"ac_annual": 1127.18, "fips": "42055", "name": "Franklin County", "payback": 9.06, "roi_25y": 216.31}, {"ac_annual": 1124.88, "fips": "42077", "name": "Lehigh County", "payback": 9.08, "roi_25y": 215.56}, {"ac_annual": 1121.75, "fips": "42075", "name": "Lebanon County", "payback": 9.1, "roi_25y": 214.54}, {"ac_annual": 1117.86, "fips": "42095", "name": "Northampton County", "payback": 9.13, "roi_25y": 213.27}, {"ac_annual": 1116.88, "fips": "42043", "name": "Dauphin County", "payback": 9.14, "roi_25y": 212.95}, {"ac_annual": 1115.68, "fips": "42041", "name": "Cumberland County", "payback": 9.15, "roi_25y": 212.56}, {"ac_annual": 1109.61, "fips": "42089", "name": "Monroe County", "payback": 9.2, "roi_25y": 210.58}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

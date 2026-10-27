@@ -77,6 +77,13 @@
         <tbody class="text-sm">
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/47097.html" class="text-brand hover:underline">Lauderdale County</a></td>
+                <td class="p-3 border-b">7591</td>
+                <td class="p-3 border-b">11.8</td>
+                <td class="p-3 border-b">131.4%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/47167.html" class="text-brand hover:underline">Tipton County</a></td>
                 <td class="p-3 border-b">7564</td>
                 <td class="p-3 border-b">11.9</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">125.3%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/47109.html" class="text-brand hover:underline">McNairy County</a></td>
-                <td class="p-3 border-b">7420</td>
-                <td class="p-3 border-b">13.8</td>
-                <td class="p-3 border-b">125.0%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1260.75, "fips": "47167", "name": "Tipton County", "payback": 11.89, "roi_25y": 130.42}, {"ac_annual": 1256.58, "fips": "47033", "name": "Crockett County", "payback": 11.93, "roi_25y": 129.49}, {"ac_annual": 1254.7, "fips": "47047", "name": "Fayette County", "payback": 11.95, "roi_25y": 129.07}, {"ac_annual": 1251.8, "fips": "47095", "name": "Lake County", "payback": 11.98, "roi_25y": 128.42}, {"ac_annual": 1251.01, "fips": "47157", "name": "Shelby County", "payback": 11.99, "roi_25y": 128.25}, {"ac_annual": 1247.48, "fips": "47069", "name": "Hardeman County", "payback": 13.65, "roi_25y": 127.46}, {"ac_annual": 1245.17, "fips": "47065", "name": "Hamilton County", "payback": 13.68, "roi_25y": 126.94}, {"ac_annual": 1244.49, "fips": "47107", "name": "McMinn County", "payback": 13.69, "roi_25y": 126.79}, {"ac_annual": 1242.95, "fips": "47075", "name": "Haywood County", "payback": 13.71, "roi_25y": 126.44}, {"ac_annual": 1241.14, "fips": "47071", "name": "Hardin County", "payback": 13.73, "roi_25y": 126.04}, {"ac_annual": 1239.86, "fips": "47103", "name": "Lincoln County", "payback": 13.74, "roi_25y": 125.75}, {"ac_annual": 1239.66, "fips": "47045", "name": "Dyer County", "payback": 13.74, "roi_25y": 125.71}, {"ac_annual": 1237.71, "fips": "47051", "name": "Franklin County", "payback": 13.76, "roi_25y": 125.27}, {"ac_annual": 1237.93, "fips": "47131", "name": "Obion County", "payback": 13.76, "roi_25y": 125.32}, {"ac_annual": 1236.62, "fips": "47109", "name": "McNairy County", "payback": 13.78, "roi_25y": 125.03}];
+    const countyData = [{"ac_annual": 1265.18, "fips": "47097", "name": "Lauderdale County", "payback": 11.85, "roi_25y": 131.41}, {"ac_annual": 1260.75, "fips": "47167", "name": "Tipton County", "payback": 11.89, "roi_25y": 130.42}, {"ac_annual": 1256.58, "fips": "47033", "name": "Crockett County", "payback": 11.93, "roi_25y": 129.49}, {"ac_annual": 1254.7, "fips": "47047", "name": "Fayette County", "payback": 11.95, "roi_25y": 129.07}, {"ac_annual": 1251.8, "fips": "47095", "name": "Lake County", "payback": 11.98, "roi_25y": 128.42}, {"ac_annual": 1251.01, "fips": "47157", "name": "Shelby County", "payback": 11.99, "roi_25y": 128.25}, {"ac_annual": 1247.48, "fips": "47069", "name": "Hardeman County", "payback": 13.65, "roi_25y": 127.46}, {"ac_annual": 1245.17, "fips": "47065", "name": "Hamilton County", "payback": 13.68, "roi_25y": 126.94}, {"ac_annual": 1244.49, "fips": "47107", "name": "McMinn County", "payback": 13.69, "roi_25y": 126.79}, {"ac_annual": 1242.95, "fips": "47075", "name": "Haywood County", "payback": 13.71, "roi_25y": 126.44}, {"ac_annual": 1241.14, "fips": "47071", "name": "Hardin County", "payback": 13.73, "roi_25y": 126.04}, {"ac_annual": 1239.86, "fips": "47103", "name": "Lincoln County", "payback": 13.74, "roi_25y": 125.75}, {"ac_annual": 1239.66, "fips": "47045", "name": "Dyer County", "payback": 13.74, "roi_25y": 125.71}, {"ac_annual": 1237.71, "fips": "47051", "name": "Franklin County", "payback": 13.76, "roi_25y": 125.27}, {"ac_annual": 1237.93, "fips": "47131", "name": "Obion County", "payback": 13.76, "roi_25y": 125.32}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

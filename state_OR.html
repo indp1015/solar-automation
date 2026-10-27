@@ -161,6 +161,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/41033.html" class="text-brand hover:underline">Josephine County</a></td>
+                <td class="p-3 border-b">7312</td>
+                <td class="p-3 border-b">10.5</td>
+                <td class="p-3 border-b">167.2%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/41049.html" class="text-brand hover:underline">Morrow County</a></td>
                 <td class="p-3 border-b">7240</td>
                 <td class="p-3 border-b">10.6</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">162.6%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/41065.html" class="text-brand hover:underline">Wasco County</a></td>
-                <td class="p-3 border-b">7171</td>
-                <td class="p-3 border-b">10.7</td>
-                <td class="p-3 border-b">161.0%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1332.0, "fips": "41037", "name": "Lake County", "payback": 9.57, "roi_25y": 196.85}, {"ac_annual": 1303.49, "fips": "41025", "name": "Harney County", "payback": 9.79, "roi_25y": 189.39}, {"ac_annual": 1299.11, "fips": "41035", "name": "Klamath County", "payback": 9.82, "roi_25y": 188.24}, {"ac_annual": 1290.15, "fips": "41017", "name": "Deschutes County", "payback": 9.89, "roi_25y": 185.9}, {"ac_annual": 1251.33, "fips": "41029", "name": "Jackson County", "payback": 10.21, "roi_25y": 175.74}, {"ac_annual": 1250.96, "fips": "41013", "name": "Crook County", "payback": 10.21, "roi_25y": 175.65}, {"ac_annual": 1248.57, "fips": "41031", "name": "Jefferson County", "payback": 10.23, "roi_25y": 175.02}, {"ac_annual": 1241.9, "fips": "41021", "name": "Gilliam County", "payback": 10.28, "roi_25y": 173.28}, {"ac_annual": 1240.95, "fips": "41045", "name": "Malheur County", "payback": 10.29, "roi_25y": 173.03}, {"ac_annual": 1237.94, "fips": "41055", "name": "Sherman County", "payback": 10.32, "roi_25y": 172.24}, {"ac_annual": 1226.79, "fips": "41015", "name": "Curry County", "payback": 10.41, "roi_25y": 169.32}, {"ac_annual": 1218.88, "fips": "41001", "name": "Baker County", "payback": 10.48, "roi_25y": 167.26}, {"ac_annual": 1206.67, "fips": "41049", "name": "Morrow County", "payback": 10.59, "roi_25y": 164.06}, {"ac_annual": 1201.14, "fips": "41069", "name": "Wheeler County", "payback": 10.64, "roi_25y": 162.61}, {"ac_annual": 1195.11, "fips": "41065", "name": "Wasco County", "payback": 10.7, "roi_25y": 161.04}];
+    const countyData = [{"ac_annual": 1332.0, "fips": "41037", "name": "Lake County", "payback": 9.57, "roi_25y": 196.85}, {"ac_annual": 1303.49, "fips": "41025", "name": "Harney County", "payback": 9.79, "roi_25y": 189.39}, {"ac_annual": 1299.11, "fips": "41035", "name": "Klamath County", "payback": 9.82, "roi_25y": 188.24}, {"ac_annual": 1290.15, "fips": "41017", "name": "Deschutes County", "payback": 9.89, "roi_25y": 185.9}, {"ac_annual": 1251.33, "fips": "41029", "name": "Jackson County", "payback": 10.21, "roi_25y": 175.74}, {"ac_annual": 1250.96, "fips": "41013", "name": "Crook County", "payback": 10.21, "roi_25y": 175.65}, {"ac_annual": 1248.57, "fips": "41031", "name": "Jefferson County", "payback": 10.23, "roi_25y": 175.02}, {"ac_annual": 1241.9, "fips": "41021", "name": "Gilliam County", "payback": 10.28, "roi_25y": 173.28}, {"ac_annual": 1240.95, "fips": "41045", "name": "Malheur County", "payback": 10.29, "roi_25y": 173.03}, {"ac_annual": 1237.94, "fips": "41055", "name": "Sherman County", "payback": 10.32, "roi_25y": 172.24}, {"ac_annual": 1226.79, "fips": "41015", "name": "Curry County", "payback": 10.41, "roi_25y": 169.32}, {"ac_annual": 1218.88, "fips": "41001", "name": "Baker County", "payback": 10.48, "roi_25y": 167.26}, {"ac_annual": 1218.64, "fips": "41033", "name": "Josephine County", "payback": 10.49, "roi_25y": 167.19}, {"ac_annual": 1206.67, "fips": "41049", "name": "Morrow County", "payback": 10.59, "roi_25y": 164.06}, {"ac_annual": 1201.14, "fips": "41069", "name": "Wheeler County", "payback": 10.64, "roi_25y": 162.61}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

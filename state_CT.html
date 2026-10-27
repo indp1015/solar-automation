@@ -91,6 +91,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/09001.html" class="text-brand hover:underline">Fairfield County</a></td>
+                <td class="p-3 border-b">6837</td>
+                <td class="p-3 border-b">5.8</td>
+                <td class="p-3 border-b">413.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/09007.html" class="text-brand hover:underline">Middlesex County</a></td>
                 <td class="p-3 border-b">6815</td>
                 <td class="p-3 border-b">5.9</td>
@@ -131,7 +138,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1142.72, "fips": "09009", "name": "New Haven County", "payback": 5.82, "roi_25y": 415.12}, {"ac_annual": 1140.42, "fips": "09011", "name": "New London County", "payback": 5.84, "roi_25y": 413.98}, {"ac_annual": 1135.79, "fips": "09007", "name": "Middlesex County", "payback": 5.86, "roi_25y": 411.69}, {"ac_annual": 1120.66, "fips": "09015", "name": "Windham County", "payback": 5.94, "roi_25y": 404.18}, {"ac_annual": 1118.6, "fips": "09003", "name": "Hartford County", "payback": 5.95, "roi_25y": 403.16}, {"ac_annual": 1117.34, "fips": "09013", "name": "Tolland County", "payback": 5.96, "roi_25y": 402.54}, {"ac_annual": 1115.94, "fips": "09005", "name": "Litchfield County", "payback": 5.97, "roi_25y": 401.84}];
+    const countyData = [{"ac_annual": 1142.72, "fips": "09009", "name": "New Haven County", "payback": 5.82, "roi_25y": 415.12}, {"ac_annual": 1140.42, "fips": "09011", "name": "New London County", "payback": 5.84, "roi_25y": 413.98}, {"ac_annual": 1139.45, "fips": "09001", "name": "Fairfield County", "payback": 5.84, "roi_25y": 413.5}, {"ac_annual": 1135.79, "fips": "09007", "name": "Middlesex County", "payback": 5.86, "roi_25y": 411.69}, {"ac_annual": 1120.66, "fips": "09015", "name": "Windham County", "payback": 5.94, "roi_25y": 404.18}, {"ac_annual": 1118.6, "fips": "09003", "name": "Hartford County", "payback": 5.95, "roi_25y": 403.16}, {"ac_annual": 1117.34, "fips": "09013", "name": "Tolland County", "payback": 5.96, "roi_25y": 402.54}, {"ac_annual": 1115.94, "fips": "09005", "name": "Litchfield County", "payback": 5.97, "roi_25y": 401.84}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

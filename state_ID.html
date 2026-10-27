@@ -154,6 +154,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/16077.html" class="text-brand hover:underline">Power County</a></td>
+                <td class="p-3 border-b">7589</td>
+                <td class="p-3 border-b">15.1</td>
+                <td class="p-3 border-b">101.6%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/16027.html" class="text-brand hover:underline">Canyon County</a></td>
                 <td class="p-3 border-b">7555</td>
                 <td class="p-3 border-b">15.1</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">100.0%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/16037.html" class="text-brand hover:underline">Custer County</a></td>
-                <td class="p-3 border-b">7517</td>
-                <td class="p-3 border-b">15.2</td>
-                <td class="p-3 border-b">99.2%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1327.79, "fips": "16063", "name": "Lincoln County", "payback": 14.34, "roi_25y": 114.19}, {"ac_annual": 1320.55, "fips": "16047", "name": "Gooding County", "payback": 14.42, "roi_25y": 112.74}, {"ac_annual": 1314.9, "fips": "16039", "name": "Elmore County", "payback": 14.48, "roi_25y": 111.61}, {"ac_annual": 1312.68, "fips": "16083", "name": "Twin Falls County", "payback": 14.5, "roi_25y": 111.17}, {"ac_annual": 1310.12, "fips": "16053", "name": "Jerome County", "payback": 14.53, "roi_25y": 110.65}, {"ac_annual": 1293.65, "fips": "16031", "name": "Cassia County", "payback": 14.72, "roi_25y": 107.36}, {"ac_annual": 1291.37, "fips": "16073", "name": "Owyhee County", "payback": 14.74, "roi_25y": 106.9}, {"ac_annual": 1291.6, "fips": "16025", "name": "Camas County", "payback": 14.74, "roi_25y": 106.95}, {"ac_annual": 1290.77, "fips": "16067", "name": "Minidoka County", "payback": 14.75, "roi_25y": 106.78}, {"ac_annual": 1269.27, "fips": "16001", "name": "Ada County", "payback": 15.0, "roi_25y": 102.48}, {"ac_annual": 1264.57, "fips": "16011", "name": "Bingham County", "payback": 15.06, "roi_25y": 101.54}, {"ac_annual": 1259.12, "fips": "16027", "name": "Canyon County", "payback": 15.12, "roi_25y": 100.45}, {"ac_annual": 1257.26, "fips": "16019", "name": "Bonneville County", "payback": 15.15, "roi_25y": 100.07}, {"ac_annual": 1256.87, "fips": "16045", "name": "Gem County", "payback": 15.15, "roi_25y": 100.0}, {"ac_annual": 1252.81, "fips": "16037", "name": "Custer County", "payback": 15.2, "roi_25y": 99.18}];
+    const countyData = [{"ac_annual": 1327.79, "fips": "16063", "name": "Lincoln County", "payback": 14.34, "roi_25y": 114.19}, {"ac_annual": 1320.55, "fips": "16047", "name": "Gooding County", "payback": 14.42, "roi_25y": 112.74}, {"ac_annual": 1314.9, "fips": "16039", "name": "Elmore County", "payback": 14.48, "roi_25y": 111.61}, {"ac_annual": 1312.68, "fips": "16083", "name": "Twin Falls County", "payback": 14.5, "roi_25y": 111.17}, {"ac_annual": 1310.12, "fips": "16053", "name": "Jerome County", "payback": 14.53, "roi_25y": 110.65}, {"ac_annual": 1293.65, "fips": "16031", "name": "Cassia County", "payback": 14.72, "roi_25y": 107.36}, {"ac_annual": 1291.37, "fips": "16073", "name": "Owyhee County", "payback": 14.74, "roi_25y": 106.9}, {"ac_annual": 1291.6, "fips": "16025", "name": "Camas County", "payback": 14.74, "roi_25y": 106.95}, {"ac_annual": 1290.77, "fips": "16067", "name": "Minidoka County", "payback": 14.75, "roi_25y": 106.78}, {"ac_annual": 1269.27, "fips": "16001", "name": "Ada County", "payback": 15.0, "roi_25y": 102.48}, {"ac_annual": 1264.57, "fips": "16011", "name": "Bingham County", "payback": 15.06, "roi_25y": 101.54}, {"ac_annual": 1264.78, "fips": "16077", "name": "Power County", "payback": 15.06, "roi_25y": 101.58}, {"ac_annual": 1259.12, "fips": "16027", "name": "Canyon County", "payback": 15.12, "roi_25y": 100.45}, {"ac_annual": 1257.26, "fips": "16019", "name": "Bonneville County", "payback": 15.15, "roi_25y": 100.07}, {"ac_annual": 1256.87, "fips": "16045", "name": "Gem County", "payback": 15.15, "roi_25y": 100.0}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

@@ -126,6 +126,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/29109.html" class="text-brand hover:underline">Lawrence County</a></td>
+                <td class="p-3 border-b">7495</td>
+                <td class="p-3 border-b">11.9</td>
+                <td class="p-3 border-b">129.5%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/29209.html" class="text-brand hover:underline">Stone County</a></td>
                 <td class="p-3 border-b">7481</td>
                 <td class="p-3 border-b">11.9</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">127.7%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/29043.html" class="text-brand hover:underline">Christian County</a></td>
-                <td class="p-3 border-b">7450</td>
-                <td class="p-3 border-b">13.6</td>
-                <td class="p-3 border-b">127.8%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1265.48, "fips": "29069", "name": "Dunklin County", "payback": 11.77, "roi_25y": 133.2}, {"ac_annual": 1255.33, "fips": "29143", "name": "New Madrid County", "payback": 11.87, "roi_25y": 130.91}, {"ac_annual": 1254.2, "fips": "29097", "name": "Jasper County", "payback": 11.88, "roi_25y": 130.66}, {"ac_annual": 1253.75, "fips": "29145", "name": "Newton County", "payback": 11.88, "roi_25y": 130.56}, {"ac_annual": 1253.13, "fips": "29155", "name": "Pemiscot County", "payback": 11.89, "roi_25y": 130.42}, {"ac_annual": 1250.23, "fips": "29119", "name": "McDonald County", "payback": 11.92, "roi_25y": 129.76}, {"ac_annual": 1250.47, "fips": "29009", "name": "Barry County", "payback": 11.92, "roi_25y": 129.82}, {"ac_annual": 1246.8, "fips": "29209", "name": "Stone County", "payback": 11.95, "roi_25y": 128.99}, {"ac_annual": 1245.75, "fips": "29149", "name": "Oregon County", "payback": 11.96, "roi_25y": 128.75}, {"ac_annual": 1243.41, "fips": "29181", "name": "Ripley County", "payback": 11.99, "roi_25y": 128.23}, {"ac_annual": 1242.97, "fips": "29011", "name": "Barton County", "payback": 11.99, "roi_25y": 128.13}, {"ac_annual": 1242.67, "fips": "29091", "name": "Howell County", "payback": 11.99, "roi_25y": 128.06}, {"ac_annual": 1241.95, "fips": "29023", "name": "Butler County", "payback": 13.63, "roi_25y": 127.9}, {"ac_annual": 1241.19, "fips": "29077", "name": "Greene County", "payback": 13.64, "roi_25y": 127.73}, {"ac_annual": 1241.61, "fips": "29043", "name": "Christian County", "payback": 13.64, "roi_25y": 127.82}];
+    const countyData = [{"ac_annual": 1265.48, "fips": "29069", "name": "Dunklin County", "payback": 11.77, "roi_25y": 133.2}, {"ac_annual": 1255.33, "fips": "29143", "name": "New Madrid County", "payback": 11.87, "roi_25y": 130.91}, {"ac_annual": 1254.2, "fips": "29097", "name": "Jasper County", "payback": 11.88, "roi_25y": 130.66}, {"ac_annual": 1253.75, "fips": "29145", "name": "Newton County", "payback": 11.88, "roi_25y": 130.56}, {"ac_annual": 1253.13, "fips": "29155", "name": "Pemiscot County", "payback": 11.89, "roi_25y": 130.42}, {"ac_annual": 1250.23, "fips": "29119", "name": "McDonald County", "payback": 11.92, "roi_25y": 129.76}, {"ac_annual": 1250.47, "fips": "29009", "name": "Barry County", "payback": 11.92, "roi_25y": 129.82}, {"ac_annual": 1249.19, "fips": "29109", "name": "Lawrence County", "payback": 11.93, "roi_25y": 129.53}, {"ac_annual": 1246.8, "fips": "29209", "name": "Stone County", "payback": 11.95, "roi_25y": 128.99}, {"ac_annual": 1245.75, "fips": "29149", "name": "Oregon County", "payback": 11.96, "roi_25y": 128.75}, {"ac_annual": 1243.41, "fips": "29181", "name": "Ripley County", "payback": 11.99, "roi_25y": 128.23}, {"ac_annual": 1242.97, "fips": "29011", "name": "Barton County", "payback": 11.99, "roi_25y": 128.13}, {"ac_annual": 1242.67, "fips": "29091", "name": "Howell County", "payback": 11.99, "roi_25y": 128.06}, {"ac_annual": 1241.95, "fips": "29023", "name": "Butler County", "payback": 13.63, "roi_25y": 127.9}, {"ac_annual": 1241.19, "fips": "29077", "name": "Greene County", "payback": 13.64, "roi_25y": 127.73}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);

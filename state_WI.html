@@ -147,6 +147,13 @@
             </tr>
             
             <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/55097.html" class="text-brand hover:underline">Portage County</a></td>
+                <td class="p-3 border-b">6705</td>
+                <td class="p-3 border-b">9.8</td>
+                <td class="p-3 border-b">190.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/55021.html" class="text-brand hover:underline">Columbia County</a></td>
                 <td class="p-3 border-b">6698</td>
                 <td class="p-3 border-b">9.8</td>
@@ -174,20 +181,13 @@
                 <td class="p-3 border-b">189.0%</td>
             </tr>
             
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/55055.html" class="text-brand hover:underline">Jefferson County</a></td>
-                <td class="p-3 border-b">6671</td>
-                <td class="p-3 border-b">9.8</td>
-                <td class="p-3 border-b">188.5%</td>
-            </tr>
-            
         </tbody>
     </table>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1134.7, "fips": "55079", "name": "Milwaukee County", "payback": 9.61, "roi_25y": 195.54}, {"ac_annual": 1129.96, "fips": "55025", "name": "Dane County", "payback": 9.65, "roi_25y": 194.09}, {"ac_annual": 1124.53, "fips": "55065", "name": "Lafayette County", "payback": 9.7, "roi_25y": 192.43}, {"ac_annual": 1121.95, "fips": "55059", "name": "Kenosha County", "payback": 9.72, "roi_25y": 191.64}, {"ac_annual": 1122.51, "fips": "55105", "name": "Rock County", "payback": 9.72, "roi_25y": 191.81}, {"ac_annual": 1121.26, "fips": "55101", "name": "Racine County", "payback": 9.73, "roi_25y": 191.43}, {"ac_annual": 1120.49, "fips": "55127", "name": "Walworth County", "payback": 9.73, "roi_25y": 191.19}, {"ac_annual": 1120.22, "fips": "55045", "name": "Green County", "payback": 9.74, "roi_25y": 191.11}, {"ac_annual": 1119.35, "fips": "55049", "name": "Iowa County", "payback": 9.74, "roi_25y": 190.84}, {"ac_annual": 1118.94, "fips": "55133", "name": "Waukesha County", "payback": 9.75, "roi_25y": 190.72}, {"ac_annual": 1116.31, "fips": "55021", "name": "Columbia County", "payback": 9.77, "roi_25y": 189.91}, {"ac_annual": 1115.41, "fips": "55023", "name": "Crawford County", "payback": 9.78, "roi_25y": 189.64}, {"ac_annual": 1114.21, "fips": "55103", "name": "Richland County", "payback": 9.79, "roi_25y": 189.27}, {"ac_annual": 1113.31, "fips": "55131", "name": "Washington County", "payback": 9.8, "roi_25y": 188.99}, {"ac_annual": 1111.81, "fips": "55055", "name": "Jefferson County", "payback": 9.81, "roi_25y": 188.53}];
+    const countyData = [{"ac_annual": 1134.7, "fips": "55079", "name": "Milwaukee County", "payback": 9.61, "roi_25y": 195.54}, {"ac_annual": 1129.96, "fips": "55025", "name": "Dane County", "payback": 9.65, "roi_25y": 194.09}, {"ac_annual": 1124.53, "fips": "55065", "name": "Lafayette County", "payback": 9.7, "roi_25y": 192.43}, {"ac_annual": 1121.95, "fips": "55059", "name": "Kenosha County", "payback": 9.72, "roi_25y": 191.64}, {"ac_annual": 1122.51, "fips": "55105", "name": "Rock County", "payback": 9.72, "roi_25y": 191.81}, {"ac_annual": 1121.26, "fips": "55101", "name": "Racine County", "payback": 9.73, "roi_25y": 191.43}, {"ac_annual": 1120.49, "fips": "55127", "name": "Walworth County", "payback": 9.73, "roi_25y": 191.19}, {"ac_annual": 1120.22, "fips": "55045", "name": "Green County", "payback": 9.74, "roi_25y": 191.11}, {"ac_annual": 1119.35, "fips": "55049", "name": "Iowa County", "payback": 9.74, "roi_25y": 190.84}, {"ac_annual": 1118.94, "fips": "55133", "name": "Waukesha County", "payback": 9.75, "roi_25y": 190.72}, {"ac_annual": 1117.58, "fips": "55097", "name": "Portage County", "payback": 9.76, "roi_25y": 190.3}, {"ac_annual": 1116.31, "fips": "55021", "name": "Columbia County", "payback": 9.77, "roi_25y": 189.91}, {"ac_annual": 1115.41, "fips": "55023", "name": "Crawford County", "payback": 9.78, "roi_25y": 189.64}, {"ac_annual": 1114.21, "fips": "55103", "name": "Richland County", "payback": 9.79, "roi_25y": 189.27}, {"ac_annual": 1113.31, "fips": "55131", "name": "Washington County", "payback": 9.8, "roi_25y": 188.99}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);
