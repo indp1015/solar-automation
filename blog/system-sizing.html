@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Size Your Solar System (Without Oversizing)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <link rel="canonical" href="https://solar.dataindp.com/blog/system-sizing.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-2">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<div class="max-w-3xl mx-auto">
+    <nav class="text-sm text-gray-500 mb-4">
+        <a href="/" class="hover:text-brand">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/blog.html" class="hover:text-brand">Blog</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-700 truncate">How to Size Your Solar System (Without Oversizing)</span>
+    </nav>
+
+    <article class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <div class="text-xs text-gray-500 mb-2 font-mono">2026-10-27</div>
+        <h1 class="text-3xl font-extrabold text-brand mb-6">How to Size Your Solar System (Without Oversizing)</h1>
+        <div class="prose prose-gray max-w-none text-gray-700 leading-relaxed">
+            <p>Sizing your solar system correctly is the most important decision you'll make — more important than panel brand or inverter choice. Here's how to do it without wasting money.</p><h2>Step 1: Calculate annual usage</h2><p>Look at your last 12 utility bills. Add up the kWh used. Example: 10,500 kWh/year for a typical U.S. home.</p><p>If you're planning additions (EV, heat pump, new addition), add 20-30% to that number. EVs typically add 3,000-4,500 kWh/year.</p><h2>Step 2: Estimate production per kW</h2><p>Your county's peak sun hours determine annual production per kW installed. Formula:</p><p><strong>Annual kWh per kW = peak sun hours/day × 365 × 0.80 (performance ratio)</strong></p><ul><li>Phoenix (5.5 hrs/day): ~1,600 kWh/kW</li><li>Los Angeles (5.0 hrs/day): ~1,460 kWh/kW</li><li>Chicago (3.8 hrs/day): ~1,110 kWh/kW</li><li>Seattle (3.1 hrs/day): ~905 kWh/kW</li></ul><h2>Step 3: Match to your usage</h2><p>For a 10,500 kWh home in Los Angeles:</p><p><strong>10,500 ÷ 1,460 = 7.2 kW system</strong></p><p>Round to the nearest inverter size (7 kW or 7.5 kW). Our calculator lets you test 4kW-10kW scenarios.</p><h2>Step 4: Check roof space</h2><p>A typical 400W panel is roughly 5.5 ft × 3.5 ft = 19.25 sq ft. A 7.5kW system needs:</p><p><strong>7,500 ÷ 400 = 19 panels × 19.25 sq ft = ~365 sq ft of unshaded roof</strong></p><p>Most single-family homes have 400-600 sq ft of south-facing roof — sufficient for 7-10 kW. If shade is an issue, consider microinverters (which minimize per-panel shading losses).</p><h2>Why oversizing is now a costly mistake</h2><p>Pre-2020, oversizing was often smart: excess generation was fully credited at retail, so extra panels were pure profit. In 2026:</p><ul><li><strong>NEM 3.0 (CA):</strong> excess exports earn only 25% of retail — oversizing exports valuable kWh for cheap.</li><li><strong>Reduced-credit states:</strong> same problem — excess generation is worth less than what you paid to install it.</li><li><strong>Battery cost:</strong> storing excess in batteries helps, but adds $800-$1,200/kWh battery cost — usually more than the extra solar itself.</li></ul><p>Rule of thumb: size to 90-100% of annual usage. Oversizing by 20%+ is now usually a waste of $3,000-$5,000.</p><h2>Undersizing can also be smart</h2><p>In a 1:1 net metering state, size to 100-120% of usage — credit bank pays out year-end. In reduced-credit states, size to 90% and let grid supply the rest. The smaller system earns the same per-kWh savings on the first 90%; the last 10% is inefficient.</p><h2>When to add a battery</h2><p>Add 5-10 kWh battery storage if:</p><ul><li>You're in a NEM 3.0 or reduced-credit state</li><li>You have high evening TOU rates (2x peak)</li><li>Frequent outages in your area</li></ul><p>Skip if 1:1 net metering is available and outages are rare — $10,000 for a battery that doesn't pay back.</p><h2>Bottom line</h2><p>Calculate annual usage → divide by your county's peak sun × 0.80 → round up to nearest inverter size. Verify roof space and shade. In most of the U.S., a 6-8 kW system covers a typical home. Our county pages show the exact payback for any size from 4kW to 10kW.</p>
+        </div>
+    </article>
+
+    <div class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-100">
+        <h3 class="font-bold text-brand mb-2">Try our interactive calculator</h3>
+        <p class="text-sm text-gray-700 mb-3">See estimated savings and payback periods for your state and system size.</p>
+        <a href="/calculator.html" class="inline-block bg-accent hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-md transition">Open Calculator →</a>
+    </div>
+</div>
+
+<style>
+.prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e3a8a; margin: 1.5rem 0 0.75rem; }
+.prose h3 { font-size: 1.15rem; font-weight: 600; color: #1f2937; margin: 1.25rem 0 0.5rem; }
+.prose p { margin-bottom: 1rem; }
+.prose ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+.prose li { margin-bottom: 0.25rem; }
+.prose strong { font-weight: 600; color: #111827; }
+</style>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <!-- 🚨 Terms 링크 추가 -->
+            <div class="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+                <a href="/terms.html" class="hover:text-brand">Terms of Service</a>
+            </div>
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

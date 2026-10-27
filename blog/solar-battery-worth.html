@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar + Battery Storage: When Does It Make Financial Sense?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <link rel="canonical" href="https://solar.dataindp.com/blog/solar-battery-worth.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-2">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<div class="max-w-3xl mx-auto">
+    <nav class="text-sm text-gray-500 mb-4">
+        <a href="/" class="hover:text-brand">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/blog.html" class="hover:text-brand">Blog</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-700 truncate">Solar + Battery Storage: When Does It Make Financial Sense?</span>
+    </nav>
+
+    <article class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <div class="text-xs text-gray-500 mb-2 font-mono">2026-10-27</div>
+        <h1 class="text-3xl font-extrabold text-brand mb-6">Solar + Battery Storage: When Does It Make Financial Sense?</h1>
+        <div class="prose prose-gray max-w-none text-gray-700 leading-relaxed">
+            <p>Battery storage has moved from niche to mainstream as net metering policies have tightened and utility outages have increased. But whether a battery makes financial sense depends heavily on your local policy and rate structure.</p><h2>When batteries make sense</h2><h3>1. Reduced-credit net metering states</h3><p>In California's NEM 3.0, Arizona's reduced net metering, and Hawaii's CGS+, exported solar earns only 25-50% of retail. A battery lets you store excess daytime generation and use it in the evening when grid rates are highest — recovering 30-50% of the value lost to reduced export credits.</p><h3>2. Time-of-use (TOU) rate structures</h3><p>Utilities like PG&E, SCE, and SDG&E charge 2-3x higher rates during evening peak hours (4-9pm). A battery charged by daytime solar can offset those expensive evening kWh, adding $300-$800/year in savings.</p><h3>3. Frequent outages</h3><p>In areas with unreliable grid (rural, wildfire-prone, hurricane zones), backup power has insurance value beyond ROI. A 10kWh battery can run essential appliances for 8-12 hours during an outage.</p><h2>When batteries don't pay back</h2><p>In states with strong 1:1 net metering (Florida, Colorado, most of Texas' competitive market), a $12,000 battery typically doesn't earn back its cost over 25 years. Export credits are already full retail rate — storing for later adds nothing.</p><h2>Cost and incentives</h2><ul><li><strong>10 kWh battery:</strong> $8,000-$15,000 installed</li><li><strong>30% ITC:</strong> applies to batteries paired with solar (through 2032)</li><li><strong>State incentives:</strong> CA SGIP (~$1,000-$4,000), NY storage rebate, MA SMART storage adder</li></ul><p>Net cost after incentives: $5,500-$10,500 for a 10kWh battery in most states.</p><h2>Payback math (California NEM 3.0)</h2><p>Median CA home with 6kW + 10kWh battery:</p><ul><li>Solar alone: ~$2,800/year savings, 9-year payback</li><li>Solar + battery: ~$3,500/year savings (battery saves evening peak + shifts exports), 10.5-year payback</li></ul><p>The battery adds $700/year in value but costs $8,000 extra — so it slightly extends payback while providing outage backup.</p><h2>Battery technology choices</h2><p>Lithium iron phosphate (LFP) is now standard — safer than older NMC chemistry, with 10-15 year expected life. Enphase IQ Battery, Tesla Powerwall 3, and FranklinWH are current market leaders.</p><h2>Bottom line</h2><p>Battery makes sense for: NEM 3.0 states, high TOU rate areas, or outage-prone regions. Skip it if you have strong 1:1 net metering and reliable grid service.</p>
+        </div>
+    </article>
+
+    <div class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-100">
+        <h3 class="font-bold text-brand mb-2">Try our interactive calculator</h3>
+        <p class="text-sm text-gray-700 mb-3">See estimated savings and payback periods for your state and system size.</p>
+        <a href="/calculator.html" class="inline-block bg-accent hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-md transition">Open Calculator →</a>
+    </div>
+</div>
+
+<style>
+.prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e3a8a; margin: 1.5rem 0 0.75rem; }
+.prose h3 { font-size: 1.15rem; font-weight: 600; color: #1f2937; margin: 1.25rem 0 0.5rem; }
+.prose p { margin-bottom: 1rem; }
+.prose ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+.prose li { margin-bottom: 0.25rem; }
+.prose strong { font-weight: 600; color: #111827; }
+</style>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <!-- 🚨 Terms 링크 추가 -->
+            <div class="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+                <a href="/terms.html" class="hover:text-brand">Terms of Service</a>
+            </div>
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

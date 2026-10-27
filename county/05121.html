@@ -167,6 +167,71 @@
     </div>
 </div>
 
+<!-- 🚨 신규: Local Context (자동 생성 비교 분석) -->
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Local Context: Randolph County, AR</h2>
+
+    <div class="space-y-4 text-gray-700 leading-relaxed text-sm">
+
+        <!-- 문단 1: 요금 vs 미국 평균 -->
+        <p>
+            <strong>Electricity rates:</strong> Randolph County pays <strong class="font-mono">12.87¢/kWh</strong>,
+            which is
+            
+                <strong class="text-green-700">22% below</strong>
+                
+            
+            the U.S. weighted-average rate of <strong class="font-mono">16.5¢/kWh</strong> (EIA 2025).
+            
+                Low local rates extend payback compared to the national average; solar economics here depend more on incentives and installation cost than on avoided electricity cost.
+            
+        </p>
+
+        <!-- 문단 2: 일조량 + payback + 주 내 순위 -->
+        <p>
+            <strong>Solar resource:</strong> With approximately <strong class="font-mono">3.4 peak sun hours</strong> per day,
+            a 6kW system in Randolph County pays back in <strong class="font-mono">15.1 years</strong>
+            — <strong>rank #54 of 75</strong> in AR.
+            
+                
+                    This is roughly in line with the AR average of 14.9 years.
+                
+            
+        </p>
+
+        <!-- 문단 3: 주 내 최고/최저 범위 -->
+        
+        <p>
+            <strong>Range within AR:</strong> Payback across 75 counties ranges from
+            <strong class="font-mono">14.3 years</strong> (fastest) to
+            <strong class="font-mono">15.3 years</strong> (slowest) — a spread of 1.0 years.
+            Randolph County sits <strong class="text-orange-700">below the state median</strong>
+            in solar attractiveness.
+        </p>
+        
+
+        <!-- 문단 4: NEM 정책 영향 -->
+        <p>
+            <strong>Net metering impact:</strong>
+            
+                Net metering rules vary by utility within AR. Confirm your specific provider's export rate before sizing the system.
+            
+            See the <a href="/state_AR.html" class="text-brand hover:underline">full AR guide</a> for policy details.
+        </p>
+
+        <!-- 문단 5: 실용적 조언 -->
+        <p class="text-xs text-gray-500 pt-2 border-t border-gray-100">
+            <strong>Bottom line:</strong>
+            
+                Randolph County has slow solar payback (15.1 years). Consider battery storage, larger systems, or waiting for better incentives before installing.
+            
+            The estimates above assume a $2.70/W + $1,500 fixed cost install, 30% ITC, and year-13 inverter replacement — see <a href="/about.html" class="text-brand hover:underline">methodology</a>.
+        </p>
+    </div>
+</div>
+
+
 <h2 class="text-xl font-bold text-brand mb-4">ROI by System Size (at 2.5% Escalation)</h2>
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-2 overflow-x-auto">
     <table class="w-full text-left border-collapse">
@@ -232,8 +297,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const RATE_CENTS = 12.87;
     const STATE_ABBR = "AR";
-
-    // 🚨 fixed cost 반영 (roi.py와 일치)
     const FIXED    = Number(PARAMS.fixed_install_cost_usd) || 0;
     const grossCost = baseData.kw * 1000 * PARAMS.cost_per_watt + FIXED;
     const netCost   = grossCost * (1 - PARAMS.itc_rate);
@@ -244,7 +307,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         ? Number(PARAMS.inverter_cost_per_kw) * baseData.kw
                         : Number(PARAMS.inverter_cost_usd) || 0;
 
-    // 🚨 NEM share (roi.py와 동일)
     const NM_OVERRIDES = (PARAMS.state_nm_override && typeof PARAMS.state_nm_override === 'object') ? PARAMS.state_nm_override : {};
     const NM_DEFAULT    = Number(PARAMS.nm_retail_share) || 1.0;
     const EXPORT_FRAC   = Number(PARAMS.export_rate_frac) || 0.4;
@@ -261,7 +323,6 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let t = 1; t <= PARAMS.years; t++) {
             const prod = annualProd * Math.pow(1 - PARAMS.degradation, t - 1);
             const retailRate = (RATE_CENTS / 100) * Math.pow(1 + escRate, t - 1);
-            // 🚨 NEM 반영된 유효 요금
             const effectiveRate = retailRate * (NM_SHARE + (1 - NM_SHARE) * EXPORT_FRAC);
             const inv = (INV_YEAR && t === INV_YEAR) ? INV_COST : 0;
             const save = prod * effectiveRate - om - inv;

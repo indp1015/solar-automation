@@ -167,6 +167,69 @@
     </div>
 </div>
 
+<!-- 🚨 신규: Local Context (자동 생성 비교 분석) -->
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Local Context: Lexington city, VA</h2>
+
+    <div class="space-y-4 text-gray-700 leading-relaxed text-sm">
+
+        <!-- 문단 1: 요금 vs 미국 평균 -->
+        <p>
+            <strong>Electricity rates:</strong> Lexington city pays <strong class="font-mono">15.28¢/kWh</strong>,
+            which is
+            
+                <strong class="text-green-700">7% below</strong>
+                
+            
+            the U.S. weighted-average rate of <strong class="font-mono">16.5¢/kWh</strong> (EIA 2025).
+            
+        </p>
+
+        <!-- 문단 2: 일조량 + payback + 주 내 순위 -->
+        <p>
+            <strong>Solar resource:</strong> With approximately <strong class="font-mono">3.3 peak sun hours</strong> per day,
+            a 6kW system in Lexington city pays back in <strong class="font-mono">11.7 years</strong>
+            — <strong>rank #68 of 133</strong> in VA.
+            
+                
+                    This is <strong class="text-green-700">0.3 years faster</strong> than the VA average of 12.0 years, reflecting either stronger sun, higher local rates, or better policy.
+                
+            
+        </p>
+
+        <!-- 문단 3: 주 내 최고/최저 범위 -->
+        
+        <p>
+            <strong>Range within VA:</strong> Payback across 133 counties ranges from
+            <strong class="font-mono">10.9 years</strong> (fastest) to
+            <strong class="font-mono">14.1 years</strong> (slowest) — a spread of 3.2 years.
+            Lexington city sits <strong class="text-green-700">above the state median</strong>
+            in solar attractiveness.
+        </p>
+        
+
+        <!-- 문단 4: NEM 정책 영향 -->
+        <p>
+            <strong>Net metering impact:</strong>
+            
+                Net metering rules vary by utility within VA. Confirm your specific provider's export rate before sizing the system.
+            
+            See the <a href="/state_VA.html" class="text-brand hover:underline">full VA guide</a> for policy details.
+        </p>
+
+        <!-- 문단 5: 실용적 조언 -->
+        <p class="text-xs text-gray-500 pt-2 border-t border-gray-100">
+            <strong>Bottom line:</strong>
+            
+                Lexington city has moderate solar economics. Payback of 11.7 years is reasonable but sensitive to installation cost and local incentives.
+            
+            The estimates above assume a $2.70/W + $1,500 fixed cost install, 30% ITC, and year-13 inverter replacement — see <a href="/about.html" class="text-brand hover:underline">methodology</a>.
+        </p>
+    </div>
+</div>
+
+
 <h2 class="text-xl font-bold text-brand mb-4">ROI by System Size (at 2.5% Escalation)</h2>
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-2 overflow-x-auto">
     <table class="w-full text-left border-collapse">
@@ -232,8 +295,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const RATE_CENTS = 15.28;
     const STATE_ABBR = "VA";
-
-    // 🚨 fixed cost 반영 (roi.py와 일치)
     const FIXED    = Number(PARAMS.fixed_install_cost_usd) || 0;
     const grossCost = baseData.kw * 1000 * PARAMS.cost_per_watt + FIXED;
     const netCost   = grossCost * (1 - PARAMS.itc_rate);
@@ -244,7 +305,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         ? Number(PARAMS.inverter_cost_per_kw) * baseData.kw
                         : Number(PARAMS.inverter_cost_usd) || 0;
 
-    // 🚨 NEM share (roi.py와 동일)
     const NM_OVERRIDES = (PARAMS.state_nm_override && typeof PARAMS.state_nm_override === 'object') ? PARAMS.state_nm_override : {};
     const NM_DEFAULT    = Number(PARAMS.nm_retail_share) || 1.0;
     const EXPORT_FRAC   = Number(PARAMS.export_rate_frac) || 0.4;
@@ -261,7 +321,6 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let t = 1; t <= PARAMS.years; t++) {
             const prod = annualProd * Math.pow(1 - PARAMS.degradation, t - 1);
             const retailRate = (RATE_CENTS / 100) * Math.pow(1 + escRate, t - 1);
-            // 🚨 NEM 반영된 유효 요금
             const effectiveRate = retailRate * (NM_SHARE + (1 - NM_SHARE) * EXPORT_FRAC);
             const inv = (INV_YEAR && t === INV_YEAR) ? INV_COST : 0;
             const save = prod * effectiveRate - om - inv;

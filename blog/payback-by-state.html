@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Payback Period by State: 2026 Comparison</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <link rel="canonical" href="https://solar.dataindp.com/blog/payback-by-state.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-2">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<div class="max-w-3xl mx-auto">
+    <nav class="text-sm text-gray-500 mb-4">
+        <a href="/" class="hover:text-brand">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/blog.html" class="hover:text-brand">Blog</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-700 truncate">Solar Payback Period by State: 2026 Comparison</span>
+    </nav>
+
+    <article class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <div class="text-xs text-gray-500 mb-2 font-mono">2026-10-27</div>
+        <h1 class="text-3xl font-extrabold text-brand mb-6">Solar Payback Period by State: 2026 Comparison</h1>
+        <div class="prose prose-gray max-w-none text-gray-700 leading-relaxed">
+            <p>Solar payback — the years until cumulative savings equal your net system cost — ranges from under 5 years in Hawaii to over 17 in parts of the Deep South. Here's the 2026 landscape.</p><h2>Fastest payback states (under 7 years)</h2><ul><li><strong>Hawaii:</strong> 4-5 years (40¢ rates + state credit)</li><li><strong>Massachusetts:</strong> 5-6 years (30¢ rates + SMART)</li><li><strong>Rhode Island:</strong> 5-6 years (29¢ rates + 1:1 NEM)</li><li><strong>Connecticut:</strong> 5-7 years (29¢ rates + strong state incentives)</li><li><strong>California:</strong> 7-9 years (31¢ rates, offset by NEM 3.0)</li></ul><h2>Medium payback states (8-12 years)</h2><ul><li><strong>New York, New Jersey:</strong> 7-9 years</li><li><strong>Arizona, New Mexico:</strong> 7-9 years (great sun, moderate rates)</li><li><strong>Colorado, Nevada:</strong> 8-10 years</li><li><strong>Oregon, Washington:</strong> 10-12 years (lower sun, low rates)</li></ul><h2>Slow payback states (13-17 years)</h2><ul><li><strong>Louisiana:</strong> 15-18 years</li><li><strong>Alabama, Mississippi:</strong> 13-16 years</li><li><strong>South Dakota, North Dakota:</strong> 14-17 years</li><li><strong>Oklahoma, Arkansas:</strong> 12-15 years</li></ul><h2>What drives the differences</h2><p>Three factors explain 90% of state variation:</p><h3>1. Electricity rate (biggest lever)</h3><p>At 30¢/kWh, solar saves $1,500/year on 5,000 kWh of self-consumption. At 12¢/kWh, the same production saves $600. Payback differs by 2.5x for the same system.</p><h3>2. Solar resource</h3><p>Phoenix gets 5.5 peak sun hours/day; Seattle gets 3.1. That's a 77% production difference — enough to shift payback by 2-3 years, all else equal.</p><h3>3. Policy (net metering + state incentives)</h3><p>1:1 net metering doubles the value of excess generation vs NEM 3.0. State tax credits (NY 25%, MA 15%, HI 35%) reduce net cost by another $1,000-$3,000.</p><h2>Within-state variation is 3-4 years</h2><p>Texas alone spans 9.4-11.5 years across 254 counties. California spans 7.9-11.0 across 58. The specific county matters as much as the state — check our county pages for exact numbers.</p><h2>How to estimate your own payback</h2><p>Quick formula:</p><p><strong>Payback = Net cost after ITC ÷ (Annual production × your rate)</strong></p><p>Example: 6kW in Atlanta (1,300 kWh/kW/yr, 14¢ rate):</p><ul><li>Net cost: $12,390 (after 30% ITC)</li><li>Annual savings: 6 × 1,300 × $0.14 = $1,092</li><li>Payback: 11.3 years (before escalation)</li></ul><p>With 2.5% annual rate escalation, actual payback drops to ~10.5 years — the savings grow over time, so cumulative reaches net cost faster.</p><h2>Why payback alone isn't enough</h2><p>Payback ignores what happens after — a system with 15-year payback and 25-year life still delivers 10 years of free electricity, worth $10,000-$30,000. IRR captures this better: our calculated IRRs range from 5% (slow states) to 20%+ (fast states). Compare IRR to your opportunity cost (bond yields, mortgage prepayment, etc.).</p><h2>Bottom line</h2><p>Payback 5-7 years = excellent (top states). 8-12 years = solid. 13+ years = consider waiting or exploring community solar. But always check your specific county and run the numbers with current policy — state averages hide 3-4 years of intra-state variation.</p>
+        </div>
+    </article>
+
+    <div class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-100">
+        <h3 class="font-bold text-brand mb-2">Try our interactive calculator</h3>
+        <p class="text-sm text-gray-700 mb-3">See estimated savings and payback periods for your state and system size.</p>
+        <a href="/calculator.html" class="inline-block bg-accent hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-md transition">Open Calculator →</a>
+    </div>
+</div>
+
+<style>
+.prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e3a8a; margin: 1.5rem 0 0.75rem; }
+.prose h3 { font-size: 1.15rem; font-weight: 600; color: #1f2937; margin: 1.25rem 0 0.5rem; }
+.prose p { margin-bottom: 1rem; }
+.prose ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+.prose li { margin-bottom: 0.25rem; }
+.prose strong { font-weight: 600; color: #111827; }
+</style>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <!-- 🚨 Terms 링크 추가 -->
+            <div class="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+                <a href="/terms.html" class="hover:text-brand">Terms of Service</a>
+            </div>
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
