@@ -41,6 +41,7 @@
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
                     <div class="hidden md:flex space-x-4">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
@@ -52,137 +53,370 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Alaska</h1>
-<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">26.11 ¢/kWh</strong> (EIA 2025).</p>
 
-<!-- 🚨 주(State) 내 카운티 차트 -->
+
+<!-- Breadcrumb -->
+<nav class="text-sm text-gray-500 mb-4">
+    <a href="/" class="hover:text-brand">Home</a>
+    <span class="mx-2">/</span>
+    <a href="/states.html" class="hover:text-brand">States</a>
+    <span class="mx-2">/</span>
+    <a href="/counties.html" class="hover:text-brand">Counties</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-700">Alaska</span>
+</nav>
+
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Alaska</h1>
+<p class="text-gray-700 mb-6">
+    Average residential electricity rate:
+    <strong class="text-brand">26.11 ¢/kWh</strong> (EIA 2025).
+    Total counties: <strong>28</strong>.
+</p>
+
+<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Alaska (6kW System)</h2>
+    <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Alaska (6kW System)</h2>
+    <p class="text-sm text-gray-600 mb-4">Top 15 by payback period. Full county list below.</p>
     <div class="relative w-full h-96">
         <canvas id="countyChart"></canvas>
     </div>
 </div>
 
+<!-- 카운티 상세 표 (상위 15개) -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Top 15 Counties by Payback</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-50 text-brand text-sm">
+                    <th class="p-3 border-b">County</th>
+                    <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
+                    <th class="p-3 border-b">Est. Payback (Years)</th>
+                    <th class="p-3 border-b">25-Year ROI (%)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02066.html" class="text-brand hover:underline">Copper River Census Area</a>
+                    </td>
+                    <td class="p-3 border-b">4726</td>
+                    <td class="p-3 border-b">9.6</td>
+                    <td class="p-3 border-b">196.4%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02068.html" class="text-brand hover:underline">Denali Borough</a>
+                    </td>
+                    <td class="p-3 border-b">4681</td>
+                    <td class="p-3 border-b">9.7</td>
+                    <td class="p-3 border-b">193.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02188.html" class="text-brand hover:underline">Northwest Arctic Borough</a>
+                    </td>
+                    <td class="p-3 border-b">4581</td>
+                    <td class="p-3 border-b">9.9</td>
+                    <td class="p-3 border-b">185.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02240.html" class="text-brand hover:underline">Southeast Fairbanks Census Area</a>
+                    </td>
+                    <td class="p-3 border-b">4530</td>
+                    <td class="p-3 border-b">10.0</td>
+                    <td class="p-3 border-b">182.0%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02230.html" class="text-brand hover:underline">Skagway Municipality</a>
+                    </td>
+                    <td class="p-3 border-b">4491</td>
+                    <td class="p-3 border-b">10.1</td>
+                    <td class="p-3 border-b">179.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02122.html" class="text-brand hover:underline">Kenai Peninsula Borough</a>
+                    </td>
+                    <td class="p-3 border-b">4471</td>
+                    <td class="p-3 border-b">10.2</td>
+                    <td class="p-3 border-b">177.6%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02090.html" class="text-brand hover:underline">Fairbanks North Star Borough</a>
+                    </td>
+                    <td class="p-3 border-b">4414</td>
+                    <td class="p-3 border-b">10.3</td>
+                    <td class="p-3 border-b">173.4%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02170.html" class="text-brand hover:underline">Matanuska-Susitna Borough</a>
+                    </td>
+                    <td class="p-3 border-b">4403</td>
+                    <td class="p-3 border-b">10.3</td>
+                    <td class="p-3 border-b">172.6%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02020.html" class="text-brand hover:underline">Anchorage Municipality</a>
+                    </td>
+                    <td class="p-3 border-b">4368</td>
+                    <td class="p-3 border-b">10.4</td>
+                    <td class="p-3 border-b">170.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02050.html" class="text-brand hover:underline">Bethel Census Area</a>
+                    </td>
+                    <td class="p-3 border-b">4288</td>
+                    <td class="p-3 border-b">10.6</td>
+                    <td class="p-3 border-b">164.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02290.html" class="text-brand hover:underline">Yukon-Koyukuk Census Area</a>
+                    </td>
+                    <td class="p-3 border-b">4287</td>
+                    <td class="p-3 border-b">10.6</td>
+                    <td class="p-3 border-b">164.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02063.html" class="text-brand hover:underline">Chugach Census Area</a>
+                    </td>
+                    <td class="p-3 border-b">4198</td>
+                    <td class="p-3 border-b">10.8</td>
+                    <td class="p-3 border-b">157.5%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02158.html" class="text-brand hover:underline">Kusilvak Census Area</a>
+                    </td>
+                    <td class="p-3 border-b">4165</td>
+                    <td class="p-3 border-b">10.9</td>
+                    <td class="p-3 border-b">155.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02060.html" class="text-brand hover:underline">Bristol Bay Borough</a>
+                    </td>
+                    <td class="p-3 border-b">3959</td>
+                    <td class="p-3 border-b">11.5</td>
+                    <td class="p-3 border-b">139.9%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/02070.html" class="text-brand hover:underline">Dillingham Census Area</a>
+                    </td>
+                    <td class="p-3 border-b">3894</td>
+                    <td class="p-3 border-b">11.7</td>
+                    <td class="p-3 border-b">135.2%</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
-    <table class="w-full text-left border-collapse">
-        <thead>
-            <tr class="bg-blue-50 text-brand text-sm">
-                <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
-                <th class="p-3 border-b">Est. Payback (Years)</th>
-                <th class="p-3 border-b">25-Year ROI (%)</th>
-            </tr>
-        </thead>
-        <tbody class="text-sm">
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02066.html" class="text-brand hover:underline">Copper River Census Area</a></td>
-                <td class="p-3 border-b">4726</td>
-                <td class="p-3 border-b">9.6</td>
-                <td class="p-3 border-b">196.4%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02068.html" class="text-brand hover:underline">Denali Borough</a></td>
-                <td class="p-3 border-b">4681</td>
-                <td class="p-3 border-b">9.7</td>
-                <td class="p-3 border-b">193.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02188.html" class="text-brand hover:underline">Northwest Arctic Borough</a></td>
-                <td class="p-3 border-b">4581</td>
-                <td class="p-3 border-b">9.9</td>
-                <td class="p-3 border-b">185.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02240.html" class="text-brand hover:underline">Southeast Fairbanks Census Area</a></td>
-                <td class="p-3 border-b">4530</td>
-                <td class="p-3 border-b">10.0</td>
-                <td class="p-3 border-b">182.0%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02230.html" class="text-brand hover:underline">Skagway Municipality</a></td>
-                <td class="p-3 border-b">4491</td>
-                <td class="p-3 border-b">10.1</td>
-                <td class="p-3 border-b">179.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02122.html" class="text-brand hover:underline">Kenai Peninsula Borough</a></td>
-                <td class="p-3 border-b">4471</td>
-                <td class="p-3 border-b">10.2</td>
-                <td class="p-3 border-b">177.6%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02090.html" class="text-brand hover:underline">Fairbanks North Star Borough</a></td>
-                <td class="p-3 border-b">4414</td>
-                <td class="p-3 border-b">10.3</td>
-                <td class="p-3 border-b">173.4%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02170.html" class="text-brand hover:underline">Matanuska-Susitna Borough</a></td>
-                <td class="p-3 border-b">4403</td>
-                <td class="p-3 border-b">10.3</td>
-                <td class="p-3 border-b">172.6%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02020.html" class="text-brand hover:underline">Anchorage Municipality</a></td>
-                <td class="p-3 border-b">4368</td>
-                <td class="p-3 border-b">10.4</td>
-                <td class="p-3 border-b">170.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02050.html" class="text-brand hover:underline">Bethel Census Area</a></td>
-                <td class="p-3 border-b">4288</td>
-                <td class="p-3 border-b">10.6</td>
-                <td class="p-3 border-b">164.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02290.html" class="text-brand hover:underline">Yukon-Koyukuk Census Area</a></td>
-                <td class="p-3 border-b">4287</td>
-                <td class="p-3 border-b">10.6</td>
-                <td class="p-3 border-b">164.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02063.html" class="text-brand hover:underline">Chugach Census Area</a></td>
-                <td class="p-3 border-b">4198</td>
-                <td class="p-3 border-b">10.8</td>
-                <td class="p-3 border-b">157.5%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02158.html" class="text-brand hover:underline">Kusilvak Census Area</a></td>
-                <td class="p-3 border-b">4165</td>
-                <td class="p-3 border-b">10.9</td>
-                <td class="p-3 border-b">155.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02060.html" class="text-brand hover:underline">Bristol Bay Borough</a></td>
-                <td class="p-3 border-b">3959</td>
-                <td class="p-3 border-b">11.5</td>
-                <td class="p-3 border-b">139.9%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/02070.html" class="text-brand hover:underline">Dillingham Census Area</a></td>
-                <td class="p-3 border-b">3894</td>
-                <td class="p-3 border-b">11.7</td>
-                <td class="p-3 border-b">135.2%</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <h2 class="text-xl font-bold text-brand mb-1">
+        All 28 Counties in Alaska
+    </h2>
+    <p class="text-sm text-gray-600 mb-4">
+        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
+        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        
+        <a href="/county/02066.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Copper River Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">9.6y</span>
+        </a>
+        
+        <a href="/county/02068.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Denali Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">9.7y</span>
+        </a>
+        
+        <a href="/county/02188.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Northwest Arctic Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">9.9y</span>
+        </a>
+        
+        <a href="/county/02240.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Southeast Fairbanks Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.0y</span>
+        </a>
+        
+        <a href="/county/02230.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Skagway Municipality</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.1y</span>
+        </a>
+        
+        <a href="/county/02122.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Kenai Peninsula Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.2y</span>
+        </a>
+        
+        <a href="/county/02090.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Fairbanks North Star Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.3y</span>
+        </a>
+        
+        <a href="/county/02170.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Matanuska-Susitna Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.3y</span>
+        </a>
+        
+        <a href="/county/02020.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Anchorage Municipality</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.4y</span>
+        </a>
+        
+        <a href="/county/02050.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Bethel Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+        </a>
+        
+        <a href="/county/02290.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Yukon-Koyukuk Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+        </a>
+        
+        <a href="/county/02063.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Chugach Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+        </a>
+        
+        <a href="/county/02158.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Kusilvak Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+        </a>
+        
+        <a href="/county/02060.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Bristol Bay Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">11.5y</span>
+        </a>
+        
+        <a href="/county/02070.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Dillingham Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">11.7y</span>
+        </a>
+        
+        <a href="/county/02164.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Lake and Peninsula Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+        </a>
+        
+        <a href="/county/02130.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Ketchikan Gateway Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+        </a>
+        
+        <a href="/county/02100.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Haines Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+        </a>
+        
+        <a href="/county/02013.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Aleutians East Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">13.9y</span>
+        </a>
+        
+        <a href="/county/02105.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Hoonah-Angoon Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">13.9y</span>
+        </a>
+        
+        <a href="/county/02275.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Wrangell City and Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.0y</span>
+        </a>
+        
+        <a href="/county/02282.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Yakutat City and Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.1y</span>
+        </a>
+        
+        <a href="/county/02150.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Kodiak Island Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.1y</span>
+        </a>
+        
+        <a href="/county/02185.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">North Slope Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.3y</span>
+        </a>
+        
+        <a href="/county/02198.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Prince of Wales-Hyder Census Area</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.6y</span>
+        </a>
+        
+        <a href="/county/02195.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Petersburg Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.9y</span>
+        </a>
+        
+        <a href="/county/02110.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Juneau City and Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.1y</span>
+        </a>
+        
+        <a href="/county/02220.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Sitka City and Borough</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.3y</span>
+        </a>
+        
+    </div>
 </div>
 
 <script>

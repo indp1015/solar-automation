@@ -41,6 +41,7 @@
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
                     <div class="hidden md:flex space-x-4">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
@@ -52,53 +53,112 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Delaware</h1>
-<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">17.15 ¢/kWh</strong> (EIA 2025).</p>
 
-<!-- 🚨 주(State) 내 카운티 차트 -->
+
+<!-- Breadcrumb -->
+<nav class="text-sm text-gray-500 mb-4">
+    <a href="/" class="hover:text-brand">Home</a>
+    <span class="mx-2">/</span>
+    <a href="/states.html" class="hover:text-brand">States</a>
+    <span class="mx-2">/</span>
+    <a href="/counties.html" class="hover:text-brand">Counties</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-700">Delaware</span>
+</nav>
+
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Delaware</h1>
+<p class="text-gray-700 mb-6">
+    Average residential electricity rate:
+    <strong class="text-brand">17.15 ¢/kWh</strong> (EIA 2025).
+    Total counties: <strong>3</strong>.
+</p>
+
+<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Delaware (6kW System)</h2>
+    <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Delaware (6kW System)</h2>
+    <p class="text-sm text-gray-600 mb-4">Top 3 by payback period. Full county list below.</p>
     <div class="relative w-full h-96">
         <canvas id="countyChart"></canvas>
     </div>
 </div>
 
+<!-- 카운티 상세 표 (상위 15개) -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Top 3 Counties by Payback</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-50 text-brand text-sm">
+                    <th class="p-3 border-b">County</th>
+                    <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
+                    <th class="p-3 border-b">Est. Payback (Years)</th>
+                    <th class="p-3 border-b">25-Year ROI (%)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/10005.html" class="text-brand hover:underline">Sussex County</a>
+                    </td>
+                    <td class="p-3 border-b">7197</td>
+                    <td class="p-3 border-b">9.6</td>
+                    <td class="p-3 border-b">196.5%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/10001.html" class="text-brand hover:underline">Kent County</a>
+                    </td>
+                    <td class="p-3 border-b">7137</td>
+                    <td class="p-3 border-b">9.7</td>
+                    <td class="p-3 border-b">193.6%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/10003.html" class="text-brand hover:underline">New Castle County</a>
+                    </td>
+                    <td class="p-3 border-b">7059</td>
+                    <td class="p-3 border-b">9.8</td>
+                    <td class="p-3 border-b">189.8%</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
-    <table class="w-full text-left border-collapse">
-        <thead>
-            <tr class="bg-blue-50 text-brand text-sm">
-                <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
-                <th class="p-3 border-b">Est. Payback (Years)</th>
-                <th class="p-3 border-b">25-Year ROI (%)</th>
-            </tr>
-        </thead>
-        <tbody class="text-sm">
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/10005.html" class="text-brand hover:underline">Sussex County</a></td>
-                <td class="p-3 border-b">7197</td>
-                <td class="p-3 border-b">9.6</td>
-                <td class="p-3 border-b">196.5%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/10001.html" class="text-brand hover:underline">Kent County</a></td>
-                <td class="p-3 border-b">7137</td>
-                <td class="p-3 border-b">9.7</td>
-                <td class="p-3 border-b">193.6%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/10003.html" class="text-brand hover:underline">New Castle County</a></td>
-                <td class="p-3 border-b">7059</td>
-                <td class="p-3 border-b">9.8</td>
-                <td class="p-3 border-b">189.8%</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <h2 class="text-xl font-bold text-brand mb-1">
+        All 3 Counties in Delaware
+    </h2>
+    <p class="text-sm text-gray-600 mb-4">
+        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
+        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        
+        <a href="/county/10005.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Sussex County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">9.6y</span>
+        </a>
+        
+        <a href="/county/10001.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Kent County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">9.7y</span>
+        </a>
+        
+        <a href="/county/10003.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">New Castle County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">9.8y</span>
+        </a>
+        
+    </div>
 </div>
 
 <script>

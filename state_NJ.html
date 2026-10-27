@@ -41,6 +41,7 @@
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
                     <div class="hidden md:flex space-x-4">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
@@ -52,137 +53,328 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in New Jersey</h1>
-<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">22.48 ¢/kWh</strong> (EIA 2025).</p>
 
-<!-- 🚨 주(State) 내 카운티 차트 -->
+
+<!-- Breadcrumb -->
+<nav class="text-sm text-gray-500 mb-4">
+    <a href="/" class="hover:text-brand">Home</a>
+    <span class="mx-2">/</span>
+    <a href="/states.html" class="hover:text-brand">States</a>
+    <span class="mx-2">/</span>
+    <a href="/counties.html" class="hover:text-brand">Counties</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-700">New Jersey</span>
+</nav>
+
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in New Jersey</h1>
+<p class="text-gray-700 mb-6">
+    Average residential electricity rate:
+    <strong class="text-brand">22.48 ¢/kWh</strong> (EIA 2025).
+    Total counties: <strong>21</strong>.
+</p>
+
+<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in New Jersey (6kW System)</h2>
+    <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in New Jersey (6kW System)</h2>
+    <p class="text-sm text-gray-600 mb-4">Top 15 by payback period. Full county list below.</p>
     <div class="relative w-full h-96">
         <canvas id="countyChart"></canvas>
     </div>
 </div>
 
+<!-- 카운티 상세 표 (상위 15개) -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Top 15 Counties by Payback</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-50 text-brand text-sm">
+                    <th class="p-3 border-b">County</th>
+                    <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
+                    <th class="p-3 border-b">Est. Payback (Years)</th>
+                    <th class="p-3 border-b">25-Year ROI (%)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34009.html" class="text-brand hover:underline">Cape May County</a>
+                    </td>
+                    <td class="p-3 border-b">7431</td>
+                    <td class="p-3 border-b">7.0</td>
+                    <td class="p-3 border-b">319.5%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34001.html" class="text-brand hover:underline">Atlantic County</a>
+                    </td>
+                    <td class="p-3 border-b">7164</td>
+                    <td class="p-3 border-b">7.3</td>
+                    <td class="p-3 border-b">302.6%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34011.html" class="text-brand hover:underline">Cumberland County</a>
+                    </td>
+                    <td class="p-3 border-b">7140</td>
+                    <td class="p-3 border-b">7.3</td>
+                    <td class="p-3 border-b">301.0%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34015.html" class="text-brand hover:underline">Gloucester County</a>
+                    </td>
+                    <td class="p-3 border-b">7018</td>
+                    <td class="p-3 border-b">7.5</td>
+                    <td class="p-3 border-b">293.3%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34033.html" class="text-brand hover:underline">Salem County</a>
+                    </td>
+                    <td class="p-3 border-b">6996</td>
+                    <td class="p-3 border-b">7.5</td>
+                    <td class="p-3 border-b">291.9%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34007.html" class="text-brand hover:underline">Camden County</a>
+                    </td>
+                    <td class="p-3 border-b">6972</td>
+                    <td class="p-3 border-b">7.5</td>
+                    <td class="p-3 border-b">290.4%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34005.html" class="text-brand hover:underline">Burlington County</a>
+                    </td>
+                    <td class="p-3 border-b">6969</td>
+                    <td class="p-3 border-b">7.5</td>
+                    <td class="p-3 border-b">290.2%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34029.html" class="text-brand hover:underline">Ocean County</a>
+                    </td>
+                    <td class="p-3 border-b">6951</td>
+                    <td class="p-3 border-b">7.5</td>
+                    <td class="p-3 border-b">289.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34023.html" class="text-brand hover:underline">Middlesex County</a>
+                    </td>
+                    <td class="p-3 border-b">6914</td>
+                    <td class="p-3 border-b">7.6</td>
+                    <td class="p-3 border-b">286.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34013.html" class="text-brand hover:underline">Essex County</a>
+                    </td>
+                    <td class="p-3 border-b">6917</td>
+                    <td class="p-3 border-b">7.6</td>
+                    <td class="p-3 border-b">286.9%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34039.html" class="text-brand hover:underline">Union County</a>
+                    </td>
+                    <td class="p-3 border-b">6910</td>
+                    <td class="p-3 border-b">7.6</td>
+                    <td class="p-3 border-b">286.5%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34017.html" class="text-brand hover:underline">Hudson County</a>
+                    </td>
+                    <td class="p-3 border-b">6904</td>
+                    <td class="p-3 border-b">7.6</td>
+                    <td class="p-3 border-b">286.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34025.html" class="text-brand hover:underline">Monmouth County</a>
+                    </td>
+                    <td class="p-3 border-b">6908</td>
+                    <td class="p-3 border-b">7.6</td>
+                    <td class="p-3 border-b">286.4%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34021.html" class="text-brand hover:underline">Mercer County</a>
+                    </td>
+                    <td class="p-3 border-b">6905</td>
+                    <td class="p-3 border-b">7.6</td>
+                    <td class="p-3 border-b">286.2%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/34019.html" class="text-brand hover:underline">Hunterdon County</a>
+                    </td>
+                    <td class="p-3 border-b">6843</td>
+                    <td class="p-3 border-b">7.7</td>
+                    <td class="p-3 border-b">282.2%</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
-    <table class="w-full text-left border-collapse">
-        <thead>
-            <tr class="bg-blue-50 text-brand text-sm">
-                <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
-                <th class="p-3 border-b">Est. Payback (Years)</th>
-                <th class="p-3 border-b">25-Year ROI (%)</th>
-            </tr>
-        </thead>
-        <tbody class="text-sm">
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34009.html" class="text-brand hover:underline">Cape May County</a></td>
-                <td class="p-3 border-b">7431</td>
-                <td class="p-3 border-b">7.0</td>
-                <td class="p-3 border-b">319.5%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34001.html" class="text-brand hover:underline">Atlantic County</a></td>
-                <td class="p-3 border-b">7164</td>
-                <td class="p-3 border-b">7.3</td>
-                <td class="p-3 border-b">302.6%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34011.html" class="text-brand hover:underline">Cumberland County</a></td>
-                <td class="p-3 border-b">7140</td>
-                <td class="p-3 border-b">7.3</td>
-                <td class="p-3 border-b">301.0%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34015.html" class="text-brand hover:underline">Gloucester County</a></td>
-                <td class="p-3 border-b">7018</td>
-                <td class="p-3 border-b">7.5</td>
-                <td class="p-3 border-b">293.3%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34033.html" class="text-brand hover:underline">Salem County</a></td>
-                <td class="p-3 border-b">6996</td>
-                <td class="p-3 border-b">7.5</td>
-                <td class="p-3 border-b">291.9%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34007.html" class="text-brand hover:underline">Camden County</a></td>
-                <td class="p-3 border-b">6972</td>
-                <td class="p-3 border-b">7.5</td>
-                <td class="p-3 border-b">290.4%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34005.html" class="text-brand hover:underline">Burlington County</a></td>
-                <td class="p-3 border-b">6969</td>
-                <td class="p-3 border-b">7.5</td>
-                <td class="p-3 border-b">290.2%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34029.html" class="text-brand hover:underline">Ocean County</a></td>
-                <td class="p-3 border-b">6951</td>
-                <td class="p-3 border-b">7.5</td>
-                <td class="p-3 border-b">289.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34023.html" class="text-brand hover:underline">Middlesex County</a></td>
-                <td class="p-3 border-b">6914</td>
-                <td class="p-3 border-b">7.6</td>
-                <td class="p-3 border-b">286.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34013.html" class="text-brand hover:underline">Essex County</a></td>
-                <td class="p-3 border-b">6917</td>
-                <td class="p-3 border-b">7.6</td>
-                <td class="p-3 border-b">286.9%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34039.html" class="text-brand hover:underline">Union County</a></td>
-                <td class="p-3 border-b">6910</td>
-                <td class="p-3 border-b">7.6</td>
-                <td class="p-3 border-b">286.5%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34017.html" class="text-brand hover:underline">Hudson County</a></td>
-                <td class="p-3 border-b">6904</td>
-                <td class="p-3 border-b">7.6</td>
-                <td class="p-3 border-b">286.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34025.html" class="text-brand hover:underline">Monmouth County</a></td>
-                <td class="p-3 border-b">6908</td>
-                <td class="p-3 border-b">7.6</td>
-                <td class="p-3 border-b">286.4%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34021.html" class="text-brand hover:underline">Mercer County</a></td>
-                <td class="p-3 border-b">6905</td>
-                <td class="p-3 border-b">7.6</td>
-                <td class="p-3 border-b">286.2%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/34019.html" class="text-brand hover:underline">Hunterdon County</a></td>
-                <td class="p-3 border-b">6843</td>
-                <td class="p-3 border-b">7.7</td>
-                <td class="p-3 border-b">282.2%</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <h2 class="text-xl font-bold text-brand mb-1">
+        All 21 Counties in New Jersey
+    </h2>
+    <p class="text-sm text-gray-600 mb-4">
+        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
+        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        
+        <a href="/county/34009.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Cape May County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.0y</span>
+        </a>
+        
+        <a href="/county/34001.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Atlantic County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.3y</span>
+        </a>
+        
+        <a href="/county/34011.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Cumberland County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.3y</span>
+        </a>
+        
+        <a href="/county/34015.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Gloucester County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.5y</span>
+        </a>
+        
+        <a href="/county/34033.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Salem County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.5y</span>
+        </a>
+        
+        <a href="/county/34007.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Camden County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.5y</span>
+        </a>
+        
+        <a href="/county/34005.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Burlington County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.5y</span>
+        </a>
+        
+        <a href="/county/34029.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Ocean County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.5y</span>
+        </a>
+        
+        <a href="/county/34023.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Middlesex County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.6y</span>
+        </a>
+        
+        <a href="/county/34013.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Essex County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.6y</span>
+        </a>
+        
+        <a href="/county/34039.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Union County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.6y</span>
+        </a>
+        
+        <a href="/county/34017.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Hudson County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.6y</span>
+        </a>
+        
+        <a href="/county/34025.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Monmouth County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.6y</span>
+        </a>
+        
+        <a href="/county/34021.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Mercer County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.6y</span>
+        </a>
+        
+        <a href="/county/34019.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Hunterdon County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.7y</span>
+        </a>
+        
+        <a href="/county/34031.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Passaic County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.7y</span>
+        </a>
+        
+        <a href="/county/34027.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Morris County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.7y</span>
+        </a>
+        
+        <a href="/county/34003.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Bergen County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.7y</span>
+        </a>
+        
+        <a href="/county/34035.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Somerset County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.7y</span>
+        </a>
+        
+        <a href="/county/34037.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Sussex County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.7y</span>
+        </a>
+        
+        <a href="/county/34041.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Warren County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.8y</span>
+        </a>
+        
+    </div>
 </div>
 
 <script>

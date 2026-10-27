@@ -41,6 +41,7 @@
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
                     <div class="hidden md:flex space-x-4">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
@@ -52,88 +53,187 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Connecticut</h1>
-<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">29.31 ¢/kWh</strong> (EIA 2025).</p>
 
-<!-- 🚨 주(State) 내 카운티 차트 -->
+
+<!-- Breadcrumb -->
+<nav class="text-sm text-gray-500 mb-4">
+    <a href="/" class="hover:text-brand">Home</a>
+    <span class="mx-2">/</span>
+    <a href="/states.html" class="hover:text-brand">States</a>
+    <span class="mx-2">/</span>
+    <a href="/counties.html" class="hover:text-brand">Counties</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-700">Connecticut</span>
+</nav>
+
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Connecticut</h1>
+<p class="text-gray-700 mb-6">
+    Average residential electricity rate:
+    <strong class="text-brand">29.31 ¢/kWh</strong> (EIA 2025).
+    Total counties: <strong>8</strong>.
+</p>
+
+<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Connecticut (6kW System)</h2>
+    <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Connecticut (6kW System)</h2>
+    <p class="text-sm text-gray-600 mb-4">Top 8 by payback period. Full county list below.</p>
     <div class="relative w-full h-96">
         <canvas id="countyChart"></canvas>
     </div>
 </div>
 
+<!-- 카운티 상세 표 (상위 15개) -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Top 8 Counties by Payback</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-50 text-brand text-sm">
+                    <th class="p-3 border-b">County</th>
+                    <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
+                    <th class="p-3 border-b">Est. Payback (Years)</th>
+                    <th class="p-3 border-b">25-Year ROI (%)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09009.html" class="text-brand hover:underline">New Haven County</a>
+                    </td>
+                    <td class="p-3 border-b">6856</td>
+                    <td class="p-3 border-b">5.8</td>
+                    <td class="p-3 border-b">415.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09011.html" class="text-brand hover:underline">New London County</a>
+                    </td>
+                    <td class="p-3 border-b">6843</td>
+                    <td class="p-3 border-b">5.8</td>
+                    <td class="p-3 border-b">414.0%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09001.html" class="text-brand hover:underline">Fairfield County</a>
+                    </td>
+                    <td class="p-3 border-b">6837</td>
+                    <td class="p-3 border-b">5.8</td>
+                    <td class="p-3 border-b">413.5%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09007.html" class="text-brand hover:underline">Middlesex County</a>
+                    </td>
+                    <td class="p-3 border-b">6815</td>
+                    <td class="p-3 border-b">5.9</td>
+                    <td class="p-3 border-b">411.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09015.html" class="text-brand hover:underline">Windham County</a>
+                    </td>
+                    <td class="p-3 border-b">6724</td>
+                    <td class="p-3 border-b">5.9</td>
+                    <td class="p-3 border-b">404.2%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09003.html" class="text-brand hover:underline">Hartford County</a>
+                    </td>
+                    <td class="p-3 border-b">6712</td>
+                    <td class="p-3 border-b">6.0</td>
+                    <td class="p-3 border-b">403.2%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09013.html" class="text-brand hover:underline">Tolland County</a>
+                    </td>
+                    <td class="p-3 border-b">6704</td>
+                    <td class="p-3 border-b">6.0</td>
+                    <td class="p-3 border-b">402.5%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/09005.html" class="text-brand hover:underline">Litchfield County</a>
+                    </td>
+                    <td class="p-3 border-b">6696</td>
+                    <td class="p-3 border-b">6.0</td>
+                    <td class="p-3 border-b">401.8%</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
-    <table class="w-full text-left border-collapse">
-        <thead>
-            <tr class="bg-blue-50 text-brand text-sm">
-                <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
-                <th class="p-3 border-b">Est. Payback (Years)</th>
-                <th class="p-3 border-b">25-Year ROI (%)</th>
-            </tr>
-        </thead>
-        <tbody class="text-sm">
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09009.html" class="text-brand hover:underline">New Haven County</a></td>
-                <td class="p-3 border-b">6856</td>
-                <td class="p-3 border-b">5.8</td>
-                <td class="p-3 border-b">415.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09011.html" class="text-brand hover:underline">New London County</a></td>
-                <td class="p-3 border-b">6843</td>
-                <td class="p-3 border-b">5.8</td>
-                <td class="p-3 border-b">414.0%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09001.html" class="text-brand hover:underline">Fairfield County</a></td>
-                <td class="p-3 border-b">6837</td>
-                <td class="p-3 border-b">5.8</td>
-                <td class="p-3 border-b">413.5%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09007.html" class="text-brand hover:underline">Middlesex County</a></td>
-                <td class="p-3 border-b">6815</td>
-                <td class="p-3 border-b">5.9</td>
-                <td class="p-3 border-b">411.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09015.html" class="text-brand hover:underline">Windham County</a></td>
-                <td class="p-3 border-b">6724</td>
-                <td class="p-3 border-b">5.9</td>
-                <td class="p-3 border-b">404.2%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09003.html" class="text-brand hover:underline">Hartford County</a></td>
-                <td class="p-3 border-b">6712</td>
-                <td class="p-3 border-b">6.0</td>
-                <td class="p-3 border-b">403.2%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09013.html" class="text-brand hover:underline">Tolland County</a></td>
-                <td class="p-3 border-b">6704</td>
-                <td class="p-3 border-b">6.0</td>
-                <td class="p-3 border-b">402.5%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/09005.html" class="text-brand hover:underline">Litchfield County</a></td>
-                <td class="p-3 border-b">6696</td>
-                <td class="p-3 border-b">6.0</td>
-                <td class="p-3 border-b">401.8%</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <h2 class="text-xl font-bold text-brand mb-1">
+        All 8 Counties in Connecticut
+    </h2>
+    <p class="text-sm text-gray-600 mb-4">
+        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
+        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        
+        <a href="/county/09009.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">New Haven County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">5.8y</span>
+        </a>
+        
+        <a href="/county/09011.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">New London County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">5.8y</span>
+        </a>
+        
+        <a href="/county/09001.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Fairfield County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">5.8y</span>
+        </a>
+        
+        <a href="/county/09007.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Middlesex County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">5.9y</span>
+        </a>
+        
+        <a href="/county/09015.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Windham County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">5.9y</span>
+        </a>
+        
+        <a href="/county/09003.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Hartford County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.0y</span>
+        </a>
+        
+        <a href="/county/09013.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Tolland County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.0y</span>
+        </a>
+        
+        <a href="/county/09005.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Litchfield County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.0y</span>
+        </a>
+        
+    </div>
 </div>
 
 <script>

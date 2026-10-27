@@ -41,6 +41,7 @@
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
                     <div class="hidden md:flex space-x-4">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
@@ -52,137 +53,418 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Washington</h1>
-<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">13.17 ¢/kWh</strong> (EIA 2025).</p>
 
-<!-- 🚨 주(State) 내 카운티 차트 -->
+
+<!-- Breadcrumb -->
+<nav class="text-sm text-gray-500 mb-4">
+    <a href="/" class="hover:text-brand">Home</a>
+    <span class="mx-2">/</span>
+    <a href="/states.html" class="hover:text-brand">States</a>
+    <span class="mx-2">/</span>
+    <a href="/counties.html" class="hover:text-brand">Counties</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-700">Washington</span>
+</nav>
+
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Washington</h1>
+<p class="text-gray-700 mb-6">
+    Average residential electricity rate:
+    <strong class="text-brand">13.17 ¢/kWh</strong> (EIA 2025).
+    Total counties: <strong>36</strong>.
+</p>
+
+<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Washington (6kW System)</h2>
+    <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Washington (6kW System)</h2>
+    <p class="text-sm text-gray-600 mb-4">Top 15 by payback period. Full county list below.</p>
     <div class="relative w-full h-96">
         <canvas id="countyChart"></canvas>
     </div>
 </div>
 
+<!-- 카운티 상세 표 (상위 15개) -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Top 15 Counties by Payback</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-50 text-brand text-sm">
+                    <th class="p-3 border-b">County</th>
+                    <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
+                    <th class="p-3 border-b">Est. Payback (Years)</th>
+                    <th class="p-3 border-b">25-Year ROI (%)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53077.html" class="text-brand hover:underline">Yakima County</a>
+                    </td>
+                    <td class="p-3 border-b">7125</td>
+                    <td class="p-3 border-b">14.4</td>
+                    <td class="p-3 border-b">113.0%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53005.html" class="text-brand hover:underline">Benton County</a>
+                    </td>
+                    <td class="p-3 border-b">7109</td>
+                    <td class="p-3 border-b">14.4</td>
+                    <td class="p-3 border-b">112.5%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53017.html" class="text-brand hover:underline">Douglas County</a>
+                    </td>
+                    <td class="p-3 border-b">7073</td>
+                    <td class="p-3 border-b">14.5</td>
+                    <td class="p-3 border-b">111.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53037.html" class="text-brand hover:underline">Kittitas County</a>
+                    </td>
+                    <td class="p-3 border-b">7001</td>
+                    <td class="p-3 border-b">14.7</td>
+                    <td class="p-3 border-b">108.4%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53021.html" class="text-brand hover:underline">Franklin County</a>
+                    </td>
+                    <td class="p-3 border-b">6992</td>
+                    <td class="p-3 border-b">14.7</td>
+                    <td class="p-3 border-b">108.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53025.html" class="text-brand hover:underline">Grant County</a>
+                    </td>
+                    <td class="p-3 border-b">6960</td>
+                    <td class="p-3 border-b">14.7</td>
+                    <td class="p-3 border-b">106.9%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53039.html" class="text-brand hover:underline">Klickitat County</a>
+                    </td>
+                    <td class="p-3 border-b">6874</td>
+                    <td class="p-3 border-b">14.9</td>
+                    <td class="p-3 border-b">103.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53013.html" class="text-brand hover:underline">Columbia County</a>
+                    </td>
+                    <td class="p-3 border-b">6860</td>
+                    <td class="p-3 border-b">15.0</td>
+                    <td class="p-3 border-b">103.2%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53043.html" class="text-brand hover:underline">Lincoln County</a>
+                    </td>
+                    <td class="p-3 border-b">6854</td>
+                    <td class="p-3 border-b">15.0</td>
+                    <td class="p-3 border-b">103.0%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53023.html" class="text-brand hover:underline">Garfield County</a>
+                    </td>
+                    <td class="p-3 border-b">6780</td>
+                    <td class="p-3 border-b">15.1</td>
+                    <td class="p-3 border-b">100.2%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53071.html" class="text-brand hover:underline">Walla Walla County</a>
+                    </td>
+                    <td class="p-3 border-b">6738</td>
+                    <td class="p-3 border-b">15.2</td>
+                    <td class="p-3 border-b">98.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53007.html" class="text-brand hover:underline">Chelan County</a>
+                    </td>
+                    <td class="p-3 border-b">6721</td>
+                    <td class="p-3 border-b">15.3</td>
+                    <td class="p-3 border-b">98.0%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53075.html" class="text-brand hover:underline">Whitman County</a>
+                    </td>
+                    <td class="p-3 border-b">6681</td>
+                    <td class="p-3 border-b">15.4</td>
+                    <td class="p-3 border-b">96.6%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53003.html" class="text-brand hover:underline">Asotin County</a>
+                    </td>
+                    <td class="p-3 border-b">6641</td>
+                    <td class="p-3 border-b">15.4</td>
+                    <td class="p-3 border-b">95.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/53063.html" class="text-brand hover:underline">Spokane County</a>
+                    </td>
+                    <td class="p-3 border-b">6430</td>
+                    <td class="p-3 border-b">16.0</td>
+                    <td class="p-3 border-b">87.2%</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
-    <table class="w-full text-left border-collapse">
-        <thead>
-            <tr class="bg-blue-50 text-brand text-sm">
-                <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
-                <th class="p-3 border-b">Est. Payback (Years)</th>
-                <th class="p-3 border-b">25-Year ROI (%)</th>
-            </tr>
-        </thead>
-        <tbody class="text-sm">
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53077.html" class="text-brand hover:underline">Yakima County</a></td>
-                <td class="p-3 border-b">7125</td>
-                <td class="p-3 border-b">14.4</td>
-                <td class="p-3 border-b">113.0%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53005.html" class="text-brand hover:underline">Benton County</a></td>
-                <td class="p-3 border-b">7109</td>
-                <td class="p-3 border-b">14.4</td>
-                <td class="p-3 border-b">112.5%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53017.html" class="text-brand hover:underline">Douglas County</a></td>
-                <td class="p-3 border-b">7073</td>
-                <td class="p-3 border-b">14.5</td>
-                <td class="p-3 border-b">111.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53037.html" class="text-brand hover:underline">Kittitas County</a></td>
-                <td class="p-3 border-b">7001</td>
-                <td class="p-3 border-b">14.7</td>
-                <td class="p-3 border-b">108.4%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53021.html" class="text-brand hover:underline">Franklin County</a></td>
-                <td class="p-3 border-b">6992</td>
-                <td class="p-3 border-b">14.7</td>
-                <td class="p-3 border-b">108.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53025.html" class="text-brand hover:underline">Grant County</a></td>
-                <td class="p-3 border-b">6960</td>
-                <td class="p-3 border-b">14.7</td>
-                <td class="p-3 border-b">106.9%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53039.html" class="text-brand hover:underline">Klickitat County</a></td>
-                <td class="p-3 border-b">6874</td>
-                <td class="p-3 border-b">14.9</td>
-                <td class="p-3 border-b">103.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53013.html" class="text-brand hover:underline">Columbia County</a></td>
-                <td class="p-3 border-b">6860</td>
-                <td class="p-3 border-b">15.0</td>
-                <td class="p-3 border-b">103.2%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53043.html" class="text-brand hover:underline">Lincoln County</a></td>
-                <td class="p-3 border-b">6854</td>
-                <td class="p-3 border-b">15.0</td>
-                <td class="p-3 border-b">103.0%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53023.html" class="text-brand hover:underline">Garfield County</a></td>
-                <td class="p-3 border-b">6780</td>
-                <td class="p-3 border-b">15.1</td>
-                <td class="p-3 border-b">100.2%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53071.html" class="text-brand hover:underline">Walla Walla County</a></td>
-                <td class="p-3 border-b">6738</td>
-                <td class="p-3 border-b">15.2</td>
-                <td class="p-3 border-b">98.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53007.html" class="text-brand hover:underline">Chelan County</a></td>
-                <td class="p-3 border-b">6721</td>
-                <td class="p-3 border-b">15.3</td>
-                <td class="p-3 border-b">98.0%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53075.html" class="text-brand hover:underline">Whitman County</a></td>
-                <td class="p-3 border-b">6681</td>
-                <td class="p-3 border-b">15.4</td>
-                <td class="p-3 border-b">96.6%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53003.html" class="text-brand hover:underline">Asotin County</a></td>
-                <td class="p-3 border-b">6641</td>
-                <td class="p-3 border-b">15.4</td>
-                <td class="p-3 border-b">95.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/53063.html" class="text-brand hover:underline">Spokane County</a></td>
-                <td class="p-3 border-b">6430</td>
-                <td class="p-3 border-b">16.0</td>
-                <td class="p-3 border-b">87.2%</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <h2 class="text-xl font-bold text-brand mb-1">
+        All 36 Counties in Washington
+    </h2>
+    <p class="text-sm text-gray-600 mb-4">
+        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
+        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        
+        <a href="/county/53077.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Yakima County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.4y</span>
+        </a>
+        
+        <a href="/county/53005.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Benton County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.4y</span>
+        </a>
+        
+        <a href="/county/53017.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Douglas County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.5y</span>
+        </a>
+        
+        <a href="/county/53037.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Kittitas County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.7y</span>
+        </a>
+        
+        <a href="/county/53021.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Franklin County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.7y</span>
+        </a>
+        
+        <a href="/county/53025.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Grant County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.7y</span>
+        </a>
+        
+        <a href="/county/53039.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Klickitat County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">14.9y</span>
+        </a>
+        
+        <a href="/county/53013.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Columbia County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.0y</span>
+        </a>
+        
+        <a href="/county/53043.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Lincoln County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.0y</span>
+        </a>
+        
+        <a href="/county/53023.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Garfield County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.1y</span>
+        </a>
+        
+        <a href="/county/53071.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Walla Walla County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.2y</span>
+        </a>
+        
+        <a href="/county/53007.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Chelan County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.3y</span>
+        </a>
+        
+        <a href="/county/53075.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Whitman County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.4y</span>
+        </a>
+        
+        <a href="/county/53003.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Asotin County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">15.4y</span>
+        </a>
+        
+        <a href="/county/53063.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Spokane County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">16.0y</span>
+        </a>
+        
+        <a href="/county/53047.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Okanogan County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">16.1y</span>
+        </a>
+        
+        <a href="/county/53019.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Ferry County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">16.4y</span>
+        </a>
+        
+        <a href="/county/53065.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Stevens County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">16.5y</span>
+        </a>
+        
+        <a href="/county/53051.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Pend Oreille County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">16.9y</span>
+        </a>
+        
+        <a href="/county/53059.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Skamania County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">17.0y</span>
+        </a>
+        
+        <a href="/county/53055.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">San Juan County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">17.0y</span>
+        </a>
+        
+        <a href="/county/53011.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Clark County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">17.8y</span>
+        </a>
+        
+        <a href="/county/53035.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Kitsap County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">17.9y</span>
+        </a>
+        
+        <a href="/county/53033.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">King County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.0y</span>
+        </a>
+        
+        <a href="/county/53073.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Whatcom County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.1y</span>
+        </a>
+        
+        <a href="/county/53045.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Mason County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.1y</span>
+        </a>
+        
+        <a href="/county/53015.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Cowlitz County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.3y</span>
+        </a>
+        
+        <a href="/county/53053.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Pierce County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.4y</span>
+        </a>
+        
+        <a href="/county/53009.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Clallam County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.4y</span>
+        </a>
+        
+        <a href="/county/53067.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Thurston County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.4y</span>
+        </a>
+        
+        <a href="/county/53069.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Wahkiakum County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.6y</span>
+        </a>
+        
+        <a href="/county/53041.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Lewis County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.6y</span>
+        </a>
+        
+        <a href="/county/53061.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Snohomish County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.9y</span>
+        </a>
+        
+        <a href="/county/53031.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Jefferson County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">18.9y</span>
+        </a>
+        
+        <a href="/county/53057.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Skagit County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">19.1y</span>
+        </a>
+        
+        <a href="/county/53027.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Grays Harbor County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">19.5y</span>
+        </a>
+        
+    </div>
 </div>
 
 <script>

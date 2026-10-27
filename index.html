@@ -41,6 +41,7 @@
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
                     <div class="hidden md:flex space-x-4">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
@@ -61,7 +62,58 @@
         Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties — all sourced from official public data.
     </p>
 </div>
+<!-- ZIP Lookup -->
+<div class="max-w-2xl mx-auto mb-12 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-lg font-bold text-brand mb-3">🔍 Find Solar ROI for Your County</h2>
+    <div class="flex gap-2">
+        <input type="text" id="zipInput" placeholder="Enter your ZIP code (e.g., 90210)"
+               maxlength="5" pattern="[0-9]{5}" inputmode="numeric"
+               class="flex-1 rounded-md border border-gray-300 px-4 py-2 focus:border-brand focus:ring-brand">
+        <button onclick="lookupZip()" 
+                class="bg-accent hover:bg-orange-600 text-white font-bold px-6 py-2 rounded-md transition">
+            Find
+        </button>
+    </div>
+    <p id="zipMsg" class="text-sm text-red-600 mt-2 hidden"></p>
+</div>
 
+<script>
+let zipMapCache = null;
+
+async function lookupZip() {
+    const input = document.getElementById('zipInput');
+    const msg = document.getElementById('zipMsg');
+    const zip = input.value.trim();
+    msg.classList.add('hidden');
+
+    if (!/^\d{5}$/.test(zip)) {
+        msg.textContent = 'Please enter a valid 5-digit ZIP code.';
+        msg.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        if (!zipMapCache) {
+            const res = await fetch('/api/zip_to_county.json');
+            zipMapCache = await res.json();
+        }
+        const fips = zipMapCache[zip];
+        if (fips) {
+            window.location.href = `/county/${fips}.html`;
+        } else {
+            msg.textContent = `ZIP ${zip} not found in our coverage area.`;
+            msg.classList.remove('hidden');
+        }
+    } catch (e) {
+        msg.textContent = 'Search failed. Please try again.';
+        msg.classList.remove('hidden');
+    }
+}
+
+document.getElementById('zipInput')?.addEventListener('keypress', e => {
+    if (e.key === 'Enter') lookupZip();
+});
+</script>
 <!-- 4개 카드 그리드 메뉴 -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">

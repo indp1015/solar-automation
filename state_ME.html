@@ -41,6 +41,7 @@
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
                     <div class="hidden md:flex space-x-4">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
@@ -52,130 +53,277 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Maine</h1>
-<p class="text-gray-700 mb-6">Average residential electricity rate: <strong class="text-brand">27.69 ¢/kWh</strong> (EIA 2025).</p>
 
-<!-- 🚨 주(State) 내 카운티 차트 -->
+
+<!-- Breadcrumb -->
+<nav class="text-sm text-gray-500 mb-4">
+    <a href="/" class="hover:text-brand">Home</a>
+    <span class="mx-2">/</span>
+    <a href="/states.html" class="hover:text-brand">States</a>
+    <span class="mx-2">/</span>
+    <a href="/counties.html" class="hover:text-brand">Counties</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-700">Maine</span>
+</nav>
+
+<h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Maine</h1>
+<p class="text-gray-700 mb-6">
+    Average residential electricity rate:
+    <strong class="text-brand">27.69 ¢/kWh</strong> (EIA 2025).
+    Total counties: <strong>14</strong>.
+</p>
+
+<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-    <h2 class="text-xl font-bold text-brand mb-4">Fastest Payback Counties in Maine (6kW System)</h2>
+    <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Maine (6kW System)</h2>
+    <p class="text-sm text-gray-600 mb-4">Top 14 by payback period. Full county list below.</p>
     <div class="relative w-full h-96">
         <canvas id="countyChart"></canvas>
     </div>
 </div>
 
+<!-- 카운티 상세 표 (상위 15개) -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-4">Top 14 Counties by Payback</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-50 text-brand text-sm">
+                    <th class="p-3 border-b">County</th>
+                    <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
+                    <th class="p-3 border-b">Est. Payback (Years)</th>
+                    <th class="p-3 border-b">25-Year ROI (%)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23031.html" class="text-brand hover:underline">York County</a>
+                    </td>
+                    <td class="p-3 border-b">6572</td>
+                    <td class="p-3 border-b">6.4</td>
+                    <td class="p-3 border-b">361.6%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23013.html" class="text-brand hover:underline">Knox County</a>
+                    </td>
+                    <td class="p-3 border-b">6553</td>
+                    <td class="p-3 border-b">6.5</td>
+                    <td class="p-3 border-b">360.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23005.html" class="text-brand hover:underline">Cumberland County</a>
+                    </td>
+                    <td class="p-3 border-b">6528</td>
+                    <td class="p-3 border-b">6.5</td>
+                    <td class="p-3 border-b">358.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23015.html" class="text-brand hover:underline">Lincoln County</a>
+                    </td>
+                    <td class="p-3 border-b">6474</td>
+                    <td class="p-3 border-b">6.5</td>
+                    <td class="p-3 border-b">353.9%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23001.html" class="text-brand hover:underline">Androscoggin County</a>
+                    </td>
+                    <td class="p-3 border-b">6420</td>
+                    <td class="p-3 border-b">6.6</td>
+                    <td class="p-3 border-b">349.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23027.html" class="text-brand hover:underline">Waldo County</a>
+                    </td>
+                    <td class="p-3 border-b">6409</td>
+                    <td class="p-3 border-b">6.6</td>
+                    <td class="p-3 border-b">348.9%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23017.html" class="text-brand hover:underline">Oxford County</a>
+                    </td>
+                    <td class="p-3 border-b">6381</td>
+                    <td class="p-3 border-b">6.6</td>
+                    <td class="p-3 border-b">346.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23011.html" class="text-brand hover:underline">Kennebec County</a>
+                    </td>
+                    <td class="p-3 border-b">6369</td>
+                    <td class="p-3 border-b">6.7</td>
+                    <td class="p-3 border-b">345.7%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23007.html" class="text-brand hover:underline">Franklin County</a>
+                    </td>
+                    <td class="p-3 border-b">6274</td>
+                    <td class="p-3 border-b">6.8</td>
+                    <td class="p-3 border-b">338.3%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23025.html" class="text-brand hover:underline">Somerset County</a>
+                    </td>
+                    <td class="p-3 border-b">6258</td>
+                    <td class="p-3 border-b">6.8</td>
+                    <td class="p-3 border-b">337.1%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23019.html" class="text-brand hover:underline">Penobscot County</a>
+                    </td>
+                    <td class="p-3 border-b">6223</td>
+                    <td class="p-3 border-b">6.8</td>
+                    <td class="p-3 border-b">334.3%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23029.html" class="text-brand hover:underline">Washington County</a>
+                    </td>
+                    <td class="p-3 border-b">6193</td>
+                    <td class="p-3 border-b">6.8</td>
+                    <td class="p-3 border-b">332.0%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23021.html" class="text-brand hover:underline">Piscataquis County</a>
+                    </td>
+                    <td class="p-3 border-b">6119</td>
+                    <td class="p-3 border-b">6.9</td>
+                    <td class="p-3 border-b">326.2%</td>
+                </tr>
+                
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 border-b">
+                        <a href="/county/23003.html" class="text-brand hover:underline">Aroostook County</a>
+                    </td>
+                    <td class="p-3 border-b">5896</td>
+                    <td class="p-3 border-b">7.2</td>
+                    <td class="p-3 border-b">308.8%</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-4">County Details</h2>
-    <table class="w-full text-left border-collapse">
-        <thead>
-            <tr class="bg-blue-50 text-brand text-sm">
-                <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
-                <th class="p-3 border-b">Est. Payback (Years)</th>
-                <th class="p-3 border-b">25-Year ROI (%)</th>
-            </tr>
-        </thead>
-        <tbody class="text-sm">
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23031.html" class="text-brand hover:underline">York County</a></td>
-                <td class="p-3 border-b">6572</td>
-                <td class="p-3 border-b">6.4</td>
-                <td class="p-3 border-b">361.6%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23013.html" class="text-brand hover:underline">Knox County</a></td>
-                <td class="p-3 border-b">6553</td>
-                <td class="p-3 border-b">6.5</td>
-                <td class="p-3 border-b">360.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23005.html" class="text-brand hover:underline">Cumberland County</a></td>
-                <td class="p-3 border-b">6528</td>
-                <td class="p-3 border-b">6.5</td>
-                <td class="p-3 border-b">358.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23015.html" class="text-brand hover:underline">Lincoln County</a></td>
-                <td class="p-3 border-b">6474</td>
-                <td class="p-3 border-b">6.5</td>
-                <td class="p-3 border-b">353.9%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23001.html" class="text-brand hover:underline">Androscoggin County</a></td>
-                <td class="p-3 border-b">6420</td>
-                <td class="p-3 border-b">6.6</td>
-                <td class="p-3 border-b">349.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23027.html" class="text-brand hover:underline">Waldo County</a></td>
-                <td class="p-3 border-b">6409</td>
-                <td class="p-3 border-b">6.6</td>
-                <td class="p-3 border-b">348.9%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23017.html" class="text-brand hover:underline">Oxford County</a></td>
-                <td class="p-3 border-b">6381</td>
-                <td class="p-3 border-b">6.6</td>
-                <td class="p-3 border-b">346.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23011.html" class="text-brand hover:underline">Kennebec County</a></td>
-                <td class="p-3 border-b">6369</td>
-                <td class="p-3 border-b">6.7</td>
-                <td class="p-3 border-b">345.7%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23007.html" class="text-brand hover:underline">Franklin County</a></td>
-                <td class="p-3 border-b">6274</td>
-                <td class="p-3 border-b">6.8</td>
-                <td class="p-3 border-b">338.3%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23025.html" class="text-brand hover:underline">Somerset County</a></td>
-                <td class="p-3 border-b">6258</td>
-                <td class="p-3 border-b">6.8</td>
-                <td class="p-3 border-b">337.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23019.html" class="text-brand hover:underline">Penobscot County</a></td>
-                <td class="p-3 border-b">6223</td>
-                <td class="p-3 border-b">6.8</td>
-                <td class="p-3 border-b">334.3%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23029.html" class="text-brand hover:underline">Washington County</a></td>
-                <td class="p-3 border-b">6193</td>
-                <td class="p-3 border-b">6.8</td>
-                <td class="p-3 border-b">332.0%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23021.html" class="text-brand hover:underline">Piscataquis County</a></td>
-                <td class="p-3 border-b">6119</td>
-                <td class="p-3 border-b">6.9</td>
-                <td class="p-3 border-b">326.2%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/23003.html" class="text-brand hover:underline">Aroostook County</a></td>
-                <td class="p-3 border-b">5896</td>
-                <td class="p-3 border-b">7.2</td>
-                <td class="p-3 border-b">308.8%</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <h2 class="text-xl font-bold text-brand mb-1">
+        All 14 Counties in Maine
+    </h2>
+    <p class="text-sm text-gray-600 mb-4">
+        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
+        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        
+        <a href="/county/23031.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">York County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.4y</span>
+        </a>
+        
+        <a href="/county/23013.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Knox County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.5y</span>
+        </a>
+        
+        <a href="/county/23005.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Cumberland County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.5y</span>
+        </a>
+        
+        <a href="/county/23015.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Lincoln County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.5y</span>
+        </a>
+        
+        <a href="/county/23001.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Androscoggin County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.6y</span>
+        </a>
+        
+        <a href="/county/23027.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Waldo County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.6y</span>
+        </a>
+        
+        <a href="/county/23017.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Oxford County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.6y</span>
+        </a>
+        
+        <a href="/county/23011.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Kennebec County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.7y</span>
+        </a>
+        
+        <a href="/county/23007.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Franklin County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.8y</span>
+        </a>
+        
+        <a href="/county/23025.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Somerset County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.8y</span>
+        </a>
+        
+        <a href="/county/23019.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Penobscot County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.8y</span>
+        </a>
+        
+        <a href="/county/23029.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Washington County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.8y</span>
+        </a>
+        
+        <a href="/county/23021.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Piscataquis County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">6.9y</span>
+        </a>
+        
+        <a href="/county/23003.html"
+           class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
+            <span class="truncate">Aroostook County</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0">7.2y</span>
+        </a>
+        
+    </div>
 </div>
 
 <script>
