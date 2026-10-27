@@ -146,7 +146,6 @@
                 <p class="text-gray-500 text-xs">Net Metering Policy</p>
                 <p class="font-bold text-gray-900">Varies by state</p>
             </div>
-            <!-- 🚨 문제 1 수정: 진짜 Peak Sun Hours -->
             <div>
                 <p class="text-gray-500 text-xs">Peak Sun Hours (Daily Avg)</p>
                 <p class="font-bold text-gray-900 font-mono">3.3 hrs/day</p>
@@ -190,61 +189,72 @@
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">4.0 kW</td>
-                <td class="p-3 border-b font-mono">$734</td>
-                <!-- 문제 3: 소수점 둘째 자리 표시 -->
-                <td class="p-3 border-b font-mono">9.37 years</td>
-                <td class="p-3 border-b text-green-600 font-mono">204.4%</td>
-                <td class="p-3 border-b font-mono">10.1%</td>
+                <td class="p-3 border-b font-mono">$719</td>
+                <td class="p-3 border-b font-mono">10.70 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">162.9%</td>
+                <td class="p-3 border-b font-mono">8.4%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">6.0 kW</td>
-                <td class="p-3 border-b font-mono">$1100</td>
-                <!-- 문제 3: 소수점 둘째 자리 표시 -->
-                <td class="p-3 border-b font-mono">9.37 years</td>
-                <td class="p-3 border-b text-green-600 font-mono">204.4%</td>
-                <td class="p-3 border-b font-mono">10.1%</td>
+                <td class="p-3 border-b font-mono">$1085</td>
+                <td class="p-3 border-b font-mono">10.25 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">175.6%</td>
+                <td class="p-3 border-b font-mono">8.9%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">8.0 kW</td>
-                <td class="p-3 border-b font-mono">$1467</td>
-                <!-- 문제 3: 소수점 둘째 자리 표시 -->
-                <td class="p-3 border-b font-mono">9.37 years</td>
-                <td class="p-3 border-b text-green-600 font-mono">204.4%</td>
-                <td class="p-3 border-b font-mono">10.1%</td>
+                <td class="p-3 border-b font-mono">$1452</td>
+                <td class="p-3 border-b font-mono">10.03 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">182.3%</td>
+                <td class="p-3 border-b font-mono">9.2%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">10.0 kW</td>
-                <td class="p-3 border-b font-mono">$1834</td>
-                <!-- 문제 3: 소수점 둘째 자리 표시 -->
-                <td class="p-3 border-b font-mono">9.37 years</td>
-                <td class="p-3 border-b text-green-600 font-mono">204.4%</td>
-                <td class="p-3 border-b font-mono">10.1%</td>
+                <td class="p-3 border-b font-mono">$1819</td>
+                <td class="p-3 border-b font-mono">9.90 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">186.5%</td>
+                <td class="p-3 border-b font-mono">9.3%</td>
             </tr>
             
         </tbody>
     </table>
 </div>
-<p class="text-xs text-gray-400 mb-8">Assumptions: $2.70/W gross cost, 30% ITC, 1.0% O&M, year-13 inverter replacement ($300/kW). Source: NREL Q1 2025 benchmark, PVGIS v5.2, EIA 2025.</p>
+<p class="text-xs text-gray-400 mb-8">
+    Assumptions: $2.70/W + $1500 fixed install cost,
+    30% ITC, 1.0% O&M,
+    year-13 inverter replacement ($300/kW).
+    Source: NREL Q1 2025 benchmark, PVGIS v5.2, EIA 2025.
+</p>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const results  = [{"annual_production": 4762.44, "irr": 0.1005, "kw": 4.0, "payback": 9.37, "roi": 204.38, "savings": 733.52}, {"annual_production": 7143.66, "irr": 0.1005, "kw": 6.0, "payback": 9.37, "roi": 204.38, "savings": 1100.28}, {"annual_production": 9524.88, "irr": 0.1005, "kw": 8.0, "payback": 9.37, "roi": 204.38, "savings": 1467.05}, {"annual_production": 11906.099999999999, "irr": 0.1005, "kw": 10.0, "payback": 9.37, "roi": 204.38, "savings": 1833.81}];
-    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "inverter_cost_per_kw": 300, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
+    const results  = [{"annual_production": 4762.44, "irr": 0.0836, "kw": 4.0, "payback": 10.7, "roi": 162.91, "savings": 718.52}, {"annual_production": 7143.66, "irr": 0.0888, "kw": 6.0, "payback": 10.25, "roi": 175.56, "savings": 1085.28}, {"annual_production": 9524.88, "irr": 0.0916, "kw": 8.0, "payback": 10.03, "roi": 182.3, "savings": 1452.05}, {"annual_production": 11906.099999999999, "irr": 0.0933, "kw": 10.0, "payback": 9.9, "roi": 186.48, "savings": 1818.81}];
+    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "fixed_install_cost_usd": 1500, "inverter_cost_per_kw": 300, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
     const baseData = results.find(r => r.kw === 6.0) || results[0];
     if (!baseData) return;
 
     const RATE_CENTS = 17.67;
-    const netCost    = baseData.kw * 1000 * PARAMS.cost_per_watt * (1 - PARAMS.itc_rate);
-    const om         = baseData.kw * 1000 * PARAMS.cost_per_watt * PARAMS.om_pct;
+    const STATE_ABBR = "IL";
+
+    // 🚨 fixed cost 반영 (roi.py와 일치)
+    const FIXED    = Number(PARAMS.fixed_install_cost_usd) || 0;
+    const grossCost = baseData.kw * 1000 * PARAMS.cost_per_watt + FIXED;
+    const netCost   = grossCost * (1 - PARAMS.itc_rate);
+    const om        = grossCost * PARAMS.om_pct;
     const annualProd = baseData.annual_production;
     const INV_YEAR   = Number(PARAMS.inverter_replace_year) || null;
-    // 문제 3: 시스템 크기 비례 인버터 비용
     const INV_COST   = (PARAMS.inverter_cost_per_kw != null)
                         ? Number(PARAMS.inverter_cost_per_kw) * baseData.kw
                         : Number(PARAMS.inverter_cost_usd) || 0;
+
+    // 🚨 NEM share (roi.py와 동일)
+    const NM_OVERRIDES = (PARAMS.state_nm_override && typeof PARAMS.state_nm_override === 'object') ? PARAMS.state_nm_override : {};
+    const NM_DEFAULT    = Number(PARAMS.nm_retail_share) || 1.0;
+    const EXPORT_FRAC   = Number(PARAMS.export_rate_frac) || 0.4;
+    const NM_SHARE      = (NM_OVERRIDES[STATE_ABBR] !== undefined) ? NM_OVERRIDES[STATE_ABBR] : NM_DEFAULT;
 
     const year1Save = baseData.savings;
     document.getElementById('summerSave').textContent = '$' + Math.round(year1Save * 0.40 / 3).toLocaleString();
@@ -256,9 +266,11 @@ document.addEventListener("DOMContentLoaded", function() {
         let cumulative = 0, payback = null;
         for (let t = 1; t <= PARAMS.years; t++) {
             const prod = annualProd * Math.pow(1 - PARAMS.degradation, t - 1);
-            const rate = (RATE_CENTS / 100) * Math.pow(1 + escRate, t - 1);
+            const retailRate = (RATE_CENTS / 100) * Math.pow(1 + escRate, t - 1);
+            // 🚨 NEM 반영된 유효 요금
+            const effectiveRate = retailRate * (NM_SHARE + (1 - NM_SHARE) * EXPORT_FRAC);
             const inv = (INV_YEAR && t === INV_YEAR) ? INV_COST : 0;
-            const save = prod * rate - om - inv;
+            const save = prod * effectiveRate - om - inv;
             cumulative += save;
             if (payback === null && cumulative >= netCost && save > 0) {
                 const prev = cumulative - save;
