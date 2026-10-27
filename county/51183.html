@@ -134,9 +134,7 @@
     </div>
 </div>
 
-<!-- 🚨 신규: 지역 정보 + 계절별 절감 -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <!-- 지역 정보 -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-lg font-bold text-brand mb-4">Local Utility & Context</h2>
         <div class="space-y-3 text-sm">
@@ -148,15 +146,15 @@
                 <p class="text-gray-500 text-xs">Net Metering Policy</p>
                 <p class="font-bold text-gray-900">Varies by state</p>
             </div>
+            <!-- 🚨 문제 1 수정: 진짜 Peak Sun Hours -->
             <div>
                 <p class="text-gray-500 text-xs">Peak Sun Hours (Daily Avg)</p>
-                <p class="font-bold text-gray-900 font-mono">4.4 hrs/day</p>
+                <p class="font-bold text-gray-900 font-mono">3.4 hrs/day</p>
             </div>
         </div>
-        <p class="text-xs text-gray-400 mt-4">Sources: EIA Form 861 (2025), PVGIS v5.2, DSIRE. Utility assignment is typical for this state — confirm with your specific provider.</p>
+        <p class="text-xs text-gray-400 mt-4">Peak Sun Hours = 1 kWp system daily output. Sources: EIA Form 861 (2025), PVGIS v5.2, DSIRE.</p>
     </div>
 
-    <!-- 계절별 절감액 -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-lg font-bold text-brand mb-4">Seasonal Savings (6kW, Year 1)</h2>
         <p class="text-sm text-gray-600 mb-4">Solar production peaks in summer. Estimates below assume typical U.S. seasonal distribution.</p>
@@ -193,15 +191,17 @@
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">4.0 kW</td>
                 <td class="p-3 border-b font-mono">$646</td>
-                <td class="p-3 border-b font-mono">10.5 years</td>
-                <td class="p-3 border-b text-green-600 font-mono">159.4%</td>
-                <td class="p-3 border-b font-mono">8.2%</td>
+                <!-- 문제 3: 소수점 둘째 자리 표시 -->
+                <td class="p-3 border-b font-mono">10.48 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">167.3%</td>
+                <td class="p-3 border-b font-mono">8.6%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">6.0 kW</td>
                 <td class="p-3 border-b font-mono">$969</td>
-                <td class="p-3 border-b font-mono">10.5 years</td>
+                <!-- 문제 3: 소수점 둘째 자리 표시 -->
+                <td class="p-3 border-b font-mono">10.48 years</td>
                 <td class="p-3 border-b text-green-600 font-mono">167.3%</td>
                 <td class="p-3 border-b font-mono">8.6%</td>
             </tr>
@@ -209,28 +209,30 @@
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">8.0 kW</td>
                 <td class="p-3 border-b font-mono">$1292</td>
-                <td class="p-3 border-b font-mono">10.5 years</td>
-                <td class="p-3 border-b text-green-600 font-mono">171.3%</td>
-                <td class="p-3 border-b font-mono">8.7%</td>
+                <!-- 문제 3: 소수점 둘째 자리 표시 -->
+                <td class="p-3 border-b font-mono">10.48 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">167.3%</td>
+                <td class="p-3 border-b font-mono">8.6%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">10.0 kW</td>
                 <td class="p-3 border-b font-mono">$1615</td>
-                <td class="p-3 border-b font-mono">10.5 years</td>
-                <td class="p-3 border-b text-green-600 font-mono">173.7%</td>
-                <td class="p-3 border-b font-mono">8.8%</td>
+                <!-- 문제 3: 소수점 둘째 자리 표시 -->
+                <td class="p-3 border-b font-mono">10.48 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">167.3%</td>
+                <td class="p-3 border-b font-mono">8.6%</td>
             </tr>
             
         </tbody>
     </table>
 </div>
-<p class="text-xs text-gray-400 mb-8">Assumptions: $2.70/W gross cost, 30% ITC, 1.0% O&M, year-13 inverter replacement. Source: NREL Q1 2025 benchmark, PVGIS v5.2, EIA 2025.</p>
+<p class="text-xs text-gray-400 mb-8">Assumptions: $2.70/W gross cost, 30% ITC, 1.0% O&M, year-13 inverter replacement ($300/kW). Source: NREL Q1 2025 benchmark, PVGIS v5.2, EIA 2025.</p>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const results  = [{"annual_production": 4933.64, "irr": 0.0824, "kw": 4.0, "payback": 10.48, "roi": 159.36, "savings": 645.86}, {"annual_production": 7400.460000000001, "irr": 0.0855, "kw": 6.0, "payback": 10.48, "roi": 167.3, "savings": 968.79}, {"annual_production": 9867.28, "irr": 0.087, "kw": 8.0, "payback": 10.48, "roi": 171.27, "savings": 1291.72}, {"annual_production": 12334.1, "irr": 0.0878, "kw": 10.0, "payback": 10.48, "roi": 173.65, "savings": 1614.65}];
-    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
+    const results  = [{"annual_production": 4933.64, "irr": 0.0855, "kw": 4.0, "payback": 10.48, "roi": 167.3, "savings": 645.86}, {"annual_production": 7400.460000000001, "irr": 0.0855, "kw": 6.0, "payback": 10.48, "roi": 167.3, "savings": 968.79}, {"annual_production": 9867.28, "irr": 0.0855, "kw": 8.0, "payback": 10.48, "roi": 167.3, "savings": 1291.72}, {"annual_production": 12334.1, "irr": 0.0855, "kw": 10.0, "payback": 10.48, "roi": 167.3, "savings": 1614.65}];
+    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "inverter_cost_per_kw": 300, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
     const baseData = results.find(r => r.kw === 6.0) || results[0];
     if (!baseData) return;
 
@@ -239,9 +241,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const om         = baseData.kw * 1000 * PARAMS.cost_per_watt * PARAMS.om_pct;
     const annualProd = baseData.annual_production;
     const INV_YEAR   = Number(PARAMS.inverter_replace_year) || null;
-    const INV_COST   = Number(PARAMS.inverter_cost_usd) || 0;
+    // 문제 3: 시스템 크기 비례 인버터 비용
+    const INV_COST   = (PARAMS.inverter_cost_per_kw != null)
+                        ? Number(PARAMS.inverter_cost_per_kw) * baseData.kw
+                        : Number(PARAMS.inverter_cost_usd) || 0;
 
-    // 여름/겨울 절감액 (Year 1, escalation 반영 전)
     const year1Save = baseData.savings;
     document.getElementById('summerSave').textContent = '$' + Math.round(year1Save * 0.40 / 3).toLocaleString();
     document.getElementById('winterSave').textContent = '$' + Math.round(year1Save * 0.15 / 3).toLocaleString();
