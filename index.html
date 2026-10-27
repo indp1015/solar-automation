@@ -88,21 +88,39 @@
     </p>
 </div>
 
-<!-- ZIP Lookup -->
+<!-- 🔍 통합 검색 + Geolocation + Popular -->
 <div class="max-w-2xl mx-auto mb-12 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-lg font-bold text-brand mb-3">🔍 Find Solar ROI for Your County</h2>
-    <div class="flex gap-2">
-        <input type="text" id="zipInput" placeholder="Enter your ZIP code (e.g., 90210)"
-               maxlength="5" pattern="[0-9]{5}" inputmode="numeric"
-               class="flex-1 rounded-md border border-gray-300 px-4 py-2 focus:border-brand focus:ring-brand">
-        <button onclick="lookupZip()"
-                class="bg-accent hover:bg-orange-600 text-white font-bold px-6 py-2 rounded-md transition">
+    <h2 class="text-lg font-bold text-brand mb-3">🔍 Find Solar ROI for Your Area</h2>
+
+    <div class="relative">
+        <input type="text" id="searchInput" autocomplete="off"
+               placeholder="Enter ZIP, county, or state (e.g., 90210, Los Angeles, CA)"
+               class="w-full rounded-md border border-gray-300 px-4 py-3 pr-24 focus:border-brand focus:ring-brand text-sm">
+        <button onclick="handleSearch()"
+                class="absolute right-1 top-1 bottom-1 bg-accent hover:bg-orange-600 text-white font-bold px-5 rounded text-sm">
             Find
         </button>
+        <div id="searchResults"
+             class="hidden absolute z-20 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-80 overflow-y-auto"></div>
     </div>
-    <p id="zipMsg" class="text-sm text-red-600 mt-2 hidden"></p>
+
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mt-4 text-sm">
+        <button onclick="useMyLocation()" class="flex items-center gap-1 text-brand hover:underline">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Use my location
+        </button>
+        <span class="text-gray-300">·</span>
+        <span class="text-gray-500 text-xs">Popular:</span>
+        <a href="/county/06037.html" class="text-brand hover:underline">Los Angeles</a>
+        <a href="/county/48201.html" class="text-brand hover:underline">Houston</a>
+        <a href="/county/04013.html" class="text-brand hover:underline">Phoenix</a>
+        <a href="/county/36061.html" class="text-brand hover:underline">NYC</a>
+    </div>
+
+    <p id="searchMsg" class="text-sm text-red-600 mt-2 hidden"></p>
 </div>
 
+<!-- 4개 카드 -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
         <h2 class="text-xl font-bold text-brand mb-2">☀️ Solar ROI by State</h2>
@@ -126,9 +144,8 @@
     </div>
 </div>
 
-<!-- Top + Bottom Counties (2열) -->
+<!-- Top + Lowest counties -->
 <div id="top-counties" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-    <!-- Top 5 -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-xl font-bold text-brand mb-2">🏆 Top Solar Payback Counties (6kW)</h2>
         <p class="text-sm text-gray-600 mb-4">Fastest payback in each state. Based on 30% ITC, 2025 EIA rates.</p>
@@ -184,7 +201,6 @@
         </div>
     </div>
 
-    <!-- Lowest Rate 5 (문제 4 신규) -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-xl font-bold text-brand mb-2">💸 Lowest-Rate Counties (6kW)</h2>
         <p class="text-sm text-gray-600 mb-4">Cheap grid power — solar payback is longer, but ROI is still positive.</p>
@@ -248,60 +264,7 @@
     <div class="relative w-full h-64 md:h-80"><canvas id="rateChart"></canvas></div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const statesData = [{"abbr": "AL", "avg_ac_per_kw": 1299.7428358208956, "elec_rate_cents": 16.09, "elec_rate_year": 2025, "name": "Alabama", "state_fips": "01", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AK", "avg_ac_per_kw": 671.5085714285715, "elec_rate_cents": 26.11, "elec_rate_year": 2025, "name": "Alaska", "state_fips": "02", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AZ", "avg_ac_per_kw": 1588.3353333333332, "elec_rate_cents": 15.26, "elec_rate_year": 2025, "name": "Arizona", "state_fips": "04", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AR", "avg_ac_per_kw": 1267.0978666666667, "elec_rate_cents": 12.87, "elec_rate_year": 2025, "name": "Arkansas", "state_fips": "05", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CA", "avg_ac_per_kw": 1431.985344827586, "elec_rate_cents": 31.35, "elec_rate_year": 2025, "name": "California", "state_fips": "06", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CO", "avg_ac_per_kw": 1386.1096875, "elec_rate_cents": 15.69, "elec_rate_year": 2025, "name": "Colorado", "state_fips": "08", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CT", "avg_ac_per_kw": 1128.865, "elec_rate_cents": 29.31, "elec_rate_year": 2025, "name": "Connecticut", "state_fips": "09", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DE", "avg_ac_per_kw": 1188.5166666666667, "elec_rate_cents": 17.15, "elec_rate_year": 2025, "name": "Delaware", "state_fips": "10", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DC", "avg_ac_per_kw": 1173.07, "elec_rate_cents": 21.92, "elec_rate_year": 2025, "name": "District of Columbia", "state_fips": "11", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "FL", "avg_ac_per_kw": 1380.5686153846154, "elec_rate_cents": 15.21, "elec_rate_year": 2025, "name": "Florida", "state_fips": "12", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "GA", "avg_ac_per_kw": 1314.2945283018867, "elec_rate_cents": 14.74, "elec_rate_year": 2025, "name": "Georgia", "state_fips": "13", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "HI", "avg_ac_per_kw": 1450.1680000000001, "elec_rate_cents": 40.4, "elec_rate_year": 2025, "name": "Hawaii", "state_fips": "15", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ID", "avg_ac_per_kw": 1195.2749999999999, "elec_rate_cents": 11.83, "elec_rate_year": 2025, "name": "Idaho", "state_fips": "16", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IL", "avg_ac_per_kw": 1173.8513725490195, "elec_rate_cents": 17.67, "elec_rate_year": 2025, "name": "Illinois", "state_fips": "17", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IN", "avg_ac_per_kw": 1148.1165217391303, "elec_rate_cents": 15.96, "elec_rate_year": 2025, "name": "Indiana", "state_fips": "18", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IA", "avg_ac_per_kw": 1157.0841414141414, "elec_rate_cents": 13.62, "elec_rate_year": 2025, "name": "Iowa", "state_fips": "19", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KS", "avg_ac_per_kw": 1322.1796190476189, "elec_rate_cents": 14.44, "elec_rate_year": 2025, "name": "Kansas", "state_fips": "20", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KY", "avg_ac_per_kw": 1169.1178333333335, "elec_rate_cents": 13.13, "elec_rate_year": 2025, "name": "Kentucky", "state_fips": "21", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "LA", "avg_ac_per_kw": 1326.11671875, "elec_rate_cents": 12.52, "elec_rate_year": 2025, "name": "Louisiana", "state_fips": "22", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ME", "avg_ac_per_kw": 1055.575, "elec_rate_cents": 27.69, "elec_rate_year": 2025, "name": "Maine", "state_fips": "23", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MD", "avg_ac_per_kw": 1185.4504166666668, "elec_rate_cents": 19.53, "elec_rate_year": 2025, "name": "Maryland", "state_fips": "24", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MA", "avg_ac_per_kw": 1125.275, "elec_rate_cents": 30.41, "elec_rate_year": 2025, "name": "Massachusetts", "state_fips": "25", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MI", "avg_ac_per_kw": 1067.949156626506, "elec_rate_cents": 20.03, "elec_rate_year": 2025, "name": "Michigan", "state_fips": "26", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MN", "avg_ac_per_kw": 1085.3683908045978, "elec_rate_cents": 15.83, "elec_rate_year": 2025, "name": "Minnesota", "state_fips": "27", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MS", "avg_ac_per_kw": 1300.7791463414635, "elec_rate_cents": 14.03, "elec_rate_year": 2025, "name": "Mississippi", "state_fips": "28", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MO", "avg_ac_per_kw": 1211.6848695652175, "elec_rate_cents": 13.3, "elec_rate_year": 2025, "name": "Missouri", "state_fips": "29", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MT", "avg_ac_per_kw": 1101.4908928571429, "elec_rate_cents": 12.99, "elec_rate_year": 2025, "name": "Montana", "state_fips": "30", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NE", "avg_ac_per_kw": 1256.884193548387, "elec_rate_cents": 12.05, "elec_rate_year": 2025, "name": "Nebraska", "state_fips": "31", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NV", "avg_ac_per_kw": 1473.0247058823531, "elec_rate_cents": 13.26, "elec_rate_year": 2025, "name": "Nevada", "state_fips": "32", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NH", "avg_ac_per_kw": 1073.416, "elec_rate_cents": 24.53, "elec_rate_year": 2025, "name": "New Hampshire", "state_fips": "33", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NJ", "avg_ac_per_kw": 1155.8771428571429, "elec_rate_cents": 22.48, "elec_rate_year": 2025, "name": "New Jersey", "state_fips": "34", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NM", "avg_ac_per_kw": 1575.7036363636364, "elec_rate_cents": 14.85, "elec_rate_year": 2025, "name": "New Mexico", "state_fips": "35", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NY", "avg_ac_per_kw": 1066.7120967741935, "elec_rate_cents": 26.39, "elec_rate_year": 2025, "name": "New York", "state_fips": "36", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NC", "avg_ac_per_kw": 1259.4263636363637, "elec_rate_cents": 14.0, "elec_rate_year": 2025, "name": "North Carolina", "state_fips": "37", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ND", "avg_ac_per_kw": 1079.8967924528301, "elec_rate_cents": 11.82, "elec_rate_year": 2025, "name": "North Dakota", "state_fips": "38", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OH", "avg_ac_per_kw": 1112.280340909091, "elec_rate_cents": 16.9, "elec_rate_year": 2025, "name": "Ohio", "state_fips": "39", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OK", "avg_ac_per_kw": 1344.6105194805193, "elec_rate_cents": 13.21, "elec_rate_year": 2025, "name": "Oklahoma", "state_fips": "40", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OR", "avg_ac_per_kw": 1145.5813888888888, "elec_rate_cents": 15.46, "elec_rate_year": 2025, "name": "Oregon", "state_fips": "41", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "PA", "avg_ac_per_kw": 1084.3250746268657, "elec_rate_cents": 19.29, "elec_rate_year": 2025, "name": "Pennsylvania", "state_fips": "42", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "RI", "avg_ac_per_kw": 1143.146, "elec_rate_cents": 29.48, "elec_rate_year": 2025, "name": "Rhode Island", "state_fips": "44", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SC", "avg_ac_per_kw": 1296.4265217391305, "elec_rate_cents": 15.12, "elec_rate_year": 2025, "name": "South Carolina", "state_fips": "45", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SD", "avg_ac_per_kw": 1170.7927272727275, "elec_rate_cents": 13.32, "elec_rate_year": 2025, "name": "South Dakota", "state_fips": "46", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TN", "avg_ac_per_kw": 1217.8073684210526, "elec_rate_cents": 13.22, "elec_rate_year": 2025, "name": "Tennessee", "state_fips": "47", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TX", "avg_ac_per_kw": 1431.9095275590553, "elec_rate_cents": 15.4, "elec_rate_year": 2025, "name": "Texas", "state_fips": "48", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "UT", "avg_ac_per_kw": 1379.0475862068965, "elec_rate_cents": 13.02, "elec_rate_year": 2025, "name": "Utah", "state_fips": "49", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VT", "avg_ac_per_kw": 1023.6107142857144, "elec_rate_cents": 22.79, "elec_rate_year": 2025, "name": "Vermont", "state_fips": "50", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VA", "avg_ac_per_kw": 1209.5262406015038, "elec_rate_cents": 15.28, "elec_rate_year": 2025, "name": "Virginia", "state_fips": "51", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WA", "avg_ac_per_kw": 1033.243888888889, "elec_rate_cents": 13.17, "elec_rate_year": 2025, "name": "Washington", "state_fips": "53", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WV", "avg_ac_per_kw": 1114.2458181818183, "elec_rate_cents": 15.39, "elec_rate_year": 2025, "name": "West Virginia", "state_fips": "54", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WI", "avg_ac_per_kw": 1092.462361111111, "elec_rate_cents": 18.08, "elec_rate_year": 2025, "name": "Wisconsin", "state_fips": "55", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WY", "avg_ac_per_kw": 1256.0165217391304, "elec_rate_cents": 13.37, "elec_rate_year": 2025, "name": "Wyoming", "state_fips": "56", "updated_at": "2026-10-26T07:26:47+00:00"}];
-    const sorted = [...statesData].sort((a, b) => b.elec_rate_cents - a.elec_rate_cents);
-    const top5High = sorted.slice(0, 5);
-    const top5Low = sorted.slice(-5).reverse();
-    const labels = [...top5High.map(s => s.abbr), ...top5Low.map(s => s.abbr)];
-    const data = [...top5High.map(s => s.elec_rate_cents), ...top5Low.map(s => s.elec_rate_cents)];
-    const colors = [...Array(5).fill('#1e40af'), ...Array(5).fill('#93c5fd')];
-
-    new Chart(document.getElementById('rateChart').getContext('2d'), {
-        type: 'bar',
-        data: { labels, datasets: [{ label: 'Electricity Rate (¢/kWh)', data, backgroundColor: colors, borderRadius: 4 }]},
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, title: { display: true, text: 'Cents per kWh' } } }
-        }
-    });
-});
-
-let zipMapCache = null;
-async function lookupZip() {
-    const input = document.getElementById('zipInput');
-    const msg = document.getElementById('zipMsg');
-    const zip = input.value.trim();
-    msg.classList.add('hidden');
-    if (!/^\d{5}$/.test(zip)) {
-        msg.textContent = 'Please enter a valid 5-digit ZIP code.';
-        msg.classList.remove('hidden');
-        return;
-    }
-    try {
-        if (!zipMapCache) {
-            const res = await fetch('/api/zip_to_county.json');
-            zipMapCache = await res.json();
-        }
-        const fips = zipMapCache[zip];
-        if (fips) {
-            window.location.href = `/county/${fips}.html`;
-        } else {
-            msg.textContent = `ZIP ${zip} not found in our coverage area.`;
-            msg.classList.remove('hidden');
-        }
-    } catch (e) {
-        msg.textContent = 'Search failed. Please try again.';
-        msg.classList.remove('hidden');
-    }
-}
-document.getElementById('zipInput')?.addEventListener('keypress', e => {
-    if (e.key === 'Enter') lookupZip();
-});
-</script>
-
+<!-- Market Snapshot + Quick Calc -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-xl font-bold text-brand mb-4">📈 Market Snapshot (2025)</h2>
@@ -562,6 +525,7 @@ document.getElementById('zipInput')?.addEventListener('keypress', e => {
     </div>
 </div>
 
+<!-- Insights -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-12">
     <h2 class="text-2xl font-bold text-brand mb-4">Current U.S. Solar Market Insights</h2>
     <p class="text-gray-700 mb-4">Navigating the solar market requires understanding the balance between installation costs, local electricity rates, and available incentives. In today's dynamic environment, homeowners must look beyond the sticker price to grasp the full financial picture.</p>
@@ -571,38 +535,7 @@ document.getElementById('zipInput')?.addEventListener('keypress', e => {
     <p class="text-gray-700">While sunshine is abundant across the U.S., actual solar production varies by region. We utilize PVGIS (NREL) data to accurately estimate the kWh output of a system based on your specific county's latitude and longitude. <em>(Note: US radiation data is a 10-year average from 2005-2015).</em></p>
 </div>
 
-<script>
-    const P = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "fixed_install_cost_usd": 1500, "inverter_cost_per_kw": 300, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
-    function updateRate() {
-        document.getElementById('calc-result').classList.add('hidden');
-    }
-    function calculateQuick(e) {
-        e.preventDefault();
-        const opt = document.getElementById('state-select').selectedOptions[0];
-        const rate = parseFloat(opt.dataset.rate);
-        const acPerKw = parseFloat(opt.dataset.ac);
-        const kw = parseFloat(document.getElementById('sys-size').value);
-        const gross = kw * 1000 * P.cost_per_watt;
-        const netCost = gross * (1 - P.itc_rate);
-        const om = gross * P.om_pct;
-        let cumulative = 0, payback = null;
-        for (let t = 1; t <= P.years; t++) {
-            const prod = kw * acPerKw * Math.pow(1 - P.degradation, t - 1);
-            const r = (rate / 100) * Math.pow(1 + P.escalation, t - 1);
-            const save = prod * r - om;
-            cumulative += save;
-            if (payback === null && cumulative >= netCost && save > 0) {
-                payback = (t - 1) + (netCost - (cumulative - save)) / save;
-            }
-        }
-        const year1 = kw * acPerKw * (rate / 100) - om;
-        document.getElementById('res-cost').innerText = '$' + netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
-        document.getElementById('res-savings').innerText = '$' + year1.toLocaleString(undefined, {maximumFractionDigits: 0});
-        document.getElementById('res-payback').innerText = payback ? payback.toFixed(1) + ' Years' : '> 25 years';
-        document.getElementById('calc-result').classList.remove('hidden');
-    }
-</script>
-
+<!-- FAQ -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-12">
     <h2 class="text-2xl font-bold text-brand mb-4">Frequently Asked Questions (FAQ)</h2>
     <div class="space-y-4">
@@ -620,6 +553,196 @@ document.getElementById('zipInput')?.addEventListener('keypress', e => {
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // ─── Rates chart ───
+    const statesData = [{"abbr": "AL", "avg_ac_per_kw": 1299.7428358208956, "elec_rate_cents": 16.09, "elec_rate_year": 2025, "name": "Alabama", "state_fips": "01", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AK", "avg_ac_per_kw": 671.5085714285715, "elec_rate_cents": 26.11, "elec_rate_year": 2025, "name": "Alaska", "state_fips": "02", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AZ", "avg_ac_per_kw": 1588.3353333333332, "elec_rate_cents": 15.26, "elec_rate_year": 2025, "name": "Arizona", "state_fips": "04", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AR", "avg_ac_per_kw": 1267.0978666666667, "elec_rate_cents": 12.87, "elec_rate_year": 2025, "name": "Arkansas", "state_fips": "05", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CA", "avg_ac_per_kw": 1431.985344827586, "elec_rate_cents": 31.35, "elec_rate_year": 2025, "name": "California", "state_fips": "06", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CO", "avg_ac_per_kw": 1386.1096875, "elec_rate_cents": 15.69, "elec_rate_year": 2025, "name": "Colorado", "state_fips": "08", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CT", "avg_ac_per_kw": 1128.865, "elec_rate_cents": 29.31, "elec_rate_year": 2025, "name": "Connecticut", "state_fips": "09", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DE", "avg_ac_per_kw": 1188.5166666666667, "elec_rate_cents": 17.15, "elec_rate_year": 2025, "name": "Delaware", "state_fips": "10", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DC", "avg_ac_per_kw": 1173.07, "elec_rate_cents": 21.92, "elec_rate_year": 2025, "name": "District of Columbia", "state_fips": "11", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "FL", "avg_ac_per_kw": 1380.5686153846154, "elec_rate_cents": 15.21, "elec_rate_year": 2025, "name": "Florida", "state_fips": "12", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "GA", "avg_ac_per_kw": 1314.2945283018867, "elec_rate_cents": 14.74, "elec_rate_year": 2025, "name": "Georgia", "state_fips": "13", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "HI", "avg_ac_per_kw": 1450.1680000000001, "elec_rate_cents": 40.4, "elec_rate_year": 2025, "name": "Hawaii", "state_fips": "15", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ID", "avg_ac_per_kw": 1195.2749999999999, "elec_rate_cents": 11.83, "elec_rate_year": 2025, "name": "Idaho", "state_fips": "16", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IL", "avg_ac_per_kw": 1173.8513725490195, "elec_rate_cents": 17.67, "elec_rate_year": 2025, "name": "Illinois", "state_fips": "17", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IN", "avg_ac_per_kw": 1148.1165217391303, "elec_rate_cents": 15.96, "elec_rate_year": 2025, "name": "Indiana", "state_fips": "18", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IA", "avg_ac_per_kw": 1157.0841414141414, "elec_rate_cents": 13.62, "elec_rate_year": 2025, "name": "Iowa", "state_fips": "19", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KS", "avg_ac_per_kw": 1322.1796190476189, "elec_rate_cents": 14.44, "elec_rate_year": 2025, "name": "Kansas", "state_fips": "20", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KY", "avg_ac_per_kw": 1169.1178333333335, "elec_rate_cents": 13.13, "elec_rate_year": 2025, "name": "Kentucky", "state_fips": "21", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "LA", "avg_ac_per_kw": 1326.11671875, "elec_rate_cents": 12.52, "elec_rate_year": 2025, "name": "Louisiana", "state_fips": "22", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ME", "avg_ac_per_kw": 1055.575, "elec_rate_cents": 27.69, "elec_rate_year": 2025, "name": "Maine", "state_fips": "23", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MD", "avg_ac_per_kw": 1185.4504166666668, "elec_rate_cents": 19.53, "elec_rate_year": 2025, "name": "Maryland", "state_fips": "24", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MA", "avg_ac_per_kw": 1125.275, "elec_rate_cents": 30.41, "elec_rate_year": 2025, "name": "Massachusetts", "state_fips": "25", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MI", "avg_ac_per_kw": 1067.949156626506, "elec_rate_cents": 20.03, "elec_rate_year": 2025, "name": "Michigan", "state_fips": "26", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MN", "avg_ac_per_kw": 1085.3683908045978, "elec_rate_cents": 15.83, "elec_rate_year": 2025, "name": "Minnesota", "state_fips": "27", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MS", "avg_ac_per_kw": 1300.7791463414635, "elec_rate_cents": 14.03, "elec_rate_year": 2025, "name": "Mississippi", "state_fips": "28", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MO", "avg_ac_per_kw": 1211.6848695652175, "elec_rate_cents": 13.3, "elec_rate_year": 2025, "name": "Missouri", "state_fips": "29", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MT", "avg_ac_per_kw": 1101.4908928571429, "elec_rate_cents": 12.99, "elec_rate_year": 2025, "name": "Montana", "state_fips": "30", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NE", "avg_ac_per_kw": 1256.884193548387, "elec_rate_cents": 12.05, "elec_rate_year": 2025, "name": "Nebraska", "state_fips": "31", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NV", "avg_ac_per_kw": 1473.0247058823531, "elec_rate_cents": 13.26, "elec_rate_year": 2025, "name": "Nevada", "state_fips": "32", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NH", "avg_ac_per_kw": 1073.416, "elec_rate_cents": 24.53, "elec_rate_year": 2025, "name": "New Hampshire", "state_fips": "33", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NJ", "avg_ac_per_kw": 1155.8771428571429, "elec_rate_cents": 22.48, "elec_rate_year": 2025, "name": "New Jersey", "state_fips": "34", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NM", "avg_ac_per_kw": 1575.7036363636364, "elec_rate_cents": 14.85, "elec_rate_year": 2025, "name": "New Mexico", "state_fips": "35", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NY", "avg_ac_per_kw": 1066.7120967741935, "elec_rate_cents": 26.39, "elec_rate_year": 2025, "name": "New York", "state_fips": "36", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NC", "avg_ac_per_kw": 1259.4263636363637, "elec_rate_cents": 14.0, "elec_rate_year": 2025, "name": "North Carolina", "state_fips": "37", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ND", "avg_ac_per_kw": 1079.8967924528301, "elec_rate_cents": 11.82, "elec_rate_year": 2025, "name": "North Dakota", "state_fips": "38", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OH", "avg_ac_per_kw": 1112.280340909091, "elec_rate_cents": 16.9, "elec_rate_year": 2025, "name": "Ohio", "state_fips": "39", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OK", "avg_ac_per_kw": 1344.6105194805193, "elec_rate_cents": 13.21, "elec_rate_year": 2025, "name": "Oklahoma", "state_fips": "40", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OR", "avg_ac_per_kw": 1145.5813888888888, "elec_rate_cents": 15.46, "elec_rate_year": 2025, "name": "Oregon", "state_fips": "41", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "PA", "avg_ac_per_kw": 1084.3250746268657, "elec_rate_cents": 19.29, "elec_rate_year": 2025, "name": "Pennsylvania", "state_fips": "42", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "RI", "avg_ac_per_kw": 1143.146, "elec_rate_cents": 29.48, "elec_rate_year": 2025, "name": "Rhode Island", "state_fips": "44", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SC", "avg_ac_per_kw": 1296.4265217391305, "elec_rate_cents": 15.12, "elec_rate_year": 2025, "name": "South Carolina", "state_fips": "45", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SD", "avg_ac_per_kw": 1170.7927272727275, "elec_rate_cents": 13.32, "elec_rate_year": 2025, "name": "South Dakota", "state_fips": "46", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TN", "avg_ac_per_kw": 1217.8073684210526, "elec_rate_cents": 13.22, "elec_rate_year": 2025, "name": "Tennessee", "state_fips": "47", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TX", "avg_ac_per_kw": 1431.9095275590553, "elec_rate_cents": 15.4, "elec_rate_year": 2025, "name": "Texas", "state_fips": "48", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "UT", "avg_ac_per_kw": 1379.0475862068965, "elec_rate_cents": 13.02, "elec_rate_year": 2025, "name": "Utah", "state_fips": "49", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VT", "avg_ac_per_kw": 1023.6107142857144, "elec_rate_cents": 22.79, "elec_rate_year": 2025, "name": "Vermont", "state_fips": "50", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VA", "avg_ac_per_kw": 1209.5262406015038, "elec_rate_cents": 15.28, "elec_rate_year": 2025, "name": "Virginia", "state_fips": "51", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WA", "avg_ac_per_kw": 1033.243888888889, "elec_rate_cents": 13.17, "elec_rate_year": 2025, "name": "Washington", "state_fips": "53", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WV", "avg_ac_per_kw": 1114.2458181818183, "elec_rate_cents": 15.39, "elec_rate_year": 2025, "name": "West Virginia", "state_fips": "54", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WI", "avg_ac_per_kw": 1092.462361111111, "elec_rate_cents": 18.08, "elec_rate_year": 2025, "name": "Wisconsin", "state_fips": "55", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WY", "avg_ac_per_kw": 1256.0165217391304, "elec_rate_cents": 13.37, "elec_rate_year": 2025, "name": "Wyoming", "state_fips": "56", "updated_at": "2026-10-26T07:26:47+00:00"}];
+    const sorted = [...statesData].sort((a, b) => b.elec_rate_cents - a.elec_rate_cents);
+    const top5High = sorted.slice(0, 5);
+    const top5Low = sorted.slice(-5).reverse();
+    const labels = [...top5High.map(s => s.abbr), ...top5Low.map(s => s.abbr)];
+    const data = [...top5High.map(s => s.elec_rate_cents), ...top5Low.map(s => s.elec_rate_cents)];
+    const colors = [...Array(5).fill('#1e40af'), ...Array(5).fill('#93c5fd')];
+
+    new Chart(document.getElementById('rateChart').getContext('2d'), {
+        type: 'bar',
+        data: { labels, datasets: [{ label: 'Electricity Rate (¢/kWh)', data, backgroundColor: colors, borderRadius: 4 }]},
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Cents per kWh' } } }
+        }
+    });
+});
+
+// ─── 🔍 통합 검색 + Geolocation ───
+let searchCache = null;
+
+async function loadSearchIndex() {
+    if (searchCache) return searchCache;
+    const [search, zip] = await Promise.all([
+        fetch('/api/search_index.json').then(r => r.json()),
+        fetch('/api/zip_to_county.json').then(r => r.json()),
+    ]);
+    searchCache = { search, zip };
+    return searchCache;
+}
+
+function showMsg(text) {
+    const msg = document.getElementById('searchMsg');
+    msg.textContent = text;
+    msg.classList.remove('hidden');
+}
+function clearMsg() {
+    document.getElementById('searchMsg').classList.add('hidden');
+}
+
+async function handleSearch() {
+    clearMsg();
+    const input = document.getElementById('searchInput').value.trim();
+    if (!input) { showMsg('Please enter a ZIP, county, or state.'); return; }
+
+    if (/^\d{5}$/.test(input)) {
+        try {
+            const { zip } = await loadSearchIndex();
+            const fips = zip[input];
+            if (fips) { window.location.href = `/county/${fips}.html`; return; }
+            showMsg(`ZIP ${input} not found in our coverage area.`);
+        } catch (e) { showMsg('Search failed. Please try again.'); }
+        return;
+    }
+
+    try {
+        const { search } = await loadSearchIndex();
+        const q = input.toLowerCase().trim();
+
+        // 우선순위: ① 정확한 state 약자 ② 정확한 county 이름 ③ 정확한 state 이름 ④ 부분 county ⑤ 부분 state
+        let hit = search.find(x => x.is_state && x.s.toLowerCase() === q);
+        if (!hit) hit = search.find(x => !x.is_state && x.c.toLowerCase() === q);
+        if (!hit) hit = search.find(x => x.is_state && x.sn.toLowerCase() === q);
+        if (!hit) hit = search.find(x => !x.is_state && x.c.toLowerCase().startsWith(q));
+        if (!hit) hit = search.find(x => x.is_state && x.sn.toLowerCase().startsWith(q));
+        if (!hit) hit = search.find(x => !x.is_state && x.c.toLowerCase().includes(q));
+
+        if (hit) {
+            if (hit.is_state) window.location.href = `/state_${hit.s}.html`;
+            else window.location.href = `/county/${hit.f}.html`;
+        } else {
+            showMsg(`No match for "${input}". Try a county name, state name, or 5-digit ZIP.`);
+        }
+    } catch (e) { showMsg('Search failed. Please try again.'); }
+}
+
+async function showAutocomplete() {
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    const box = document.getElementById('searchResults');
+    if (q.length < 2) { box.classList.add('hidden'); return; }
+
+    try {
+        const { search } = await loadSearchIndex();
+        const matches = search.filter(x => {
+            if (x.is_state) return x.sn.toLowerCase().includes(q) || x.s.toLowerCase() === q;
+            return x.c.toLowerCase().includes(q) || x.s.toLowerCase() === q;
+        }).slice(0, 8);
+
+        if (!matches.length) { box.classList.add('hidden'); return; }
+
+        box.innerHTML = matches.map(m => {
+            const label = m.is_state ? m.sn : `${m.c}, ${m.s}`;
+            const href = m.is_state
+                ? `/state_${m.s}.html`
+                : `/county/${m.f}.html`;
+            const badge = m.is_state
+                ? '<span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">state</span>'
+                : '<span class="text-xs text-gray-400">county</span>';
+            return `<a href="${href}" class="flex justify-between items-center px-4 py-2 hover:bg-blue-50 text-sm border-b border-gray-100 last:border-b-0">
+                        <span>${label}</span>${badge}
+                    </a>`;
+        }).join('');
+        box.classList.remove('hidden');
+    } catch (e) {
+        box.classList.add('hidden');
+    }
+}
+
+async function useMyLocation() {
+    clearMsg();
+    if (!navigator.geolocation) { showMsg('Geolocation not supported by your browser.'); return; }
+    showMsg('📍 Detecting your location…');
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+        clearMsg();
+        const { lat, lon } = pos.coords;
+        try {
+            const r = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1&zoom=14`,
+                { headers: { 'Accept': 'application/json' } }
+            );
+            const data = await r.json();
+            const zipRaw = data?.address?.postcode || '';
+            const zip5 = String(zipRaw).slice(0, 5);
+
+            if (zip5 && /^\d{5}$/.test(zip5)) {
+                const { zip } = await loadSearchIndex();
+                const fips = zip[zip5];
+                if (fips) { window.location.href = `/county/${fips}.html`; return; }
+            }
+
+            // Fallback: state
+            const iso = data?.address?.['ISO3166-2-lvl4'] || '';
+            const stateAbbr = iso.replace('US-', '');
+            if (stateAbbr) { window.location.href = `/state_${stateAbbr}.html`; return; }
+
+            showMsg('Could not determine your county. Please enter a ZIP code.');
+        } catch (e) {
+            showMsg('Location detected but reverse-lookup failed. Please enter a ZIP code.');
+        }
+    }, (err) => {
+        clearMsg();
+        showMsg('Location access denied or unavailable. Please enter a ZIP or county name.');
+    }, { timeout: 8000, maximumAge: 300000 });
+}
+
+// 이벤트
+document.getElementById('searchInput').addEventListener('input', showAutocomplete);
+document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); handleSearch(); }
+});
+document.getElementById('searchInput').addEventListener('blur', () => {
+    setTimeout(() => document.getElementById('searchResults').classList.add('hidden'), 200);
+});
+
+// ─── Quick Calculator (기존 유지) ───
+const P = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "fixed_install_cost_usd": 1500, "inverter_cost_per_kw": 300, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
+function updateRate() {
+    document.getElementById('calc-result').classList.add('hidden');
+}
+function calculateQuick(e) {
+    e.preventDefault();
+    const opt = document.getElementById('state-select').selectedOptions[0];
+    const rate = parseFloat(opt.dataset.rate);
+    const acPerKw = parseFloat(opt.dataset.ac);
+    const kw = parseFloat(document.getElementById('sys-size').value);
+    const gross = kw * 1000 * P.cost_per_watt + (Number(P.fixed_install_cost_usd) || 0);
+    const netCost = gross * (1 - P.itc_rate);
+    const om = gross * P.om_pct;
+    let cumulative = 0, payback = null;
+    for (let t = 1; t <= P.years; t++) {
+        const prod = kw * acPerKw * Math.pow(1 - P.degradation, t - 1);
+        const r = (rate / 100) * Math.pow(1 + P.escalation, t - 1);
+        const save = prod * r - om;
+        cumulative += save;
+        if (payback === null && cumulative >= netCost && save > 0) {
+            payback = (t - 1) + (netCost - (cumulative - save)) / save;
+        }
+    }
+    const year1 = kw * acPerKw * (rate / 100) - om;
+    document.getElementById('res-cost').innerText = '$' + netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
+    document.getElementById('res-savings').innerText = '$' + year1.toLocaleString(undefined, {maximumFractionDigits: 0});
+    document.getElementById('res-payback').innerText = payback ? payback.toFixed(1) + ' Years' : '> 25 years';
+    document.getElementById('calc-result').classList.remove('hidden');
+}
+</script>
 
 <script type="application/ld+json">
 {
