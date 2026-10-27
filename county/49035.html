@@ -69,12 +69,15 @@
     </div>
 </div>
 
-<!-- 🚨 특별 기능: What-If 시뮬레이터 & 게이지 차트 -->
+<!-- What-If 시뮬레이터 & 게이지 차트 -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
     <!-- 게이지 차트 (본전 회수 기간) -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 flex flex-col items-center justify-center">
         <h2 class="text-lg font-bold text-brand mb-2">Estimated Payback Period</h2>
-        <p class="text-xs text-gray-500 mb-4">Based on 6kW system & 30% ITC</p>
+        <p class="text-xs text-gray-500 mb-4">
+            Based on 6kW system &amp; 30% ITC,
+            incl. year-13 inverter replacement
+        </p>
         <div class="relative w-full h-40">
             <canvas id="gaugeChart"></canvas>
         </div>
@@ -88,7 +91,7 @@
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-lg font-bold text-brand mb-2">What-If Simulator</h2>
         <p class="text-sm text-gray-600 mb-4">Electricity rates usually rise over time. Adjust the expected <strong>annual rate increase</strong> to see how it accelerates your ROI.</p>
-        
+
         <div class="mb-4">
             <label class="flex justify-between text-sm font-medium text-gray-700 mb-1">
                 <span>Rate Escalation</span>
@@ -99,7 +102,7 @@
                 <span>1%</span><span>4%</span><span>7%</span>
             </div>
         </div>
-        
+
         <div class="bg-gray-50 p-3 rounded text-sm text-gray-700">
             <p class="mb-1"><strong>Net Initial Cost:</strong> $<span id="netCostDisplay">0</span></p>
             <p><strong>25-Year Total Savings:</strong> $<span id="savingsDisplay" class="text-green-600 font-bold">0</span></p>
@@ -170,7 +173,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const RATE_CENTS = 13.02;
     const netCost    = baseData.kw * 1000 * PARAMS.cost_per_watt * (1 - PARAMS.itc_rate);
     const om         = baseData.kw * 1000 * PARAMS.cost_per_watt * PARAMS.om_pct;
-    const annualProd = baseData.annual_production;   // ✅ 정확한 발전량
+    const annualProd = baseData.annual_production;
+
+    // 🚨 신규: 인버터 교체 파라미터
+    const INV_YEAR = Number(PARAMS.inverter_replace_year) || null;
+    const INV_COST = Number(PARAMS.inverter_cost_usd) || 0;
 
     let gaugeChart;
 
@@ -179,7 +186,8 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let t = 1; t <= PARAMS.years; t++) {
             const prod = annualProd * Math.pow(1 - PARAMS.degradation, t - 1);
             const rate = (RATE_CENTS / 100) * Math.pow(1 + escRate, t - 1);
-            const save = prod * rate - om;
+            const inv = (INV_YEAR && t === INV_YEAR) ? INV_COST : 0;   // 🚨 신규
+            const save = prod * rate - om - inv;                        // 🚨 인버터 차감
             cumulative += save;
             if (payback === null && cumulative >= netCost && save > 0) {
                 const prev = cumulative - save;
