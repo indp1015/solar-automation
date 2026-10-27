@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar Panel ROI in Louisiana (2025)</title>
+    <title>Solar Panel ROI in Louisiana (2026)</title>
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 🚨 Chart.js 추가 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js 버전 고정 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
                     colors: {
                         brand: '#1e3a8a',
                         accent: '#f97316'
@@ -20,29 +28,48 @@
             }
         }
     </script>
-        <!-- SEO & Social Media Meta Tags -->
+    <!-- SEO & Social -->
     <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
     <meta property="og:title" content="U.S. Solar ROI Data Hub">
     <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://solar.dataindp.com">
-    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
     <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
-    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="canonical" href="https://solar.dataindp.com/state_LA.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
-    
-    <!-- 상단 네비게이션 바 -->
-    <nav class="bg-white shadow-sm border-b border-gray-200">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center space-x-8">
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
-                    <div class="hidden md:flex space-x-4">
+                    <div class="hidden md:flex space-x-2">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
                         <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
                 </div>
@@ -50,30 +77,27 @@
         </div>
     </nav>
 
-    <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
 
 
-<!-- Breadcrumb -->
 <nav class="text-sm text-gray-500 mb-4">
     <a href="/" class="hover:text-brand">Home</a>
     <span class="mx-2">/</span>
     <a href="/states.html" class="hover:text-brand">States</a>
     <span class="mx-2">/</span>
-    <a href="/counties.html" class="hover:text-brand">Counties</a>
-    <span class="mx-2">/</span>
     <span class="text-gray-700">Louisiana</span>
 </nav>
 
 <h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Louisiana</h1>
-<p class="text-gray-700 mb-6">
+<p class="text-gray-700 mb-2">
     Average residential electricity rate:
-    <strong class="text-brand">12.52 ¢/kWh</strong> (EIA 2025).
-    Total counties: <strong>64</strong>.
+    <strong class="text-brand">12.52 ¢/kWh</strong>
+    (EIA 2025). Total counties: <strong>64</strong>.
 </p>
+<p class="text-xs text-gray-400 mb-6">Source: EIA Form 861 (2025), PVGIS v5.2 (NREL/NSRDB), DSIRE. Last updated: October 2026.</p>
 
-<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
+<!-- Fastest counties 차트 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
     <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Louisiana (6kW System)</h2>
     <p class="text-sm text-gray-600 mb-4">Top 15 by payback period. Full county list below.</p>
@@ -82,7 +106,7 @@
     </div>
 </div>
 
-<!-- 카운티 상세 표 (상위 15개) -->
+<!-- 상위 15개 표 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
     <h2 class="text-xl font-bold text-brand mb-4">Top 15 Counties by Payback</h2>
     <div class="overflow-x-auto">
@@ -98,138 +122,108 @@
             <tbody class="text-sm">
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22095.html" class="text-brand hover:underline">St. John the Baptist Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8301</td>
-                    <td class="p-3 border-b">11.4</td>
-                    <td class="p-3 border-b">141.5%</td>
+                    <td class="p-3 border-b"><a href="/county/22095.html" class="text-brand hover:underline">St. John the Baptist Parish</a></td>
+                    <td class="p-3 border-b font-mono">8301</td>
+                    <td class="p-3 border-b font-mono">11.4</td>
+                    <td class="p-3 border-b font-mono">141.5%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22075.html" class="text-brand hover:underline">Plaquemines Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8276</td>
-                    <td class="p-3 border-b">11.5</td>
-                    <td class="p-3 border-b">140.6%</td>
+                    <td class="p-3 border-b"><a href="/county/22075.html" class="text-brand hover:underline">Plaquemines Parish</a></td>
+                    <td class="p-3 border-b font-mono">8276</td>
+                    <td class="p-3 border-b font-mono">11.5</td>
+                    <td class="p-3 border-b font-mono">140.6%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22045.html" class="text-brand hover:underline">Iberia Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8146</td>
-                    <td class="p-3 border-b">11.7</td>
-                    <td class="p-3 border-b">136.0%</td>
+                    <td class="p-3 border-b"><a href="/county/22045.html" class="text-brand hover:underline">Iberia Parish</a></td>
+                    <td class="p-3 border-b font-mono">8146</td>
+                    <td class="p-3 border-b font-mono">11.7</td>
+                    <td class="p-3 border-b font-mono">136.0%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22023.html" class="text-brand hover:underline">Cameron Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8146</td>
-                    <td class="p-3 border-b">11.7</td>
-                    <td class="p-3 border-b">136.0%</td>
+                    <td class="p-3 border-b"><a href="/county/22023.html" class="text-brand hover:underline">Cameron Parish</a></td>
+                    <td class="p-3 border-b font-mono">8146</td>
+                    <td class="p-3 border-b font-mono">11.7</td>
+                    <td class="p-3 border-b font-mono">136.0%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22101.html" class="text-brand hover:underline">St. Mary Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8123</td>
-                    <td class="p-3 border-b">11.7</td>
-                    <td class="p-3 border-b">135.2%</td>
+                    <td class="p-3 border-b"><a href="/county/22101.html" class="text-brand hover:underline">St. Mary Parish</a></td>
+                    <td class="p-3 border-b font-mono">8123</td>
+                    <td class="p-3 border-b font-mono">11.7</td>
+                    <td class="p-3 border-b font-mono">135.2%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22071.html" class="text-brand hover:underline">Orleans Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8100</td>
-                    <td class="p-3 border-b">11.7</td>
-                    <td class="p-3 border-b">134.4%</td>
+                    <td class="p-3 border-b"><a href="/county/22071.html" class="text-brand hover:underline">Orleans Parish</a></td>
+                    <td class="p-3 border-b font-mono">8100</td>
+                    <td class="p-3 border-b font-mono">11.7</td>
+                    <td class="p-3 border-b font-mono">134.4%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22055.html" class="text-brand hover:underline">Lafayette Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8087</td>
-                    <td class="p-3 border-b">11.7</td>
-                    <td class="p-3 border-b">133.9%</td>
+                    <td class="p-3 border-b"><a href="/county/22055.html" class="text-brand hover:underline">Lafayette Parish</a></td>
+                    <td class="p-3 border-b font-mono">8087</td>
+                    <td class="p-3 border-b font-mono">11.7</td>
+                    <td class="p-3 border-b font-mono">133.9%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22007.html" class="text-brand hover:underline">Assumption Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8080</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">133.7%</td>
+                    <td class="p-3 border-b"><a href="/county/22007.html" class="text-brand hover:underline">Assumption Parish</a></td>
+                    <td class="p-3 border-b font-mono">8080</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">133.7%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22103.html" class="text-brand hover:underline">St. Tammany Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8082</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">133.8%</td>
+                    <td class="p-3 border-b"><a href="/county/22103.html" class="text-brand hover:underline">St. Tammany Parish</a></td>
+                    <td class="p-3 border-b font-mono">8082</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">133.8%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22087.html" class="text-brand hover:underline">St. Bernard Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8075</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">133.5%</td>
+                    <td class="p-3 border-b"><a href="/county/22087.html" class="text-brand hover:underline">St. Bernard Parish</a></td>
+                    <td class="p-3 border-b font-mono">8075</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">133.5%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22113.html" class="text-brand hover:underline">Vermilion Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8063</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">133.1%</td>
+                    <td class="p-3 border-b"><a href="/county/22113.html" class="text-brand hover:underline">Vermilion Parish</a></td>
+                    <td class="p-3 border-b font-mono">8063</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">133.1%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22097.html" class="text-brand hover:underline">St. Landry Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8064</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">133.1%</td>
+                    <td class="p-3 border-b"><a href="/county/22097.html" class="text-brand hover:underline">St. Landry Parish</a></td>
+                    <td class="p-3 border-b font-mono">8064</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">133.1%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22093.html" class="text-brand hover:underline">St. James Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8048</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">132.6%</td>
+                    <td class="p-3 border-b"><a href="/county/22093.html" class="text-brand hover:underline">St. James Parish</a></td>
+                    <td class="p-3 border-b font-mono">8048</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">132.6%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22001.html" class="text-brand hover:underline">Acadia Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8046</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">132.5%</td>
+                    <td class="p-3 border-b"><a href="/county/22001.html" class="text-brand hover:underline">Acadia Parish</a></td>
+                    <td class="p-3 border-b font-mono">8046</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">132.5%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/22099.html" class="text-brand hover:underline">St. Martin Parish</a>
-                    </td>
-                    <td class="p-3 border-b">8042</td>
-                    <td class="p-3 border-b">11.8</td>
-                    <td class="p-3 border-b">132.4%</td>
+                    <td class="p-3 border-b"><a href="/county/22099.html" class="text-brand hover:underline">St. Martin Parish</a></td>
+                    <td class="p-3 border-b font-mono">8042</td>
+                    <td class="p-3 border-b font-mono">11.8</td>
+                    <td class="p-3 border-b font-mono">132.4%</td>
                 </tr>
                 
             </tbody>
@@ -237,399 +231,404 @@
     </div>
 </div>
 
-<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
+<!-- 🚨 신규: 주별 심층 가이드 -->
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-3">About Louisiana Solar</h2>
+    <p class="text-gray-700 mb-3">At an average residential rate of 12.52¢/kWh, Louisiana homeowners typically see solar payback periods ranging from 11.4 to 13.9 years for a 6kW system after the 30% federal ITC.</p>
+    <p class="text-gray-700 mb-3">Net metering policies, utility buyback programs, and local installation costs vary widely within the state. Check your utility's current rules before signing a solar contract — small policy differences can extend payback by 2–4 years.</p>
+    <p class="text-xs text-gray-400 mt-3">Sources: EIA Form 861 (2025), PVGIS v5.2 (NREL/NSRDB).</p>
+</div>
+
+
+<!-- 전체 카운티 인덱스 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-1">
-        All 64 Counties in Louisiana
-    </h2>
-    <p class="text-sm text-gray-600 mb-4">
-        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
-        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
-    </p>
+    <h2 class="text-xl font-bold text-brand mb-1">All 64 Counties in Louisiana</h2>
+    <p class="text-sm text-gray-600 mb-4">Click any county to see its detailed ROI analysis. <span class="text-gray-400">(Sorted by payback — fastest first)</span></p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         
         <a href="/county/22095.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. John the Baptist Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.4y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.4y</span>
         </a>
         
         <a href="/county/22075.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Plaquemines Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.5y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.5y</span>
         </a>
         
         <a href="/county/22045.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Iberia Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.7y</span>
         </a>
         
         <a href="/county/22023.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Cameron Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.7y</span>
         </a>
         
         <a href="/county/22101.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Mary Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.7y</span>
         </a>
         
         <a href="/county/22071.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Orleans Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.7y</span>
         </a>
         
         <a href="/county/22055.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Lafayette Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.7y</span>
         </a>
         
         <a href="/county/22007.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Assumption Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22103.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Tammany Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22087.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Bernard Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22113.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Vermilion Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22097.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Landry Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22093.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. James Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22001.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Acadia Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22099.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Martin Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22053.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jefferson Davis Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22033.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">East Baton Rouge Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22039.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Evangeline Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22077.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Pointe Coupee Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22009.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Avoyelles Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22121.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">West Baton Rouge Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.8y</span>
         </a>
         
         <a href="/county/22047.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Iberville Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22005.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Ascension Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22107.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Tensas Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22051.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jefferson Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22083.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Richland Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22123.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">West Carroll Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22029.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Concordia Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22057.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Lafourche Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22041.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Franklin Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22065.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Madison Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22025.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Catahoula Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22125.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">West Feliciana Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22035.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">East Carroll Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22089.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Charles Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.9y</span>
         </a>
         
         <a href="/county/22067.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Morehouse Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">12.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">12.0y</span>
         </a>
         
         <a href="/county/22105.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Tangipahoa Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">12.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">12.0y</span>
         </a>
         
         <a href="/county/22017.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Caddo Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">12.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">12.0y</span>
         </a>
         
         <a href="/county/22109.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Terrebonne Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">12.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">12.0y</span>
         </a>
         
         <a href="/county/22037.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">East Feliciana Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">12.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">12.0y</span>
         </a>
         
         <a href="/county/22063.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Livingston Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.7y</span>
         </a>
         
         <a href="/county/22091.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Helena Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.7y</span>
         </a>
         
         <a href="/county/22079.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Rapides Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.7y</span>
         </a>
         
         <a href="/county/22015.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Bossier Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.7y</span>
         </a>
         
         <a href="/county/22073.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Ouachita Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.7y</span>
         </a>
         
         <a href="/county/22085.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Sabine Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.7y</span>
         </a>
         
         <a href="/county/22059.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">LaSalle Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.7y</span>
         </a>
         
         <a href="/county/22117.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Washington Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22027.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Claiborne Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22003.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Allen Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22031.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">De Soto Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22111.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Union Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22021.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Caldwell Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22069.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Natchitoches Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22127.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Winn Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22043.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Grant Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22081.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Red River Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22019.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Calcasieu Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22013.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Bienville Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22119.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Webster Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22061.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Lincoln Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22049.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jackson Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.8y</span>
         </a>
         
         <a href="/county/22011.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Beauregard Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.9y</span>
         </a>
         
         <a href="/county/22115.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Vernon Parish</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">13.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">13.9y</span>
         </a>
         
     </div>
@@ -666,16 +665,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </main>
 
-    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
     <footer class="bg-white border-t border-gray-200 mt-12 py-8">
         <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
             <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
             <div class="mt-2 space-x-4">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
                 <a href="/about.html" class="hover:text-brand">About & Methodology</a>
                 <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
             </div>
-            
-            <!-- 면책 조항 본문 -->
             <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
                 <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
                 <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>

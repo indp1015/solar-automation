@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar ROI & Electricity Cost in Miami County, IN</title>
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 🚨 Chart.js 추가 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js 버전 고정 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
                     colors: {
                         brand: '#1e3a8a',
                         accent: '#f97316'
@@ -20,29 +28,48 @@
             }
         }
     </script>
-        <!-- SEO & Social Media Meta Tags -->
+    <!-- SEO & Social -->
     <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
     <meta property="og:title" content="U.S. Solar ROI Data Hub">
     <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://solar.dataindp.com">
-    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
     <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
-    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="canonical" href="https://solar.dataindp.com/county/18103.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
-    
-    <!-- 상단 네비게이션 바 -->
-    <nav class="bg-white shadow-sm border-b border-gray-200">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center space-x-8">
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
-                    <div class="hidden md:flex space-x-4">
+                    <div class="hidden md:flex space-x-2">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
                         <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
                 </div>
@@ -50,71 +77,107 @@
         </div>
     </nav>
 
-    <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
 
-<!-- 상단 헤더 -->
 <div class="mb-8">
+    <nav class="text-sm text-gray-500 mb-3">
+        <a href="/" class="hover:text-brand">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/state_IN.html" class="hover:text-brand">IN</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-700">Miami County</span>
+    </nav>
     <h1 class="text-3xl font-bold text-brand mb-2">Solar Savings in Miami County, IN</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
         <div class="bg-blue-50 p-4 rounded border border-blue-100">
             <p class="text-sm text-blue-800">Electricity Rate (State Avg)</p>
-            <p class="text-2xl font-bold text-brand">15.96 ¢/kWh</p>
+            <p class="text-2xl font-bold text-brand font-mono">15.96 ¢/kWh</p>
         </div>
         <div class="bg-orange-50 p-4 rounded border border-orange-100">
             <p class="text-sm text-orange-800">Solar Radiation (10-Yr Avg)</p>
-            <p class="text-2xl font-bold text-accent">1450 kWh/m²/yr</p>
+            <p class="text-2xl font-bold text-accent font-mono">1450 kWh/m²/yr</p>
         </div>
     </div>
 </div>
 
-<!-- What-If 시뮬레이터 & 게이지 차트 -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <!-- 게이지 차트 (본전 회수 기간) -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 flex flex-col items-center justify-center">
         <h2 class="text-lg font-bold text-brand mb-2">Estimated Payback Period</h2>
         <p class="text-xs text-gray-500 mb-4">
-            Based on 6kW system &amp; 30% ITC,
-            incl. year-13 inverter replacement
+            Based on 6kW system &amp; 30% ITC, incl. year-13 inverter replacement
         </p>
         <div class="relative w-full h-40">
             <canvas id="gaugeChart"></canvas>
         </div>
         <div class="mt-4 text-center">
-            <span id="paybackDisplay" class="text-4xl font-extrabold text-brand">0.0</span>
+            <span id="paybackDisplay" class="text-4xl font-extrabold text-brand font-mono">0.0</span>
             <span class="text-xl text-gray-500">Years</span>
         </div>
     </div>
 
-    <!-- What-If 슬라이더 -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-lg font-bold text-brand mb-2">What-If Simulator</h2>
         <p class="text-sm text-gray-600 mb-4">Electricity rates usually rise over time. Adjust the expected <strong>annual rate increase</strong> to see how it accelerates your ROI.</p>
-
         <div class="mb-4">
             <label class="flex justify-between text-sm font-medium text-gray-700 mb-1">
                 <span>Rate Escalation</span>
-                <span id="escalationVal" class="text-accent font-bold">2.5%</span>
+                <span id="escalationVal" class="text-accent font-bold font-mono">2.5%</span>
             </label>
             <input type="range" id="escalationSlider" min="1" max="7" step="0.5" value="2.5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-            <div class="flex justify-between text-xs text-gray-400 mt-1">
-                <span>1%</span><span>4%</span><span>7%</span>
-            </div>
+            <div class="flex justify-between text-xs text-gray-400 mt-1"><span>1%</span><span>4%</span><span>7%</span></div>
         </div>
-
         <div class="bg-gray-50 p-3 rounded text-sm text-gray-700">
-            <p class="mb-1"><strong>Net Initial Cost:</strong> $<span id="netCostDisplay">0</span></p>
-            <p><strong>25-Year Total Savings:</strong> $<span id="savingsDisplay" class="text-green-600 font-bold">0</span></p>
+            <p class="mb-1"><strong>Net Initial Cost:</strong> $<span id="netCostDisplay" class="font-mono">0</span></p>
+            <p><strong>25-Year Total Savings:</strong> $<span id="savingsDisplay" class="text-green-600 font-bold font-mono">0</span></p>
         </div>
     </div>
 </div>
 
-<!-- 시스템 크기별 상세 테이블 -->
-<h2 class="text-xl font-bold text-brand mb-4">
-  ROI by System Size (at 2.5% Escalation)
-</h2>
-<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 overflow-x-auto">
+<!-- 🚨 신규: 지역 정보 + 계절별 절감 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- 지역 정보 -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <h2 class="text-lg font-bold text-brand mb-4">Local Utility & Context</h2>
+        <div class="space-y-3 text-sm">
+            <div>
+                <p class="text-gray-500 text-xs">Typical Utility Company</p>
+                <p class="font-bold text-gray-900">Duke Energy Indiana, AES Indiana</p>
+            </div>
+            <div>
+                <p class="text-gray-500 text-xs">Net Metering Policy</p>
+                <p class="font-bold text-gray-900">Varies by state</p>
+            </div>
+            <div>
+                <p class="text-gray-500 text-xs">Peak Sun Hours (Daily Avg)</p>
+                <p class="font-bold text-gray-900 font-mono">4.0 hrs/day</p>
+            </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-4">Sources: EIA Form 861 (2025), PVGIS v5.2, DSIRE. Utility assignment is typical for this state — confirm with your specific provider.</p>
+    </div>
+
+    <!-- 계절별 절감액 -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <h2 class="text-lg font-bold text-brand mb-4">Seasonal Savings (6kW, Year 1)</h2>
+        <p class="text-sm text-gray-600 mb-4">Solar production peaks in summer. Estimates below assume typical U.S. seasonal distribution.</p>
+        <div class="grid grid-cols-2 gap-3 text-sm">
+            <div class="bg-orange-50 p-3 rounded text-center">
+                <p class="text-xs text-orange-800">Summer (Jun–Aug)</p>
+                <p class="text-lg font-bold text-accent font-mono" id="summerSave">$0</p>
+                <p class="text-xs text-gray-500">/month avg</p>
+            </div>
+            <div class="bg-blue-50 p-3 rounded text-center">
+                <p class="text-xs text-blue-800">Winter (Dec–Feb)</p>
+                <p class="text-lg font-bold text-brand font-mono" id="winterSave">$0</p>
+                <p class="text-xs text-gray-500">/month avg</p>
+            </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-4">Seasonal distribution varies by latitude and climate. Southern states see larger summer/winter gaps.</p>
+    </div>
+</div>
+
+<h2 class="text-xl font-bold text-brand mb-4">ROI by System Size (at 2.5% Escalation)</h2>
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-2 overflow-x-auto">
     <table class="w-full text-left border-collapse">
         <thead>
             <tr class="bg-blue-50 text-brand text-sm">
@@ -129,39 +192,40 @@
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">4.0 kW</td>
-                <td class="p-3 border-b">$615</td>
-                <td class="p-3 border-b font-medium">10.9 years</td>
-                <td class="p-3 border-b text-green-600">146.3%</td>
-                <td class="p-3 border-b">7.7%</td>
+                <td class="p-3 border-b font-mono">$615</td>
+                <td class="p-3 border-b font-mono">10.9 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">146.3%</td>
+                <td class="p-3 border-b font-mono">7.7%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">6.0 kW</td>
-                <td class="p-3 border-b">$922</td>
-                <td class="p-3 border-b font-medium">10.9 years</td>
-                <td class="p-3 border-b text-green-600">154.2%</td>
-                <td class="p-3 border-b">8.0%</td>
+                <td class="p-3 border-b font-mono">$922</td>
+                <td class="p-3 border-b font-mono">10.9 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">154.2%</td>
+                <td class="p-3 border-b font-mono">8.0%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">8.0 kW</td>
-                <td class="p-3 border-b">$1230</td>
-                <td class="p-3 border-b font-medium">10.9 years</td>
-                <td class="p-3 border-b text-green-600">158.2%</td>
-                <td class="p-3 border-b">8.2%</td>
+                <td class="p-3 border-b font-mono">$1230</td>
+                <td class="p-3 border-b font-mono">10.9 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">158.2%</td>
+                <td class="p-3 border-b font-mono">8.2%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">10.0 kW</td>
-                <td class="p-3 border-b">$1537</td>
-                <td class="p-3 border-b font-medium">10.9 years</td>
-                <td class="p-3 border-b text-green-600">160.5%</td>
-                <td class="p-3 border-b">8.2%</td>
+                <td class="p-3 border-b font-mono">$1537</td>
+                <td class="p-3 border-b font-mono">10.9 years</td>
+                <td class="p-3 border-b text-green-600 font-mono">160.5%</td>
+                <td class="p-3 border-b font-mono">8.2%</td>
             </tr>
             
         </tbody>
     </table>
 </div>
+<p class="text-xs text-gray-400 mb-8">Assumptions: $2.70/W gross cost, 30% ITC, 1.0% O&M, year-13 inverter replacement. Source: NREL Q1 2025 benchmark, PVGIS v5.2, EIA 2025.</p>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -174,10 +238,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const netCost    = baseData.kw * 1000 * PARAMS.cost_per_watt * (1 - PARAMS.itc_rate);
     const om         = baseData.kw * 1000 * PARAMS.cost_per_watt * PARAMS.om_pct;
     const annualProd = baseData.annual_production;
+    const INV_YEAR   = Number(PARAMS.inverter_replace_year) || null;
+    const INV_COST   = Number(PARAMS.inverter_cost_usd) || 0;
 
-    // 🚨 신규: 인버터 교체 파라미터
-    const INV_YEAR = Number(PARAMS.inverter_replace_year) || null;
-    const INV_COST = Number(PARAMS.inverter_cost_usd) || 0;
+    // 여름/겨울 절감액 (Year 1, escalation 반영 전)
+    const year1Save = baseData.savings;
+    document.getElementById('summerSave').textContent = '$' + Math.round(year1Save * 0.40 / 3).toLocaleString();
+    document.getElementById('winterSave').textContent = '$' + Math.round(year1Save * 0.15 / 3).toLocaleString();
 
     let gaugeChart;
 
@@ -186,8 +253,8 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let t = 1; t <= PARAMS.years; t++) {
             const prod = annualProd * Math.pow(1 - PARAMS.degradation, t - 1);
             const rate = (RATE_CENTS / 100) * Math.pow(1 + escRate, t - 1);
-            const inv = (INV_YEAR && t === INV_YEAR) ? INV_COST : 0;   // 🚨 신규
-            const save = prod * rate - om - inv;                        // 🚨 인버터 차감
+            const inv = (INV_YEAR && t === INV_YEAR) ? INV_COST : 0;
+            const save = prod * rate - om - inv;
             cumulative += save;
             if (payback === null && cumulative >= netCost && save > 0) {
                 const prev = cumulative - save;
@@ -217,10 +284,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function updateUI(escPct) {
         const res = calculateRoi(escPct / 100);
         updateGauge(res.payback);
-        document.getElementById('netCostDisplay').innerText =
-            netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
-        document.getElementById('savingsDisplay').innerText =
-            res.totalSavings.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('netCostDisplay').innerText = netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('savingsDisplay').innerText = res.totalSavings.toLocaleString(undefined, {maximumFractionDigits: 0});
     }
 
     const slider = document.getElementById('escalationSlider');
@@ -230,23 +295,20 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('escalationVal').innerText = this.value + '%';
         updateUI(parseFloat(this.value));
     });
-
     updateUI(PARAMS.escalation * 100);
 });
 </script>
 
     </main>
 
-    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
     <footer class="bg-white border-t border-gray-200 mt-12 py-8">
         <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
             <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
             <div class="mt-2 space-x-4">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
                 <a href="/about.html" class="hover:text-brand">About & Methodology</a>
                 <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
             </div>
-            
-            <!-- 면책 조항 본문 -->
             <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
                 <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
                 <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>

@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar Panel ROI in Indiana (2025)</title>
+    <title>Solar Panel ROI in Indiana (2026)</title>
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 🚨 Chart.js 추가 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js 버전 고정 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
                     colors: {
                         brand: '#1e3a8a',
                         accent: '#f97316'
@@ -20,29 +28,48 @@
             }
         }
     </script>
-        <!-- SEO & Social Media Meta Tags -->
+    <!-- SEO & Social -->
     <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
     <meta property="og:title" content="U.S. Solar ROI Data Hub">
     <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://solar.dataindp.com">
-    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
     <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
-    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="canonical" href="https://solar.dataindp.com/state_IN.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
-    
-    <!-- 상단 네비게이션 바 -->
-    <nav class="bg-white shadow-sm border-b border-gray-200">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center space-x-8">
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
-                    <div class="hidden md:flex space-x-4">
+                    <div class="hidden md:flex space-x-2">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
                         <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
                 </div>
@@ -50,30 +77,27 @@
         </div>
     </nav>
 
-    <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
 
 
-<!-- Breadcrumb -->
 <nav class="text-sm text-gray-500 mb-4">
     <a href="/" class="hover:text-brand">Home</a>
     <span class="mx-2">/</span>
     <a href="/states.html" class="hover:text-brand">States</a>
     <span class="mx-2">/</span>
-    <a href="/counties.html" class="hover:text-brand">Counties</a>
-    <span class="mx-2">/</span>
     <span class="text-gray-700">Indiana</span>
 </nav>
 
 <h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Indiana</h1>
-<p class="text-gray-700 mb-6">
+<p class="text-gray-700 mb-2">
     Average residential electricity rate:
-    <strong class="text-brand">15.96 ¢/kWh</strong> (EIA 2025).
-    Total counties: <strong>92</strong>.
+    <strong class="text-brand">15.96 ¢/kWh</strong>
+    (EIA 2025). Total counties: <strong>92</strong>.
 </p>
+<p class="text-xs text-gray-400 mb-6">Source: EIA Form 861 (2025), PVGIS v5.2 (NREL/NSRDB), DSIRE. Last updated: October 2026.</p>
 
-<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
+<!-- Fastest counties 차트 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
     <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Indiana (6kW System)</h2>
     <p class="text-sm text-gray-600 mb-4">Top 15 by payback period. Full county list below.</p>
@@ -82,7 +106,7 @@
     </div>
 </div>
 
-<!-- 카운티 상세 표 (상위 15개) -->
+<!-- 상위 15개 표 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
     <h2 class="text-xl font-bold text-brand mb-4">Top 15 Counties by Payback</h2>
     <div class="overflow-x-auto">
@@ -98,138 +122,108 @@
             <tbody class="text-sm">
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18163.html" class="text-brand hover:underline">Vanderburgh County</a>
-                    </td>
-                    <td class="p-3 border-b">7281</td>
-                    <td class="p-3 border-b">10.2</td>
-                    <td class="p-3 border-b">176.1%</td>
+                    <td class="p-3 border-b"><a href="/county/18163.html" class="text-brand hover:underline">Vanderburgh County</a></td>
+                    <td class="p-3 border-b font-mono">7281</td>
+                    <td class="p-3 border-b font-mono">10.2</td>
+                    <td class="p-3 border-b font-mono">176.1%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18173.html" class="text-brand hover:underline">Warrick County</a>
-                    </td>
-                    <td class="p-3 border-b">7231</td>
-                    <td class="p-3 border-b">10.3</td>
-                    <td class="p-3 border-b">173.8%</td>
+                    <td class="p-3 border-b"><a href="/county/18173.html" class="text-brand hover:underline">Warrick County</a></td>
+                    <td class="p-3 border-b font-mono">7231</td>
+                    <td class="p-3 border-b font-mono">10.3</td>
+                    <td class="p-3 border-b font-mono">173.8%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18129.html" class="text-brand hover:underline">Posey County</a>
-                    </td>
-                    <td class="p-3 border-b">7218</td>
-                    <td class="p-3 border-b">10.3</td>
-                    <td class="p-3 border-b">173.3%</td>
+                    <td class="p-3 border-b"><a href="/county/18129.html" class="text-brand hover:underline">Posey County</a></td>
+                    <td class="p-3 border-b font-mono">7218</td>
+                    <td class="p-3 border-b font-mono">10.3</td>
+                    <td class="p-3 border-b font-mono">173.3%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18147.html" class="text-brand hover:underline">Spencer County</a>
-                    </td>
-                    <td class="p-3 border-b">7136</td>
-                    <td class="p-3 border-b">10.4</td>
-                    <td class="p-3 border-b">169.6%</td>
+                    <td class="p-3 border-b"><a href="/county/18147.html" class="text-brand hover:underline">Spencer County</a></td>
+                    <td class="p-3 border-b font-mono">7136</td>
+                    <td class="p-3 border-b font-mono">10.4</td>
+                    <td class="p-3 border-b font-mono">169.6%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18051.html" class="text-brand hover:underline">Gibson County</a>
-                    </td>
-                    <td class="p-3 border-b">7122</td>
-                    <td class="p-3 border-b">10.4</td>
-                    <td class="p-3 border-b">168.9%</td>
+                    <td class="p-3 border-b"><a href="/county/18051.html" class="text-brand hover:underline">Gibson County</a></td>
+                    <td class="p-3 border-b font-mono">7122</td>
+                    <td class="p-3 border-b font-mono">10.4</td>
+                    <td class="p-3 border-b font-mono">168.9%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18083.html" class="text-brand hover:underline">Knox County</a>
-                    </td>
-                    <td class="p-3 border-b">7092</td>
-                    <td class="p-3 border-b">10.5</td>
-                    <td class="p-3 border-b">167.6%</td>
+                    <td class="p-3 border-b"><a href="/county/18083.html" class="text-brand hover:underline">Knox County</a></td>
+                    <td class="p-3 border-b font-mono">7092</td>
+                    <td class="p-3 border-b font-mono">10.5</td>
+                    <td class="p-3 border-b font-mono">167.6%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18043.html" class="text-brand hover:underline">Floyd County</a>
-                    </td>
-                    <td class="p-3 border-b">7078</td>
-                    <td class="p-3 border-b">10.5</td>
-                    <td class="p-3 border-b">167.0%</td>
+                    <td class="p-3 border-b"><a href="/county/18043.html" class="text-brand hover:underline">Floyd County</a></td>
+                    <td class="p-3 border-b font-mono">7078</td>
+                    <td class="p-3 border-b font-mono">10.5</td>
+                    <td class="p-3 border-b font-mono">167.0%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18123.html" class="text-brand hover:underline">Perry County</a>
-                    </td>
-                    <td class="p-3 border-b">7075</td>
-                    <td class="p-3 border-b">10.5</td>
-                    <td class="p-3 border-b">166.8%</td>
+                    <td class="p-3 border-b"><a href="/county/18123.html" class="text-brand hover:underline">Perry County</a></td>
+                    <td class="p-3 border-b font-mono">7075</td>
+                    <td class="p-3 border-b font-mono">10.5</td>
+                    <td class="p-3 border-b font-mono">166.8%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18061.html" class="text-brand hover:underline">Harrison County</a>
-                    </td>
-                    <td class="p-3 border-b">7036</td>
-                    <td class="p-3 border-b">10.6</td>
-                    <td class="p-3 border-b">165.1%</td>
+                    <td class="p-3 border-b"><a href="/county/18061.html" class="text-brand hover:underline">Harrison County</a></td>
+                    <td class="p-3 border-b font-mono">7036</td>
+                    <td class="p-3 border-b font-mono">10.6</td>
+                    <td class="p-3 border-b font-mono">165.1%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18037.html" class="text-brand hover:underline">Dubois County</a>
-                    </td>
-                    <td class="p-3 border-b">7025</td>
-                    <td class="p-3 border-b">10.6</td>
-                    <td class="p-3 border-b">164.6%</td>
+                    <td class="p-3 border-b"><a href="/county/18037.html" class="text-brand hover:underline">Dubois County</a></td>
+                    <td class="p-3 border-b font-mono">7025</td>
+                    <td class="p-3 border-b font-mono">10.6</td>
+                    <td class="p-3 border-b font-mono">164.6%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18125.html" class="text-brand hover:underline">Pike County</a>
-                    </td>
-                    <td class="p-3 border-b">7021</td>
-                    <td class="p-3 border-b">10.6</td>
-                    <td class="p-3 border-b">164.4%</td>
+                    <td class="p-3 border-b"><a href="/county/18125.html" class="text-brand hover:underline">Pike County</a></td>
+                    <td class="p-3 border-b font-mono">7021</td>
+                    <td class="p-3 border-b font-mono">10.6</td>
+                    <td class="p-3 border-b font-mono">164.4%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18019.html" class="text-brand hover:underline">Clark County</a>
-                    </td>
-                    <td class="p-3 border-b">7005</td>
-                    <td class="p-3 border-b">10.6</td>
-                    <td class="p-3 border-b">163.7%</td>
+                    <td class="p-3 border-b"><a href="/county/18019.html" class="text-brand hover:underline">Clark County</a></td>
+                    <td class="p-3 border-b font-mono">7005</td>
+                    <td class="p-3 border-b font-mono">10.6</td>
+                    <td class="p-3 border-b font-mono">163.7%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18025.html" class="text-brand hover:underline">Crawford County</a>
-                    </td>
-                    <td class="p-3 border-b">6997</td>
-                    <td class="p-3 border-b">10.6</td>
-                    <td class="p-3 border-b">163.3%</td>
+                    <td class="p-3 border-b"><a href="/county/18025.html" class="text-brand hover:underline">Crawford County</a></td>
+                    <td class="p-3 border-b font-mono">6997</td>
+                    <td class="p-3 border-b font-mono">10.6</td>
+                    <td class="p-3 border-b font-mono">163.3%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18027.html" class="text-brand hover:underline">Daviess County</a>
-                    </td>
-                    <td class="p-3 border-b">6987</td>
-                    <td class="p-3 border-b">10.6</td>
-                    <td class="p-3 border-b">162.9%</td>
+                    <td class="p-3 border-b"><a href="/county/18027.html" class="text-brand hover:underline">Daviess County</a></td>
+                    <td class="p-3 border-b font-mono">6987</td>
+                    <td class="p-3 border-b font-mono">10.6</td>
+                    <td class="p-3 border-b font-mono">162.9%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/18175.html" class="text-brand hover:underline">Washington County</a>
-                    </td>
-                    <td class="p-3 border-b">6980</td>
-                    <td class="p-3 border-b">10.6</td>
-                    <td class="p-3 border-b">162.6%</td>
+                    <td class="p-3 border-b"><a href="/county/18175.html" class="text-brand hover:underline">Washington County</a></td>
+                    <td class="p-3 border-b font-mono">6980</td>
+                    <td class="p-3 border-b font-mono">10.6</td>
+                    <td class="p-3 border-b font-mono">162.6%</td>
                 </tr>
                 
             </tbody>
@@ -237,567 +231,572 @@
     </div>
 </div>
 
-<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
+<!-- 🚨 신규: 주별 심층 가이드 -->
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+    <h2 class="text-xl font-bold text-brand mb-3">About Indiana Solar</h2>
+    <p class="text-gray-700 mb-3">At an average residential rate of 15.96¢/kWh, Indiana homeowners typically see solar payback periods ranging from 10.2 to 11.2 years for a 6kW system after the 30% federal ITC.</p>
+    <p class="text-gray-700 mb-3">Net metering policies, utility buyback programs, and local installation costs vary widely within the state. Check your utility's current rules before signing a solar contract — small policy differences can extend payback by 2–4 years.</p>
+    <p class="text-xs text-gray-400 mt-3">Sources: EIA Form 861 (2025), PVGIS v5.2 (NREL/NSRDB).</p>
+</div>
+
+
+<!-- 전체 카운티 인덱스 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-1">
-        All 92 Counties in Indiana
-    </h2>
-    <p class="text-sm text-gray-600 mb-4">
-        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
-        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
-    </p>
+    <h2 class="text-xl font-bold text-brand mb-1">All 92 Counties in Indiana</h2>
+    <p class="text-sm text-gray-600 mb-4">Click any county to see its detailed ROI analysis. <span class="text-gray-400">(Sorted by payback — fastest first)</span></p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         
         <a href="/county/18163.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Vanderburgh County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.2y</span>
         </a>
         
         <a href="/county/18173.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Warrick County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.3y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.3y</span>
         </a>
         
         <a href="/county/18129.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Posey County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.3y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.3y</span>
         </a>
         
         <a href="/county/18147.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Spencer County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.4y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.4y</span>
         </a>
         
         <a href="/county/18051.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Gibson County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.4y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.4y</span>
         </a>
         
         <a href="/county/18083.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Knox County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.5y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.5y</span>
         </a>
         
         <a href="/county/18043.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Floyd County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.5y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.5y</span>
         </a>
         
         <a href="/county/18123.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Perry County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.5y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.5y</span>
         </a>
         
         <a href="/county/18061.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Harrison County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18037.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Dubois County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18125.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Pike County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18019.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Clark County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18025.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Crawford County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18027.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Daviess County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18175.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Washington County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18153.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Sullivan County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.6y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.6y</span>
         </a>
         
         <a href="/county/18005.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Bartholomew County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18167.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Vigo County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18157.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Tippecanoe County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18137.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Ripley County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18071.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jackson County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18117.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Orange County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18063.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Hendricks County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18143.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Scott County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18055.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Greene County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18057.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Hamilton County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18077.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jefferson County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18101.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Martin County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18145.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Shelby County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18093.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Lawrence County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18029.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Dearborn County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18107.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Montgomery County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18119.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Owen County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18081.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Johnson County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18109.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Morgan County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18013.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Brown County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18155.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Switzerland County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18079.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jennings County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18139.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Rush County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18115.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Ohio County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.7y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.7y</span>
         </a>
         
         <a href="/county/18011.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Boone County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18041.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Fayette County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18059.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Hancock County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18095.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Madison County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18023.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Clinton County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18133.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Putnam County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18031.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Decatur County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18161.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Union County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18035.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Delaware County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18105.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Monroe County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18047.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Franklin County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18171.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Warren County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18067.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Howard County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18045.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Fountain County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18165.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Vermillion County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18097.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Marion County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18121.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Parke County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18021.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Clay County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18177.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Wayne County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18007.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Benton County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18159.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Tipton County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18135.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Randolph County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18015.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Carroll County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.8y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.8y</span>
         </a>
         
         <a href="/county/18111.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Newton County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18181.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">White County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18065.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Henry County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18017.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Cass County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18073.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jasper County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18103.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Miami County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18075.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Jay County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18053.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Grant County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18131.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Pulaski County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18009.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Blackford County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">10.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">10.9y</span>
         </a>
         
         <a href="/county/18069.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Huntington County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.0y</span>
         </a>
         
         <a href="/county/18001.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Adams County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.0y</span>
         </a>
         
         <a href="/county/18049.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Fulton County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.0y</span>
         </a>
         
         <a href="/county/18089.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Lake County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.0y</span>
         </a>
         
         <a href="/county/18151.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Steuben County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.0y</span>
         </a>
         
         <a href="/county/18003.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Allen County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.0y</span>
         </a>
         
         <a href="/county/18179.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Wells County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.0y</span>
         </a>
         
         <a href="/county/18099.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Marshall County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.1y</span>
         </a>
         
         <a href="/county/18085.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Kosciusko County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.1y</span>
         </a>
         
         <a href="/county/18169.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Wabash County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.1y</span>
         </a>
         
         <a href="/county/18149.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Starke County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.1y</span>
         </a>
         
         <a href="/county/18183.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Whitley County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.1y</span>
         </a>
         
         <a href="/county/18033.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">DeKalb County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.1y</span>
         </a>
         
         <a href="/county/18141.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">St. Joseph County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.2y</span>
         </a>
         
         <a href="/county/18127.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Porter County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.2y</span>
         </a>
         
         <a href="/county/18113.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Noble County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.2y</span>
         </a>
         
         <a href="/county/18087.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">LaGrange County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.2y</span>
         </a>
         
         <a href="/county/18039.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Elkhart County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.2y</span>
         </a>
         
         <a href="/county/18091.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">LaPorte County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">11.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">11.2y</span>
         </a>
         
     </div>
@@ -834,16 +833,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </main>
 
-    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
     <footer class="bg-white border-t border-gray-200 mt-12 py-8">
         <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
             <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
             <div class="mt-2 space-x-4">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
                 <a href="/about.html" class="hover:text-brand">About & Methodology</a>
                 <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
             </div>
-            
-            <!-- 면책 조항 본문 -->
             <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
                 <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
                 <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>

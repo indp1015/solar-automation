@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Metering (NEM 3.0) Explained: How It Affects Your Savings</title>
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js 버전 고정 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
+                    colors: {
+                        brand: '#1e3a8a',
+                        accent: '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- SEO & Social -->
+    <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
+    <meta property="og:title" content="U.S. Solar ROI Data Hub">
+    <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solar.dataindp.com">
+    <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
+    <link rel="canonical" href="https://solar.dataindp.com/blog/net-metering.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
+                    <div class="hidden md:flex space-x-2">
+                        <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
+                        <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+<div class="max-w-3xl mx-auto">
+    <nav class="text-sm text-gray-500 mb-4">
+        <a href="/" class="hover:text-brand">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/blog.html" class="hover:text-brand">Blog</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-700 truncate">Net Metering (NEM 3.0) Explained: How It Affects Your Savings</span>
+    </nav>
+
+    <article class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <div class="text-xs text-gray-500 mb-2 font-mono">2026-10-27</div>
+        <h1 class="text-3xl font-extrabold text-brand mb-6">Net Metering (NEM 3.0) Explained: How It Affects Your Savings</h1>
+        <div class="prose prose-gray max-w-none text-gray-700 leading-relaxed">
+            <p>Net metering is the mechanism that credits you for solar electricity you send back to the grid. The policy varies dramatically across states, and it's the single biggest variable in solar ROI after installation cost.</p><h2>Three main net metering structures</h2><h3>1. Full 1:1 retail credit</h3><p>Every kWh you export earns the same rate you pay for grid electricity. This is the most favorable structure. Currently mandated in ~30 states including Florida, New York (for systems under 10kW), and Colorado.</p><h3>2. Reduced export credit</h3><p>Exports earn a lower "avoided cost" rate. Examples: California's NEM 3.0 (~25% of retail), Arizona utilities (~40-70% of retail), Hawaii's CGS+ (~50%). Payback periods lengthen by 30-80% versus 1:1.</p><h3>3. No statewide net metering</h3><p>Texas and a few other states have no mandate. Some utilities voluntarily offer buyback at low rates. Self-consumption is critical — battery storage becomes more valuable.</p><h2>Self-consumption vs export</h2><p>In any net metering structure, electricity you use on-site is worth the full retail rate. Only excess (exported) generation is subject to the export rate. This is why sizing systems to annual usage — not oversized — usually delivers the best ROI.</p><h2>NEM 3.0's impact in California</h2><p>Before NEM 3.0 (April 2023), a typical California system had a 6-8 year payback. After NEM 3.0, paybacks for the same system extend to 9-13 years without battery storage. Adding a battery to shift exports to evening peak hours recovers much of the lost value.</p><h2>What to check before installing</h2><p>Confirm your utility's current net metering policy — it may differ from the state mandate. Grandfathering periods exist: systems installed before major policy changes often keep the old rates for 15-20 years.</p>
+        </div>
+    </article>
+
+    <div class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-100">
+        <h3 class="font-bold text-brand mb-2">Try our interactive calculator</h3>
+        <p class="text-sm text-gray-700 mb-3">See estimated savings and payback periods for your state and system size.</p>
+        <a href="/calculator.html" class="inline-block bg-accent hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-md transition">Open Calculator →</a>
+    </div>
+</div>
+
+<style>
+.prose h2 { font-size: 1.5rem; font-weight: 700; color: #1e3a8a; margin: 1.5rem 0 0.75rem; }
+.prose h3 { font-size: 1.15rem; font-weight: 600; color: #1f2937; margin: 1.25rem 0 0.5rem; }
+.prose p { margin-bottom: 1rem; }
+.prose ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+.prose li { margin-bottom: 0.25rem; }
+.prose strong { font-weight: 600; color: #111827; }
+</style>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
+                <a href="/about.html" class="hover:text-brand">About & Methodology</a>
+                <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
+            </div>
+            <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
+                <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
+                <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

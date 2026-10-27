@@ -4,6 +4,7 @@
   <url><loc>https://solar.dataindp.com/states.html</loc></url>
   <url><loc>https://solar.dataindp.com/counties.html</loc></url>
   <url><loc>https://solar.dataindp.com/calculator.html</loc></url>
+  <url><loc>https://solar.dataindp.com/blog.html</loc></url>
   <url><loc>https://solar.dataindp.com/about.html</loc></url>
   <url><loc>https://solar.dataindp.com/privacy.html</loc></url>
   <url><loc>https://solar.dataindp.com/state_AL.html</loc></url>
@@ -3190,4 +3191,7 @@
   <url><loc>https://solar.dataindp.com/county/02230.html</loc></url>
   <url><loc>https://solar.dataindp.com/county/02130.html</loc></url>
   <url><loc>https://solar.dataindp.com/county/02275.html</loc></url>
+  <url><loc>https://solar.dataindp.com/blog/itc-2026.html</loc></url>
+  <url><loc>https://solar.dataindp.com/blog/net-metering.html</loc></url>
+  <url><loc>https://solar.dataindp.com/blog/panel-lifespan.html</loc></url>
 </urlset>

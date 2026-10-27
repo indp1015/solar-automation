@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar Panel ROI in Arizona (2025)</title>
+    <title>Solar Panel ROI in Arizona (2026)</title>
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 🚨 Chart.js 추가 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js 버전 고정 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+                    },
                     colors: {
                         brand: '#1e3a8a',
                         accent: '#f97316'
@@ -20,29 +28,48 @@
             }
         }
     </script>
-        <!-- SEO & Social Media Meta Tags -->
+    <!-- SEO & Social -->
     <meta name="description" content="Explore county-level solar payback periods, electricity rates, and 25-year ROI across 3,100+ U.S. counties.">
     <meta property="og:title" content="U.S. Solar ROI Data Hub">
     <meta property="og:description" content="Calculate your solar payback period and 25-year savings based on official EIA and NREL data.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://solar.dataindp.com">
-    <!-- 임시 썸네일 이미지 (나중에 직접 만든 로고로 교체 가능) -->
     <meta property="og:image" content="https://solar.dataindp.com/og-image.png">
-    <!-- Favicon (이모지로 임시 설정) -->
+    <link rel="canonical" href="https://solar.dataindp.com/state_AZ.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com",
+      "logo": "https://solar.dataindp.com/og-image.png",
+      "description": "County-level solar ROI and electricity rate data for 3,100+ U.S. counties."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Solar Data Hub",
+      "url": "https://solar.dataindp.com"
+    }
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
-    
-    <!-- 상단 네비게이션 바 -->
-    <nav class="bg-white shadow-sm border-b border-gray-200">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center space-x-8">
                     <a href="/" class="text-xl font-bold text-brand">Solar Data Hub</a>
-                    <div class="hidden md:flex space-x-4">
+                    <div class="hidden md:flex space-x-2">
                         <a href="/" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</a>
                         <a href="/counties.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">All Counties</a>
                         <a href="/calculator.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Calculator</a>
+                        <a href="/blog.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Blog</a>
                         <a href="/about.html" class="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">About & Data</a>
                     </div>
                 </div>
@@ -50,30 +77,27 @@
         </div>
     </nav>
 
-    <!-- 메인 콘텐츠 영역 -->
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
 
 
-<!-- Breadcrumb -->
 <nav class="text-sm text-gray-500 mb-4">
     <a href="/" class="hover:text-brand">Home</a>
     <span class="mx-2">/</span>
     <a href="/states.html" class="hover:text-brand">States</a>
     <span class="mx-2">/</span>
-    <a href="/counties.html" class="hover:text-brand">Counties</a>
-    <span class="mx-2">/</span>
     <span class="text-gray-700">Arizona</span>
 </nav>
 
 <h1 class="text-3xl font-bold text-brand mb-4">Solar Panel ROI in Arizona</h1>
-<p class="text-gray-700 mb-6">
+<p class="text-gray-700 mb-2">
     Average residential electricity rate:
-    <strong class="text-brand">15.26 ¢/kWh</strong> (EIA 2025).
-    Total counties: <strong>15</strong>.
+    <strong class="text-brand">15.26 ¢/kWh</strong>
+    (EIA 2025). Total counties: <strong>15</strong>.
 </p>
+<p class="text-xs text-gray-400 mb-6">Source: EIA Form 861 (2025), PVGIS v5.2 (NREL/NSRDB), DSIRE. Last updated: October 2026.</p>
 
-<!-- 주 내 카운티 차트 (상위 15개만 시각화) -->
+<!-- Fastest counties 차트 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
     <h2 class="text-xl font-bold text-brand mb-1">Fastest Payback Counties in Arizona (6kW System)</h2>
     <p class="text-sm text-gray-600 mb-4">Top 15 by payback period. Full county list below.</p>
@@ -82,7 +106,7 @@
     </div>
 </div>
 
-<!-- 카운티 상세 표 (상위 15개) -->
+<!-- 상위 15개 표 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
     <h2 class="text-xl font-bold text-brand mb-4">Top 15 Counties by Payback</h2>
     <div class="overflow-x-auto">
@@ -98,138 +122,108 @@
             <tbody class="text-sm">
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04003.html" class="text-brand hover:underline">Cochise County</a>
-                    </td>
-                    <td class="p-3 border-b">9795</td>
-                    <td class="p-3 border-b">7.9</td>
-                    <td class="p-3 border-b">269.9%</td>
+                    <td class="p-3 border-b"><a href="/county/04003.html" class="text-brand hover:underline">Cochise County</a></td>
+                    <td class="p-3 border-b font-mono">9795</td>
+                    <td class="p-3 border-b font-mono">7.9</td>
+                    <td class="p-3 border-b font-mono">269.9%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04023.html" class="text-brand hover:underline">Santa Cruz County</a>
-                    </td>
-                    <td class="p-3 border-b">9685</td>
-                    <td class="p-3 border-b">8.0</td>
-                    <td class="p-3 border-b">265.2%</td>
+                    <td class="p-3 border-b"><a href="/county/04023.html" class="text-brand hover:underline">Santa Cruz County</a></td>
+                    <td class="p-3 border-b font-mono">9685</td>
+                    <td class="p-3 border-b font-mono">8.0</td>
+                    <td class="p-3 border-b font-mono">265.2%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04017.html" class="text-brand hover:underline">Navajo County</a>
-                    </td>
-                    <td class="p-3 border-b">9663</td>
-                    <td class="p-3 border-b">8.0</td>
-                    <td class="p-3 border-b">264.2%</td>
+                    <td class="p-3 border-b"><a href="/county/04017.html" class="text-brand hover:underline">Navajo County</a></td>
+                    <td class="p-3 border-b font-mono">9663</td>
+                    <td class="p-3 border-b font-mono">8.0</td>
+                    <td class="p-3 border-b font-mono">264.2%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04009.html" class="text-brand hover:underline">Graham County</a>
-                    </td>
-                    <td class="p-3 border-b">9626</td>
-                    <td class="p-3 border-b">8.0</td>
-                    <td class="p-3 border-b">262.6%</td>
+                    <td class="p-3 border-b"><a href="/county/04009.html" class="text-brand hover:underline">Graham County</a></td>
+                    <td class="p-3 border-b font-mono">9626</td>
+                    <td class="p-3 border-b font-mono">8.0</td>
+                    <td class="p-3 border-b font-mono">262.6%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04019.html" class="text-brand hover:underline">Pima County</a>
-                    </td>
-                    <td class="p-3 border-b">9620</td>
-                    <td class="p-3 border-b">8.0</td>
-                    <td class="p-3 border-b">262.4%</td>
+                    <td class="p-3 border-b"><a href="/county/04019.html" class="text-brand hover:underline">Pima County</a></td>
+                    <td class="p-3 border-b font-mono">9620</td>
+                    <td class="p-3 border-b font-mono">8.0</td>
+                    <td class="p-3 border-b font-mono">262.4%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04012.html" class="text-brand hover:underline">La Paz County</a>
-                    </td>
-                    <td class="p-3 border-b">9612</td>
-                    <td class="p-3 border-b">8.0</td>
-                    <td class="p-3 border-b">262.1%</td>
+                    <td class="p-3 border-b"><a href="/county/04012.html" class="text-brand hover:underline">La Paz County</a></td>
+                    <td class="p-3 border-b font-mono">9612</td>
+                    <td class="p-3 border-b font-mono">8.0</td>
+                    <td class="p-3 border-b font-mono">262.1%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04015.html" class="text-brand hover:underline">Mohave County</a>
-                    </td>
-                    <td class="p-3 border-b">9613</td>
-                    <td class="p-3 border-b">8.0</td>
-                    <td class="p-3 border-b">262.1%</td>
+                    <td class="p-3 border-b"><a href="/county/04015.html" class="text-brand hover:underline">Mohave County</a></td>
+                    <td class="p-3 border-b font-mono">9613</td>
+                    <td class="p-3 border-b font-mono">8.0</td>
+                    <td class="p-3 border-b font-mono">262.1%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04027.html" class="text-brand hover:underline">Yuma County</a>
-                    </td>
-                    <td class="p-3 border-b">9598</td>
-                    <td class="p-3 border-b">8.1</td>
-                    <td class="p-3 border-b">261.4%</td>
+                    <td class="p-3 border-b"><a href="/county/04027.html" class="text-brand hover:underline">Yuma County</a></td>
+                    <td class="p-3 border-b font-mono">9598</td>
+                    <td class="p-3 border-b font-mono">8.1</td>
+                    <td class="p-3 border-b font-mono">261.4%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04011.html" class="text-brand hover:underline">Greenlee County</a>
-                    </td>
-                    <td class="p-3 border-b">9591</td>
-                    <td class="p-3 border-b">8.1</td>
-                    <td class="p-3 border-b">261.2%</td>
+                    <td class="p-3 border-b"><a href="/county/04011.html" class="text-brand hover:underline">Greenlee County</a></td>
+                    <td class="p-3 border-b font-mono">9591</td>
+                    <td class="p-3 border-b font-mono">8.1</td>
+                    <td class="p-3 border-b font-mono">261.2%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04021.html" class="text-brand hover:underline">Pinal County</a>
-                    </td>
-                    <td class="p-3 border-b">9472</td>
-                    <td class="p-3 border-b">8.2</td>
-                    <td class="p-3 border-b">256.0%</td>
+                    <td class="p-3 border-b"><a href="/county/04021.html" class="text-brand hover:underline">Pinal County</a></td>
+                    <td class="p-3 border-b font-mono">9472</td>
+                    <td class="p-3 border-b font-mono">8.2</td>
+                    <td class="p-3 border-b font-mono">256.0%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04013.html" class="text-brand hover:underline">Maricopa County</a>
-                    </td>
-                    <td class="p-3 border-b">9405</td>
-                    <td class="p-3 border-b">8.2</td>
-                    <td class="p-3 border-b">253.2%</td>
+                    <td class="p-3 border-b"><a href="/county/04013.html" class="text-brand hover:underline">Maricopa County</a></td>
+                    <td class="p-3 border-b font-mono">9405</td>
+                    <td class="p-3 border-b font-mono">8.2</td>
+                    <td class="p-3 border-b font-mono">253.2%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04007.html" class="text-brand hover:underline">Gila County</a>
-                    </td>
-                    <td class="p-3 border-b">9349</td>
-                    <td class="p-3 border-b">8.3</td>
-                    <td class="p-3 border-b">250.7%</td>
+                    <td class="p-3 border-b"><a href="/county/04007.html" class="text-brand hover:underline">Gila County</a></td>
+                    <td class="p-3 border-b font-mono">9349</td>
+                    <td class="p-3 border-b font-mono">8.3</td>
+                    <td class="p-3 border-b font-mono">250.7%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04025.html" class="text-brand hover:underline">Yavapai County</a>
-                    </td>
-                    <td class="p-3 border-b">9354</td>
-                    <td class="p-3 border-b">8.3</td>
-                    <td class="p-3 border-b">250.9%</td>
+                    <td class="p-3 border-b"><a href="/county/04025.html" class="text-brand hover:underline">Yavapai County</a></td>
+                    <td class="p-3 border-b font-mono">9354</td>
+                    <td class="p-3 border-b font-mono">8.3</td>
+                    <td class="p-3 border-b font-mono">250.9%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04001.html" class="text-brand hover:underline">Apache County</a>
-                    </td>
-                    <td class="p-3 border-b">9297</td>
-                    <td class="p-3 border-b">8.3</td>
-                    <td class="p-3 border-b">248.5%</td>
+                    <td class="p-3 border-b"><a href="/county/04001.html" class="text-brand hover:underline">Apache County</a></td>
+                    <td class="p-3 border-b font-mono">9297</td>
+                    <td class="p-3 border-b font-mono">8.3</td>
+                    <td class="p-3 border-b font-mono">248.5%</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 border-b">
-                        <a href="/county/04005.html" class="text-brand hover:underline">Coconino County</a>
-                    </td>
-                    <td class="p-3 border-b">9271</td>
-                    <td class="p-3 border-b">8.3</td>
-                    <td class="p-3 border-b">247.4%</td>
+                    <td class="p-3 border-b"><a href="/county/04005.html" class="text-brand hover:underline">Coconino County</a></td>
+                    <td class="p-3 border-b font-mono">9271</td>
+                    <td class="p-3 border-b font-mono">8.3</td>
+                    <td class="p-3 border-b font-mono">247.4%</td>
                 </tr>
                 
             </tbody>
@@ -237,105 +231,154 @@
     </div>
 </div>
 
-<!-- ★ 신규: 전체 카운티 인덱스 (SEO + 접근성) -->
-<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-xl font-bold text-brand mb-1">
-        All 15 Counties in Arizona
-    </h2>
-    <p class="text-sm text-gray-600 mb-4">
-        Click any county to see its detailed solar ROI, electricity data, and 25-year projection.
-        <span class="text-gray-400">(Sorted by payback — fastest first)</span>
+<!-- 🚨 신규: 주별 심층 가이드 -->
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
+    <h2 class="text-2xl font-bold text-brand mb-4">Arizona Solar Guide (2026)</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-blue-50 p-3 rounded text-center">
+            <p class="text-xs text-gray-600">Avg. Annual Usage</p>
+            <p class="text-lg font-bold text-brand font-mono">12,500 kWh</p>
+        </div>
+        <div class="bg-orange-50 p-3 rounded text-center">
+            <p class="text-xs text-gray-600">Install Cost</p>
+            <p class="text-lg font-bold text-accent font-mono">$2.50/W</p>
+        </div>
+        <div class="bg-green-50 p-3 rounded text-center">
+            <p class="text-xs text-gray-600">Home Ownership</p>
+            <p class="text-lg font-bold text-green-700 font-mono">65%</p>
+        </div>
+        <div class="bg-gray-50 p-3 rounded text-center">
+            <p class="text-xs text-gray-600">Net Metering</p>
+            <p class="text-sm font-bold text-gray-900">Utility-specific net metering</p>
+        </div>
+    </div>
+
+    <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Net Metering: Utility-specific net metering</h3>
+    <p class="text-gray-700 mb-4">Arizona has no statewide net metering mandate. APS and SRP offer export compensation at rates well below retail (typically 6–10¢/kWh vs ~14¢ retail). Self-consumption with battery storage delivers the best ROI in most territories.</p>
+
+    <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Key Incentives in Arizona</h3>
+    <ul class="list-disc ml-6 text-gray-700 space-y-2 mb-4">
+        
+        <li>State Tax Credit — 25% of system cost up to $1,000</li>
+        
+        <li>Property Tax Exemption — solar systems exempt from property tax</li>
+        
+        <li>Sales Tax Exemption — solar equipment exempt from state sales tax</li>
+        
+    </ul>
+
+    <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Major Utilities</h3>
+    <p class="text-gray-700 mb-4">Arizona Public Service (APS), Salt River Project (SRP), Tucson Electric Power. Net metering rules may vary by utility even within the same state — confirm with your local provider before signing a contract.</p>
+
+    <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">What This Means for ROI</h3>
+    <p class="text-gray-700">
+        At 15.26¢/kWh and ~12,500 kWh of annual usage, Arizona homeowners typically see payback periods between
+        
+        <strong class="font-mono">7.9 years</strong> (in Cochise County)
+        and <strong class="font-mono">8.3 years</strong> (in Coconino County).
+        Installation cost of $2.50/W is <strong>below</strong> the national median of ~$2.70/W.
     </p>
+
+    <p class="text-xs text-gray-400 mt-6">Sources: EIA Form 861 (2025), NREL Q1 2025 Solar Industry Benchmark, DSIRE Database, U.S. Census Bureau (ACS 2023).</p>
+</div>
+
+
+<!-- 전체 카운티 인덱스 -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-xl font-bold text-brand mb-1">All 15 Counties in Arizona</h2>
+    <p class="text-sm text-gray-600 mb-4">Click any county to see its detailed ROI analysis. <span class="text-gray-400">(Sorted by payback — fastest first)</span></p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         
         <a href="/county/04003.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Cochise County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">7.9y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">7.9y</span>
         </a>
         
         <a href="/county/04023.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Santa Cruz County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.0y</span>
         </a>
         
         <a href="/county/04017.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Navajo County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.0y</span>
         </a>
         
         <a href="/county/04009.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Graham County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.0y</span>
         </a>
         
         <a href="/county/04019.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Pima County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.0y</span>
         </a>
         
         <a href="/county/04012.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">La Paz County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.0y</span>
         </a>
         
         <a href="/county/04015.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Mohave County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.0y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.0y</span>
         </a>
         
         <a href="/county/04027.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Yuma County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.1y</span>
         </a>
         
         <a href="/county/04011.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Greenlee County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.1y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.1y</span>
         </a>
         
         <a href="/county/04021.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Pinal County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.2y</span>
         </a>
         
         <a href="/county/04013.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Maricopa County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.2y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.2y</span>
         </a>
         
         <a href="/county/04007.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Gila County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.3y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.3y</span>
         </a>
         
         <a href="/county/04025.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Yavapai County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.3y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.3y</span>
         </a>
         
         <a href="/county/04001.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Apache County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.3y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.3y</span>
         </a>
         
         <a href="/county/04005.html"
            class="block px-3 py-2 text-sm rounded border border-gray-100 hover:bg-blue-50 hover:border-blue-200 hover:text-brand transition flex justify-between items-center">
             <span class="truncate">Coconino County</span>
-            <span class="text-xs text-gray-400 ml-2 shrink-0">8.3y</span>
+            <span class="text-xs text-gray-400 ml-2 shrink-0 font-mono">8.3y</span>
         </a>
         
     </div>
@@ -372,16 +415,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </main>
 
-    <!-- ⚖️ 법적 면책 조항이 포함된 푸터 -->
     <footer class="bg-white border-t border-gray-200 mt-12 py-8">
         <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
             <p>&copy; 2026 Solar Data Hub. All rights reserved.</p>
             <div class="mt-2 space-x-4">
+                <a href="/blog.html" class="hover:text-brand">Blog</a>
                 <a href="/about.html" class="hover:text-brand">About & Methodology</a>
                 <a href="/privacy.html" class="hover:text-brand">Privacy Policy</a>
             </div>
-            
-            <!-- 면책 조항 본문 -->
             <div class="mt-6 text-xs text-gray-400 max-w-4xl mx-auto text-left bg-gray-50 p-4 rounded border border-gray-100">
                 <p class="mb-2"><strong>LEGAL DISCLAIMER:</strong> This website provides estimates for informational purposes only and does not constitute financial, tax, or investment advice. The calculations are based on public data and standardized assumptions (e.g., 30% Federal ITC, 25-year projection). Actual savings and payback periods will vary based on your specific installer quotes, local utility policies, roof conditions, and future electricity rate changes.</p>
                 <p class="mb-2"><strong>DATA SOURCES & ATTRIBUTION:</strong> Electricity rates are sourced from the U.S. Energy Information Administration (EIA 2025). Solar production estimates are generated using PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em>Note: US solar radiation data is based on a 2005-2015 average.</em> Incentive data is referenced from DSIRE (CC-BY-SA 4.0). NREL, EIA, and DSIRE do not endorse or guarantee the accuracy of the calculations provided on this site.</p>
