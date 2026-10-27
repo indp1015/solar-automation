@@ -1,1 +1,1 @@
-{"state": "DC", "rate": 21.92, "counties": [{"fips": "11001", "name": "District of Columbia", "ac_annual": 1173.07, "payback": 7.63, "roi_25y": 283.49}]}
+{"state": "DC", "rate": 21.92, "avg_ac_per_kw": 1173.1, "counties": [{"fips": "11001", "name": "District of Columbia", "ac_annual": 1173.07, "payback": 7.63, "roi_25y": 283.49}]}

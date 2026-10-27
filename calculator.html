@@ -256,7 +256,9 @@ async function recalc() {
     const usageKwh = +document.getElementById('usageSlider').value;
     const esc = +document.getElementById('escSlider').value;
 
-    const r = compute({ kw, usageKwh, rateCents: data.rate, avgAcPerKw: data.avg_ac_per_kw, escPct: esc });
+    // avg_ac_per_kw 누락 시 국가 평균 1,450 kWh/kW로 fallback
+    const avgAcPerKw = Number.isFinite(data.avg_ac_per_kw) ? data.avg_ac_per_kw : 1450;
+    const r = compute({ kw, usageKwh, rateCents: data.rate, avgAcPerKw, escPct: esc });
 
     document.getElementById('rGross').textContent   = '$' + (kw * 1000 * COST_PER_WATT).toLocaleString(undefined,{maximumFractionDigits:0});
     document.getElementById('rNet').textContent     = '$' + r.net.toLocaleString(undefined,{maximumFractionDigits:0});
