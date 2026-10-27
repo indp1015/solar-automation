@@ -310,11 +310,11 @@ async function recalc() {
     // ═══════════════════════════════════════════════════════════════
     const labels = r.flows.map(f => f.year);
     const cumValues = r.flows.map(f => Math.round(f.cumulative));
-    const savingValues = r.annuals.map(a => Math.round(a.net + a.inv_paid));   // 순수 절감액 (항상 양수)
-    const inverterValues = r.annuals.map(a => a.inv_paid ? -Math.round(a.inv_paid) : 0);  // 인버터 비용 (음수)
+    const savingValues = r.annuals.map(a => Math.round(a.net + a.inv_paid));
+    const inverterValues = r.annuals.map(a => a.inv_paid ? -Math.round(a.inv_paid) : 0);
 
     // ═══════════════════════════════════════════════════════════════
-    // 차트 1: 누적 라인 + Payback 수직선
+    // 차트 1: 누적 라인 + Payback 수직선 (0선까지만)
     // ═══════════════════════════════════════════════════════════════
     const paybackPlugin = {
         id: 'paybackLine',
@@ -325,16 +325,25 @@ async function recalc() {
             const yTop = chart.chartArea.top;
             const ctx = chart.ctx;
             ctx.save();
+            // ─── 개선: 0선까지만 (전체 관통 X) ───
             ctx.strokeStyle = '#22c55e';
             ctx.setLineDash([6, 4]);
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(x, Math.max(yZero, chart.chartArea.bottom));
-            ctx.lineTo(x, yTop);
+            ctx.lineTo(x, Math.min(yZero, chart.chartArea.top));   // ← 0선에서 멈춤
             ctx.stroke();
+            // 라벨은 0선 위쪽에 배치
+            ctx.setLineDash([]);
             ctx.fillStyle = '#16a34a';
             ctx.font = 'bold 11px sans-serif';
-            ctx.fillText(`Payback ${r.payback.toFixed(1)} yrs`, x + 6, yTop + 14);
+            ctx.textAlign = 'left';
+            ctx.fillText(`Payback ${r.payback.toFixed(1)} yrs`, x + 6, Math.max(yZero - 8, yTop + 14));
+            // 0선 위에 작은 원 표시 (payback 지점)
+            ctx.fillStyle = '#22c55e';
+            ctx.beginPath();
+            ctx.arc(x, yZero, 4, 0, 2 * Math.PI);
+            ctx.fill();
             ctx.restore();
         }
     };
@@ -394,8 +403,29 @@ async function recalc() {
     });
 
     // ═══════════════════════════════════════════════════════════════
-    // 차트 2: 연간 막대 (파랑↑ 절감, 빨강↓ 인버터)
+    // 차트 2: 연간 막대 + Year 13 🔧 아이콘
     // ═══════════════════════════════════════════════════════════════
+    const invYearPlugin = {
+        id: 'invYearLabel',
+        afterDatasetsDraw(chart) {
+            if (!INV_YEAR || INV_YEAR > 25) return;
+            const x = chart.scales.x.getPixelForValue(INV_YEAR - 1);
+            const yTop = chart.chartArea.top;
+            const ctx = chart.ctx;
+            ctx.save();
+            // 빨간 배경 원 + 🔧 이모지
+            ctx.fillStyle = 'rgba(220,38,38,0.15)';
+            ctx.beginPath();
+            ctx.arc(x, yTop + 12, 11, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.font = '14px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🔧', x, yTop + 13);
+            ctx.restore();
+        }
+    };
+
     if (annualChart) annualChart.destroy();
     annualChart = new Chart(document.getElementById('annualChart'), {
         data: {
@@ -425,6 +455,9 @@ async function recalc() {
             responsive: true,
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
+            layout: {
+                padding: { top: 20 }   // 🔧 아이콘 공간 확보
+            },
             plugins: {
                 legend: { display: false },
                 title: {
@@ -465,7 +498,8 @@ async function recalc() {
                     }
                 }
             }
-        }
+        },
+        plugins: [invYearPlugin]
     });
 }
 
