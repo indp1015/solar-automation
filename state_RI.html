@@ -69,7 +69,7 @@
         <thead>
             <tr class="bg-blue-50 text-brand text-sm">
                 <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
                 <th class="p-3 border-b">Est. Payback (Years)</th>
                 <th class="p-3 border-b">25-Year ROI (%)</th>
             </tr>
@@ -78,37 +78,37 @@
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/44005.html" class="text-brand hover:underline">Newport County</a></td>
-                <td class="p-3 border-b">1168</td>
-                <td class="p-3 border-b">6.0</td>
-                <td class="p-3 border-b">447.1%</td>
+                <td class="p-3 border-b">7010</td>
+                <td class="p-3 border-b">5.7</td>
+                <td class="p-3 border-b">431.2%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/44009.html" class="text-brand hover:underline">Washington County</a></td>
-                <td class="p-3 border-b">1151</td>
-                <td class="p-3 border-b">6.0</td>
-                <td class="p-3 border-b">438.3%</td>
+                <td class="p-3 border-b">6904</td>
+                <td class="p-3 border-b">5.8</td>
+                <td class="p-3 border-b">422.4%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/44003.html" class="text-brand hover:underline">Kent County</a></td>
-                <td class="p-3 border-b">1136</td>
-                <td class="p-3 border-b">6.1</td>
-                <td class="p-3 border-b">431.1%</td>
-            </tr>
-            
-            <tr class="hover:bg-gray-50">
-                <td class="p-3 border-b"><a href="/county/44007.html" class="text-brand hover:underline">Providence County</a></td>
-                <td class="p-3 border-b">1130</td>
-                <td class="p-3 border-b">6.2</td>
-                <td class="p-3 border-b">427.9%</td>
+                <td class="p-3 border-b">6818</td>
+                <td class="p-3 border-b">5.8</td>
+                <td class="p-3 border-b">415.2%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/44001.html" class="text-brand hover:underline">Bristol County</a></td>
-                <td class="p-3 border-b">1130</td>
-                <td class="p-3 border-b">6.2</td>
-                <td class="p-3 border-b">428.1%</td>
+                <td class="p-3 border-b">6782</td>
+                <td class="p-3 border-b">5.8</td>
+                <td class="p-3 border-b">412.3%</td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50">
+                <td class="p-3 border-b"><a href="/county/44007.html" class="text-brand hover:underline">Providence County</a></td>
+                <td class="p-3 border-b">6780</td>
+                <td class="p-3 border-b">5.9</td>
+                <td class="p-3 border-b">412.1%</td>
             </tr>
             
         </tbody>
@@ -117,28 +117,28 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1168.34, "fips": "44005", "name": "Newport County", "payback": 5.95, "roi_25y": 447.06}, {"ac_annual": 1150.74, "fips": "44009", "name": "Washington County", "payback": 6.05, "roi_25y": 438.28}, {"ac_annual": 1136.28, "fips": "44003", "name": "Kent County", "payback": 6.14, "roi_25y": 431.07}, {"ac_annual": 1129.96, "fips": "44007", "name": "Providence County", "payback": 6.17, "roi_25y": 427.92}, {"ac_annual": 1130.41, "fips": "44001", "name": "Bristol County", "payback": 6.17, "roi_25y": 428.14}];
+    const countyData = [{"ac_annual": 1168.34, "fips": "44005", "name": "Newport County", "payback": 5.66, "roi_25y": 431.19}, {"ac_annual": 1150.74, "fips": "44009", "name": "Washington County", "payback": 5.75, "roi_25y": 422.41}, {"ac_annual": 1136.28, "fips": "44003", "name": "Kent County", "payback": 5.82, "roi_25y": 415.2}, {"ac_annual": 1130.41, "fips": "44001", "name": "Bristol County", "payback": 5.85, "roi_25y": 412.27}, {"ac_annual": 1129.96, "fips": "44007", "name": "Providence County", "payback": 5.86, "roi_25y": 412.05}];
+    if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);
+    const lo = Math.min(...data), hi = Math.max(...data);
+    const pad = Math.max(0.3, (hi - lo) * 0.15);
+    const min = Math.max(0, Math.floor((lo - pad) * 10) / 10);
+    const max = Math.ceil((hi + pad) * 10) / 10;
 
-    const ctx = document.getElementById('countyChart').getContext('2d');
-    new Chart(ctx, {
+    new Chart(document.getElementById('countyChart').getContext('2d'), {
         type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Payback Period (Years)',
-                data: data,
-                backgroundColor: '#3b82f6',
-                borderRadius: 4
-            }]
-        },
+        data: { labels, datasets: [{
+            label: 'Payback (Years)', data,
+            backgroundColor: '#3b82f6', borderRadius: 4
+        }]},
         options: {
-            indexAxis: 'y', // 가로 막대
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => `${ctx.parsed.x.toFixed(2)} years` } }
+            },
+            scales: { x: { min, max, title: { display: true, text: 'Years to Break Even' } } }
         }
     });
 });

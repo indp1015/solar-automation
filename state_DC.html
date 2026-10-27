@@ -69,7 +69,7 @@
         <thead>
             <tr class="bg-blue-50 text-brand text-sm">
                 <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
                 <th class="p-3 border-b">Est. Payback (Years)</th>
                 <th class="p-3 border-b">25-Year ROI (%)</th>
             </tr>
@@ -78,9 +78,9 @@
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/11001.html" class="text-brand hover:underline">District of Columbia</a></td>
-                <td class="p-3 border-b">1173</td>
-                <td class="p-3 border-b">8.2</td>
-                <td class="p-3 border-b">299.4%</td>
+                <td class="p-3 border-b">7038</td>
+                <td class="p-3 border-b">7.6</td>
+                <td class="p-3 border-b">283.5%</td>
             </tr>
             
         </tbody>
@@ -89,28 +89,28 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1173.07, "fips": "11001", "name": "District of Columbia", "payback": 8.21, "roi_25y": 299.37}];
+    const countyData = [{"ac_annual": 1173.07, "fips": "11001", "name": "District of Columbia", "payback": 7.63, "roi_25y": 283.49}];
+    if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);
+    const lo = Math.min(...data), hi = Math.max(...data);
+    const pad = Math.max(0.3, (hi - lo) * 0.15);
+    const min = Math.max(0, Math.floor((lo - pad) * 10) / 10);
+    const max = Math.ceil((hi + pad) * 10) / 10;
 
-    const ctx = document.getElementById('countyChart').getContext('2d');
-    new Chart(ctx, {
+    new Chart(document.getElementById('countyChart').getContext('2d'), {
         type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Payback Period (Years)',
-                data: data,
-                backgroundColor: '#3b82f6',
-                borderRadius: 4
-            }]
-        },
+        data: { labels, datasets: [{
+            label: 'Payback (Years)', data,
+            backgroundColor: '#3b82f6', borderRadius: 4
+        }]},
         options: {
-            indexAxis: 'y', // 가로 막대
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => `${ctx.parsed.x.toFixed(2)} years` } }
+            },
+            scales: { x: { min, max, title: { display: true, text: 'Years to Break Even' } } }
         }
     });
 });

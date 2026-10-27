@@ -69,7 +69,7 @@
         <thead>
             <tr class="bg-blue-50 text-brand text-sm">
                 <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
                 <th class="p-3 border-b">Est. Payback (Years)</th>
                 <th class="p-3 border-b">25-Year ROI (%)</th>
             </tr>
@@ -78,37 +78,37 @@
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15003.html" class="text-brand hover:underline">Honolulu County</a></td>
-                <td class="p-3 border-b">1504</td>
+                <td class="p-3 border-b">9027</td>
                 <td class="p-3 border-b">3.2</td>
-                <td class="p-3 border-b">892.7%</td>
+                <td class="p-3 border-b">876.8%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15001.html" class="text-brand hover:underline">Hawaii County</a></td>
-                <td class="p-3 border-b">1505</td>
+                <td class="p-3 border-b">9031</td>
                 <td class="p-3 border-b">3.2</td>
-                <td class="p-3 border-b">893.2%</td>
+                <td class="p-3 border-b">877.3%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15009.html" class="text-brand hover:underline">Maui County</a></td>
-                <td class="p-3 border-b">1491</td>
-                <td class="p-3 border-b">3.3</td>
-                <td class="p-3 border-b">883.8%</td>
+                <td class="p-3 border-b">8948</td>
+                <td class="p-3 border-b">3.2</td>
+                <td class="p-3 border-b">867.9%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15005.html" class="text-brand hover:underline">Kalawao County</a></td>
-                <td class="p-3 border-b">1472</td>
-                <td class="p-3 border-b">3.3</td>
-                <td class="p-3 border-b">870.5%</td>
+                <td class="p-3 border-b">8832</td>
+                <td class="p-3 border-b">3.2</td>
+                <td class="p-3 border-b">854.7%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15007.html" class="text-brand hover:underline">Kauai County</a></td>
-                <td class="p-3 border-b">1278</td>
-                <td class="p-3 border-b">3.9</td>
-                <td class="p-3 border-b">737.8%</td>
+                <td class="p-3 border-b">7667</td>
+                <td class="p-3 border-b">3.8</td>
+                <td class="p-3 border-b">722.0%</td>
             </tr>
             
         </tbody>
@@ -117,28 +117,28 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1504.42, "fips": "15003", "name": "Honolulu County", "payback": 3.25, "roi_25y": 892.67}, {"ac_annual": 1505.13, "fips": "15001", "name": "Hawaii County", "payback": 3.25, "roi_25y": 893.16}, {"ac_annual": 1491.37, "fips": "15009", "name": "Maui County", "payback": 3.28, "roi_25y": 883.75}, {"ac_annual": 1472.03, "fips": "15005", "name": "Kalawao County", "payback": 3.33, "roi_25y": 870.53}, {"ac_annual": 1277.89, "fips": "15007", "name": "Kauai County", "payback": 3.86, "roi_25y": 737.82}];
+    const countyData = [{"ac_annual": 1504.42, "fips": "15003", "name": "Honolulu County", "payback": 3.18, "roi_25y": 876.8}, {"ac_annual": 1505.13, "fips": "15001", "name": "Hawaii County", "payback": 3.18, "roi_25y": 877.28}, {"ac_annual": 1491.37, "fips": "15009", "name": "Maui County", "payback": 3.21, "roi_25y": 867.88}, {"ac_annual": 1472.03, "fips": "15005", "name": "Kalawao County", "payback": 3.25, "roi_25y": 854.66}, {"ac_annual": 1277.89, "fips": "15007", "name": "Kauai County", "payback": 3.75, "roi_25y": 721.95}];
+    if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);
+    const lo = Math.min(...data), hi = Math.max(...data);
+    const pad = Math.max(0.3, (hi - lo) * 0.15);
+    const min = Math.max(0, Math.floor((lo - pad) * 10) / 10);
+    const max = Math.ceil((hi + pad) * 10) / 10;
 
-    const ctx = document.getElementById('countyChart').getContext('2d');
-    new Chart(ctx, {
+    new Chart(document.getElementById('countyChart').getContext('2d'), {
         type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Payback Period (Years)',
-                data: data,
-                backgroundColor: '#3b82f6',
-                borderRadius: 4
-            }]
-        },
+        data: { labels, datasets: [{
+            label: 'Payback (Years)', data,
+            backgroundColor: '#3b82f6', borderRadius: 4
+        }]},
         options: {
-            indexAxis: 'y', // 가로 막대
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => `${ctx.parsed.x.toFixed(2)} years` } }
+            },
+            scales: { x: { min, max, title: { display: true, text: 'Years to Break Even' } } }
         }
     });
 });

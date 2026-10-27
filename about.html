@@ -59,37 +59,16 @@
     </div>
 
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
-        <h2 class="text-2xl font-bold text-brand mb-6">Methodology & Data Sources</h2>
-        
-        <div class="space-y-6">
-            <div class="flex items-start">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-xl">⚡</div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-bold text-gray-900">Electricity Rates</h3>
-                    <p class="text-gray-600 mt-1">Sourced from the U.S. Energy Information Administration (EIA) 2025 state averages. We use the residential sector (RES) annual data.</p>
-                </div>
-            </div>
-            
-            <div class="flex items-start">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-xl">☀️</div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-bold text-gray-900">Solar Production</h3>
-                    <p class="text-gray-600 mt-1">Generated via PVGIS v5.2 (European Commission JRC) utilizing NSRDB (NREL) data. <em class="text-sm text-gray-500">Note: US radiation data is based on a 2005-2015 average.</em></p>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-xl">🏛️</div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-bold text-gray-900">Incentives</h3>
-                    <p class="text-gray-600 mt-1">Referenced from DSIRE (CC-BY-SA 4.0). Includes federal Investment Tax Credit (ITC) and state-level policies.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-8 p-4 bg-gray-50 rounded-md border border-gray-200">
-            <p class="text-sm text-gray-700">Our ROI calculations use a 25-year projection, accounting for a 0.5% annual panel degradation and a 2.5% annual electricity rate increase. The default system cost is $2.70 per watt before the 30% ITC.</p>
-        </div>
+    <h2 class="text-2xl font-bold text-brand mb-6">Our Assumptions (and Why)</h2>
+    <div class="space-y-4 text-gray-700">
+        <p><strong>System cost: $2.70/W.</strong> Based on the U.S. median installed cost for residential solar in 2024–2025 (NREL Q1 2025 benchmark: $2.50–$2.90/W before incentives).</p>
+        <p><strong>Federal ITC: 30%.</strong> The Inflation Reduction Act extended the 30% residential tax credit through 2032. We assume the full credit is usable in year 1; if you have no federal tax liability, a carry-forward or reduced benefit applies.</p>
+        <p><strong>Electricity rate escalation: 2.5% per year.</strong> The EIA Annual Energy Outlook projects 2–3% long-term residential escalation. We use 2.5% as a conservative midpoint.</p>
+        <p><strong>Panel degradation: 0.5% per year.</strong> Matches the median of Tier-1 manufacturer warranties (0.5%/yr linear) and NREL long-term field studies.</p>
+        <p><strong>Operations & maintenance: 1.0% of gross system cost per year.</strong> Covers cleaning, monitoring, and minor repairs. Inverter replacement (~$1800) is included in year 13.</p>
+        <p><strong>Net metering:</strong> Our baseline assumes 1:1 retail-rate credit for exported production. <em>This is optimistic for states that have moved to NEM 3.0 (e.g., California since April 2023) — actual payback there may be 30–50% longer.</em> We plan to add state-specific NEM modeling.</p>
+        <p><strong>Discount rate for NPV: 5%.</strong> Reflects the opportunity cost of capital at current Treasury yields.</p>
+    </div>
     </div>
 
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">

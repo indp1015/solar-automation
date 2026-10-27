@@ -107,7 +107,9 @@
 </div>
 
 <!-- 시스템 크기별 상세 테이블 -->
-<h2 class="text-xl font-bold text-brand mb-4">ROI by System Size (at 2.5% Escalation)</h2>
+<h2 class="text-xl font-bold text-brand mb-4">
+  ROI by System Size (at 2.5% Escalation)
+</h2>
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 overflow-x-auto">
     <table class="w-full text-left border-collapse">
         <thead>
@@ -124,33 +126,33 @@
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">4.0 kW</td>
                 <td class="p-3 border-b">$713</td>
-                <td class="p-3 border-b font-medium">10.6 years</td>
-                <td class="p-3 border-b text-green-600">211.6%</td>
-                <td class="p-3 border-b">10.2%</td>
+                <td class="p-3 border-b font-medium">9.6 years</td>
+                <td class="p-3 border-b text-green-600">187.8%</td>
+                <td class="p-3 border-b">9.4%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">6.0 kW</td>
                 <td class="p-3 border-b">$1070</td>
-                <td class="p-3 border-b font-medium">10.6 years</td>
-                <td class="p-3 border-b text-green-600">211.6%</td>
-                <td class="p-3 border-b">10.2%</td>
+                <td class="p-3 border-b font-medium">9.6 years</td>
+                <td class="p-3 border-b text-green-600">195.7%</td>
+                <td class="p-3 border-b">9.7%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">8.0 kW</td>
                 <td class="p-3 border-b">$1426</td>
-                <td class="p-3 border-b font-medium">10.6 years</td>
-                <td class="p-3 border-b text-green-600">211.6%</td>
-                <td class="p-3 border-b">10.2%</td>
+                <td class="p-3 border-b font-medium">9.6 years</td>
+                <td class="p-3 border-b text-green-600">199.7%</td>
+                <td class="p-3 border-b">9.8%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">10.0 kW</td>
                 <td class="p-3 border-b">$1783</td>
-                <td class="p-3 border-b font-medium">10.6 years</td>
-                <td class="p-3 border-b text-green-600">211.6%</td>
-                <td class="p-3 border-b">10.2%</td>
+                <td class="p-3 border-b font-medium">9.6 years</td>
+                <td class="p-3 border-b text-green-600">202.1%</td>
+                <td class="p-3 border-b">9.9%</td>
             </tr>
             
         </tbody>
@@ -159,85 +161,68 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const results = [{"irr": 0.1025, "kw": 4.0, "payback": 10.6, "roi": 211.59, "savings": 713.04}, {"irr": 0.1025, "kw": 6.0, "payback": 10.6, "roi": 211.59, "savings": 1069.56}, {"irr": 0.1025, "kw": 8.0, "payback": 10.6, "roi": 211.59, "savings": 1426.08}, {"irr": 0.1025, "kw": 10.0, "payback": 10.6, "roi": 211.59, "savings": 1782.6}];
-    // 기본 6kW 시나리오 선택 (없으면 첫 번째)
-    const baseData = results.find(r => r.kw === 6.0) || results[0]; 
-    if(!baseData) return;
+    const results  = [{"annual_production": 4646.52, "irr": 0.0942, "kw": 4.0, "payback": 9.6, "roi": 187.78, "savings": 713.04}, {"annual_production": 6969.780000000001, "irr": 0.097, "kw": 6.0, "payback": 9.6, "roi": 195.72, "savings": 1069.56}, {"annual_production": 9293.04, "irr": 0.0984, "kw": 8.0, "payback": 9.6, "roi": 199.69, "savings": 1426.08}, {"annual_production": 11616.300000000001, "irr": 0.0992, "kw": 10.0, "payback": 9.6, "roi": 202.07, "savings": 1782.6}];
+    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "years": 25};
+    const baseData = results.find(r => r.kw === 6.0) || results[0];
+    if (!baseData) return;
 
     const RATE_CENTS = 17.67;
-    const COST_PER_WATT = 2.70;
-    const ITC = 0.30;
-    const DEGRADATION = 0.005;
-    
-    const grossCost = baseData.kw * 1000 * COST_PER_WATT;
-    const netCost = grossCost * (1 - ITC);
-    const annualProduction = (baseData.savings / (RATE_CENTS / 100)); // 역산하여 연간 발전량 추정
+    const netCost    = baseData.kw * 1000 * PARAMS.cost_per_watt * (1 - PARAMS.itc_rate);
+    const om         = baseData.kw * 1000 * PARAMS.cost_per_watt * PARAMS.om_pct;
+    const annualProd = baseData.annual_production;   // ✅ 정확한 발전량
 
     let gaugeChart;
 
-    // ROI 계산 함수 (파이썬 roi.py의 로직을 JS로 포팅)
-    function calculateRoi(escalationRate) {
-        let cumulativeSavings = 0;
-        let paybackYear = null;
-        let cashflow = -netCost;
-
-        for (let t = 1; t <= 25; t++) {
-            const prod = annualProduction * Math.pow(1 - DEGRADATION, t - 1);
-            const rate = (RATE_CENTS / 100) * Math.pow(1 + escalationRate, t - 1);
-            const yearlySave = prod * rate;
-            cumulativeSavings += yearlySave;
-            
-            if (paybackYear === null && cumulativeSavings >= netCost) {
-                paybackYear = t - ((cumulativeSavings - netCost) / yearlySave); // 정밀 보간
+    function calculateRoi(escRate) {
+        let cumulative = 0, payback = null;
+        for (let t = 1; t <= PARAMS.years; t++) {
+            const prod = annualProd * Math.pow(1 - PARAMS.degradation, t - 1);
+            const rate = (RATE_CENTS / 100) * Math.pow(1 + escRate, t - 1);
+            const save = prod * rate - om;
+            cumulative += save;
+            if (payback === null && cumulative >= netCost && save > 0) {
+                const prev = cumulative - save;
+                payback = (t - 1) + (netCost - prev) / save;
             }
         }
-        return { payback: paybackYear || 25, totalSavings: cumulativeSavings };
+        return { payback: payback ?? PARAMS.years, totalSavings: cumulative };
     }
 
-    // 게이지 차트 그리기
     function updateGauge(payback) {
         const ctx = document.getElementById('gaugeChart').getContext('2d');
         const color = payback < 6 ? '#22c55e' : (payback < 10 ? '#f97316' : '#ef4444');
-        
         if (gaugeChart) gaugeChart.destroy();
-        
         gaugeChart = new Chart(ctx, {
             type: 'doughnut',
-            data: {
-                datasets: [{
-                    data: [payback, 25 - payback],
-                    backgroundColor: [color, '#e5e7eb'],
-                    circumference: 180,
-                    rotation: 270,
-                    borderWidth: 0,
-                    cutout: '80%'
-                }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { tooltip: { enabled: false }, legend: { display: false } }
-            }
+            data: { datasets: [{
+                data: [Math.min(payback, PARAMS.years), Math.max(PARAMS.years - payback, 0)],
+                backgroundColor: [color, '#e5e7eb'],
+                circumference: 180, rotation: 270, borderWidth: 0, cutout: '80%'
+            }]},
+            options: { responsive: true, maintainAspectRatio: false,
+                       plugins: { tooltip: { enabled: false }, legend: { display: false } } }
         });
         document.getElementById('paybackDisplay').innerText = payback.toFixed(1);
     }
 
-    // UI 업데이트 로직
-    function updateUI(escalation) {
-        const res = calculateRoi(escalation / 100);
+    function updateUI(escPct) {
+        const res = calculateRoi(escPct / 100);
         updateGauge(res.payback);
-        document.getElementById('netCostDisplay').innerText = netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
-        document.getElementById('savingsDisplay').innerText = res.totalSavings.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('netCostDisplay').innerText =
+            netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('savingsDisplay').innerText =
+            res.totalSavings.toLocaleString(undefined, {maximumFractionDigits: 0});
     }
 
-    // 슬라이더 이벤트 연결
     const slider = document.getElementById('escalationSlider');
+    slider.value = (PARAMS.escalation * 100).toFixed(1);
+    document.getElementById('escalationVal').innerText = slider.value + '%';
     slider.addEventListener('input', function() {
         document.getElementById('escalationVal').innerText = this.value + '%';
         updateUI(parseFloat(this.value));
     });
 
-    // 초기 렌더링 (기본 2.5%)
-    updateUI(2.5);
+    updateUI(PARAMS.escalation * 100);
 });
 </script>
 

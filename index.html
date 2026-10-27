@@ -113,43 +113,45 @@
                 
                 <tr class="hover:bg-gray-50">
                     <td class="p-3 border-b font-medium text-gray-500">2</td>
-                    <td class="p-3 border-b"><a href="/county/15001.html" class="text-brand hover:underline font-medium">Hawaii County</a></td>
-                    <td class="p-3 border-b">HI</td>
-                    <td class="p-3 border-b">40.40</td>
-                    <td class="p-3 border-b font-bold text-green-600">3.2 years</td>
+                    <td class="p-3 border-b"><a href="/county/06083.html" class="text-brand hover:underline font-medium">Santa Barbara County</a></td>
+                    <td class="p-3 border-b">CA</td>
+                    <td class="p-3 border-b">31.35</td>
+                    <td class="p-3 border-b font-bold text-green-600">3.9 years</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
                     <td class="p-3 border-b font-medium text-gray-500">3</td>
-                    <td class="p-3 border-b"><a href="/county/15009.html" class="text-brand hover:underline font-medium">Maui County</a></td>
-                    <td class="p-3 border-b">HI</td>
-                    <td class="p-3 border-b">40.40</td>
-                    <td class="p-3 border-b font-bold text-green-600">3.3 years</td>
+                    <td class="p-3 border-b"><a href="/county/25019.html" class="text-brand hover:underline font-medium">Nantucket County</a></td>
+                    <td class="p-3 border-b">MA</td>
+                    <td class="p-3 border-b">30.41</td>
+                    <td class="p-3 border-b font-bold text-green-600">5.3 years</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
                     <td class="p-3 border-b font-medium text-gray-500">4</td>
-                    <td class="p-3 border-b"><a href="/county/15005.html" class="text-brand hover:underline font-medium">Kalawao County</a></td>
-                    <td class="p-3 border-b">HI</td>
-                    <td class="p-3 border-b">40.40</td>
-                    <td class="p-3 border-b font-bold text-green-600">3.3 years</td>
+                    <td class="p-3 border-b"><a href="/county/44005.html" class="text-brand hover:underline font-medium">Newport County</a></td>
+                    <td class="p-3 border-b">RI</td>
+                    <td class="p-3 border-b">29.48</td>
+                    <td class="p-3 border-b font-bold text-green-600">5.7 years</td>
                 </tr>
                 
                 <tr class="hover:bg-gray-50">
                     <td class="p-3 border-b font-medium text-gray-500">5</td>
-                    <td class="p-3 border-b"><a href="/county/15007.html" class="text-brand hover:underline font-medium">Kauai County</a></td>
-                    <td class="p-3 border-b">HI</td>
-                    <td class="p-3 border-b">40.40</td>
-                    <td class="p-3 border-b font-bold text-green-600">3.9 years</td>
+                    <td class="p-3 border-b"><a href="/county/09009.html" class="text-brand hover:underline font-medium">New Haven County</a></td>
+                    <td class="p-3 border-b">CT</td>
+                    <td class="p-3 border-b">29.31</td>
+                    <td class="p-3 border-b font-bold text-green-600">5.8 years</td>
                 </tr>
                 
             </tbody>
         </table>
     </div>
 </div>
-<!-- 🚨 전기요금 비교 차트 -->
+
+<!-- 전기요금 비교 차트 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-12">
-    <h2 class="text-2xl font-bold text-brand mb-4">⚡ Electricity Rates: Top 5 Most vs. Least Expensive States</h2>
+    <h2 class="text-2xl font-bold text-brand mb-1">⚡ Electricity Rates: Top 5 vs. Bottom 5 States</h2>
+    <p class="text-sm text-gray-600 mb-4">Higher rates (dark blue) generally mean faster solar payback.</p>
     <div class="relative w-full h-64 md:h-80">
         <canvas id="rateChart"></canvas>
     </div>
@@ -157,17 +159,14 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // 서버(Jinja2)에서 전달받은 전체 주 데이터
-    const statesData = [{"abbr": "AL", "elec_rate_cents": 16.09, "elec_rate_year": 2025, "name": "Alabama", "state_fips": "01", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AK", "elec_rate_cents": 26.11, "elec_rate_year": 2025, "name": "Alaska", "state_fips": "02", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AZ", "elec_rate_cents": 15.26, "elec_rate_year": 2025, "name": "Arizona", "state_fips": "04", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AR", "elec_rate_cents": 12.87, "elec_rate_year": 2025, "name": "Arkansas", "state_fips": "05", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CA", "elec_rate_cents": 31.35, "elec_rate_year": 2025, "name": "California", "state_fips": "06", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CO", "elec_rate_cents": 15.69, "elec_rate_year": 2025, "name": "Colorado", "state_fips": "08", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CT", "elec_rate_cents": 29.31, "elec_rate_year": 2025, "name": "Connecticut", "state_fips": "09", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DE", "elec_rate_cents": 17.15, "elec_rate_year": 2025, "name": "Delaware", "state_fips": "10", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DC", "elec_rate_cents": 21.92, "elec_rate_year": 2025, "name": "District of Columbia", "state_fips": "11", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "FL", "elec_rate_cents": 15.21, "elec_rate_year": 2025, "name": "Florida", "state_fips": "12", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "GA", "elec_rate_cents": 14.74, "elec_rate_year": 2025, "name": "Georgia", "state_fips": "13", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "HI", "elec_rate_cents": 40.4, "elec_rate_year": 2025, "name": "Hawaii", "state_fips": "15", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ID", "elec_rate_cents": 11.83, "elec_rate_year": 2025, "name": "Idaho", "state_fips": "16", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IL", "elec_rate_cents": 17.67, "elec_rate_year": 2025, "name": "Illinois", "state_fips": "17", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IN", "elec_rate_cents": 15.96, "elec_rate_year": 2025, "name": "Indiana", "state_fips": "18", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IA", "elec_rate_cents": 13.62, "elec_rate_year": 2025, "name": "Iowa", "state_fips": "19", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KS", "elec_rate_cents": 14.44, "elec_rate_year": 2025, "name": "Kansas", "state_fips": "20", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KY", "elec_rate_cents": 13.13, "elec_rate_year": 2025, "name": "Kentucky", "state_fips": "21", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "LA", "elec_rate_cents": 12.52, "elec_rate_year": 2025, "name": "Louisiana", "state_fips": "22", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ME", "elec_rate_cents": 27.69, "elec_rate_year": 2025, "name": "Maine", "state_fips": "23", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MD", "elec_rate_cents": 19.53, "elec_rate_year": 2025, "name": "Maryland", "state_fips": "24", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MA", "elec_rate_cents": 30.41, "elec_rate_year": 2025, "name": "Massachusetts", "state_fips": "25", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MI", "elec_rate_cents": 20.03, "elec_rate_year": 2025, "name": "Michigan", "state_fips": "26", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MN", "elec_rate_cents": 15.83, "elec_rate_year": 2025, "name": "Minnesota", "state_fips": "27", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MS", "elec_rate_cents": 14.03, "elec_rate_year": 2025, "name": "Mississippi", "state_fips": "28", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MO", "elec_rate_cents": 13.3, "elec_rate_year": 2025, "name": "Missouri", "state_fips": "29", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MT", "elec_rate_cents": 12.99, "elec_rate_year": 2025, "name": "Montana", "state_fips": "30", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NE", "elec_rate_cents": 12.05, "elec_rate_year": 2025, "name": "Nebraska", "state_fips": "31", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NV", "elec_rate_cents": 13.26, "elec_rate_year": 2025, "name": "Nevada", "state_fips": "32", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NH", "elec_rate_cents": 24.53, "elec_rate_year": 2025, "name": "New Hampshire", "state_fips": "33", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NJ", "elec_rate_cents": 22.48, "elec_rate_year": 2025, "name": "New Jersey", "state_fips": "34", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NM", "elec_rate_cents": 14.85, "elec_rate_year": 2025, "name": "New Mexico", "state_fips": "35", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NY", "elec_rate_cents": 26.39, "elec_rate_year": 2025, "name": "New York", "state_fips": "36", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NC", "elec_rate_cents": 14.0, "elec_rate_year": 2025, "name": "North Carolina", "state_fips": "37", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ND", "elec_rate_cents": 11.82, "elec_rate_year": 2025, "name": "North Dakota", "state_fips": "38", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OH", "elec_rate_cents": 16.9, "elec_rate_year": 2025, "name": "Ohio", "state_fips": "39", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OK", "elec_rate_cents": 13.21, "elec_rate_year": 2025, "name": "Oklahoma", "state_fips": "40", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OR", "elec_rate_cents": 15.46, "elec_rate_year": 2025, "name": "Oregon", "state_fips": "41", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "PA", "elec_rate_cents": 19.29, "elec_rate_year": 2025, "name": "Pennsylvania", "state_fips": "42", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "RI", "elec_rate_cents": 29.48, "elec_rate_year": 2025, "name": "Rhode Island", "state_fips": "44", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SC", "elec_rate_cents": 15.12, "elec_rate_year": 2025, "name": "South Carolina", "state_fips": "45", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SD", "elec_rate_cents": 13.32, "elec_rate_year": 2025, "name": "South Dakota", "state_fips": "46", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TN", "elec_rate_cents": 13.22, "elec_rate_year": 2025, "name": "Tennessee", "state_fips": "47", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TX", "elec_rate_cents": 15.4, "elec_rate_year": 2025, "name": "Texas", "state_fips": "48", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "UT", "elec_rate_cents": 13.02, "elec_rate_year": 2025, "name": "Utah", "state_fips": "49", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VT", "elec_rate_cents": 22.79, "elec_rate_year": 2025, "name": "Vermont", "state_fips": "50", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VA", "elec_rate_cents": 15.28, "elec_rate_year": 2025, "name": "Virginia", "state_fips": "51", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WA", "elec_rate_cents": 13.17, "elec_rate_year": 2025, "name": "Washington", "state_fips": "53", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WV", "elec_rate_cents": 15.39, "elec_rate_year": 2025, "name": "West Virginia", "state_fips": "54", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WI", "elec_rate_cents": 18.08, "elec_rate_year": 2025, "name": "Wisconsin", "state_fips": "55", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WY", "elec_rate_cents": 13.37, "elec_rate_year": 2025, "name": "Wyoming", "state_fips": "56", "updated_at": "2026-10-26T07:26:47+00:00"}];
-    
-    // 전기요금 기준 정렬
+    const statesData = [{"abbr": "AL", "avg_ac_per_kw": 1300.0625757575758, "elec_rate_cents": 16.09, "elec_rate_year": 2025, "name": "Alabama", "state_fips": "01", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AK", "avg_ac_per_kw": 672.5764, "elec_rate_cents": 26.11, "elec_rate_year": 2025, "name": "Alaska", "state_fips": "02", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AZ", "avg_ac_per_kw": 1585.18, "elec_rate_cents": 15.26, "elec_rate_year": 2025, "name": "Arizona", "state_fips": "04", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "AR", "avg_ac_per_kw": 1266.955, "elec_rate_cents": 12.87, "elec_rate_year": 2025, "name": "Arkansas", "state_fips": "05", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CA", "avg_ac_per_kw": 1431.985344827586, "elec_rate_cents": 31.35, "elec_rate_year": 2025, "name": "California", "state_fips": "06", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CO", "avg_ac_per_kw": 1386.1096875, "elec_rate_cents": 15.69, "elec_rate_year": 2025, "name": "Colorado", "state_fips": "08", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "CT", "avg_ac_per_kw": 1127.3528571428571, "elec_rate_cents": 29.31, "elec_rate_year": 2025, "name": "Connecticut", "state_fips": "09", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DE", "avg_ac_per_kw": 1187.9850000000001, "elec_rate_cents": 17.15, "elec_rate_year": 2025, "name": "Delaware", "state_fips": "10", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "DC", "avg_ac_per_kw": 1173.07, "elec_rate_cents": 21.92, "elec_rate_year": 2025, "name": "District of Columbia", "state_fips": "11", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "FL", "avg_ac_per_kw": 1380.5686153846154, "elec_rate_cents": 15.21, "elec_rate_year": 2025, "name": "Florida", "state_fips": "12", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "GA", "avg_ac_per_kw": 1314.9853333333333, "elec_rate_cents": 14.74, "elec_rate_year": 2025, "name": "Georgia", "state_fips": "13", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "HI", "avg_ac_per_kw": 1450.1680000000001, "elec_rate_cents": 40.4, "elec_rate_year": 2025, "name": "Hawaii", "state_fips": "15", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ID", "avg_ac_per_kw": 1193.6586046511627, "elec_rate_cents": 11.83, "elec_rate_year": 2025, "name": "Idaho", "state_fips": "16", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IL", "avg_ac_per_kw": 1173.8513725490195, "elec_rate_cents": 17.67, "elec_rate_year": 2025, "name": "Illinois", "state_fips": "17", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IN", "avg_ac_per_kw": 1148.597252747253, "elec_rate_cents": 15.96, "elec_rate_year": 2025, "name": "Indiana", "state_fips": "18", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "IA", "avg_ac_per_kw": 1156.6954166666667, "elec_rate_cents": 13.62, "elec_rate_year": 2025, "name": "Iowa", "state_fips": "19", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KS", "avg_ac_per_kw": 1322.835673076923, "elec_rate_cents": 14.44, "elec_rate_year": 2025, "name": "Kansas", "state_fips": "20", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "KY", "avg_ac_per_kw": 1169.263613445378, "elec_rate_cents": 13.13, "elec_rate_year": 2025, "name": "Kentucky", "state_fips": "21", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "LA", "avg_ac_per_kw": 1326.0992063492063, "elec_rate_cents": 12.52, "elec_rate_year": 2025, "name": "Louisiana", "state_fips": "22", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ME", "avg_ac_per_kw": 1055.575, "elec_rate_cents": 27.69, "elec_rate_year": 2025, "name": "Maine", "state_fips": "23", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MD", "avg_ac_per_kw": 1184.8627272727272, "elec_rate_cents": 19.53, "elec_rate_year": 2025, "name": "Maryland", "state_fips": "24", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MA", "avg_ac_per_kw": 1125.26, "elec_rate_cents": 30.41, "elec_rate_year": 2025, "name": "Massachusetts", "state_fips": "25", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MI", "avg_ac_per_kw": 1068.2117073170732, "elec_rate_cents": 20.03, "elec_rate_year": 2025, "name": "Michigan", "state_fips": "26", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MN", "avg_ac_per_kw": 1085.2982558139533, "elec_rate_cents": 15.83, "elec_rate_year": 2025, "name": "Minnesota", "state_fips": "27", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MS", "avg_ac_per_kw": 1301.246329113924, "elec_rate_cents": 14.03, "elec_rate_year": 2025, "name": "Mississippi", "state_fips": "28", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MO", "avg_ac_per_kw": 1211.759818181818, "elec_rate_cents": 13.3, "elec_rate_year": 2025, "name": "Missouri", "state_fips": "29", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "MT", "avg_ac_per_kw": 1101.0037037037036, "elec_rate_cents": 12.99, "elec_rate_year": 2025, "name": "Montana", "state_fips": "30", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NE", "avg_ac_per_kw": 1257.0811956521738, "elec_rate_cents": 12.05, "elec_rate_year": 2025, "name": "Nebraska", "state_fips": "31", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NV", "avg_ac_per_kw": 1473.0247058823531, "elec_rate_cents": 13.26, "elec_rate_year": 2025, "name": "Nevada", "state_fips": "32", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NH", "avg_ac_per_kw": 1073.416, "elec_rate_cents": 24.53, "elec_rate_year": 2025, "name": "New Hampshire", "state_fips": "33", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NJ", "avg_ac_per_kw": 1155.8771428571429, "elec_rate_cents": 22.48, "elec_rate_year": 2025, "name": "New Jersey", "state_fips": "34", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NM", "avg_ac_per_kw": 1575.7036363636364, "elec_rate_cents": 14.85, "elec_rate_year": 2025, "name": "New Mexico", "state_fips": "35", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NY", "avg_ac_per_kw": 1067.3803448275862, "elec_rate_cents": 26.39, "elec_rate_year": 2025, "name": "New York", "state_fips": "36", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "NC", "avg_ac_per_kw": 1259.5010416666667, "elec_rate_cents": 14.0, "elec_rate_year": 2025, "name": "North Carolina", "state_fips": "37", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "ND", "avg_ac_per_kw": 1080.443653846154, "elec_rate_cents": 11.82, "elec_rate_year": 2025, "name": "North Dakota", "state_fips": "38", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OH", "avg_ac_per_kw": 1112.2987209302325, "elec_rate_cents": 16.9, "elec_rate_year": 2025, "name": "Ohio", "state_fips": "39", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OK", "avg_ac_per_kw": 1342.4127777777778, "elec_rate_cents": 13.21, "elec_rate_year": 2025, "name": "Oklahoma", "state_fips": "40", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "OR", "avg_ac_per_kw": 1143.4945454545455, "elec_rate_cents": 15.46, "elec_rate_year": 2025, "name": "Oregon", "state_fips": "41", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "PA", "avg_ac_per_kw": 1084.3015384615385, "elec_rate_cents": 19.29, "elec_rate_year": 2025, "name": "Pennsylvania", "state_fips": "42", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "RI", "avg_ac_per_kw": 1143.146, "elec_rate_cents": 29.48, "elec_rate_year": 2025, "name": "Rhode Island", "state_fips": "44", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SC", "avg_ac_per_kw": 1296.4077272727272, "elec_rate_cents": 15.12, "elec_rate_year": 2025, "name": "South Carolina", "state_fips": "45", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "SD", "avg_ac_per_kw": 1171.3201538461537, "elec_rate_cents": 13.32, "elec_rate_year": 2025, "name": "South Dakota", "state_fips": "46", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TN", "avg_ac_per_kw": 1217.3034042553193, "elec_rate_cents": 13.22, "elec_rate_year": 2025, "name": "Tennessee", "state_fips": "47", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "TX", "avg_ac_per_kw": 1432.4533466135458, "elec_rate_cents": 15.4, "elec_rate_year": 2025, "name": "Texas", "state_fips": "48", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "UT", "avg_ac_per_kw": 1379.0475862068965, "elec_rate_cents": 13.02, "elec_rate_year": 2025, "name": "Utah", "state_fips": "49", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VT", "avg_ac_per_kw": 1023.6107142857144, "elec_rate_cents": 22.79, "elec_rate_year": 2025, "name": "Vermont", "state_fips": "50", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "VA", "avg_ac_per_kw": 1209.006717557252, "elec_rate_cents": 15.28, "elec_rate_year": 2025, "name": "Virginia", "state_fips": "51", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WA", "avg_ac_per_kw": 1040.2214705882352, "elec_rate_cents": 13.17, "elec_rate_year": 2025, "name": "Washington", "state_fips": "53", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WV", "avg_ac_per_kw": 1114.2458181818183, "elec_rate_cents": 15.39, "elec_rate_year": 2025, "name": "West Virginia", "state_fips": "54", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WI", "avg_ac_per_kw": 1091.938695652174, "elec_rate_cents": 18.08, "elec_rate_year": 2025, "name": "Wisconsin", "state_fips": "55", "updated_at": "2026-10-26T07:26:47+00:00"}, {"abbr": "WY", "avg_ac_per_kw": 1254.8313636363637, "elec_rate_cents": 13.37, "elec_rate_year": 2025, "name": "Wyoming", "state_fips": "56", "updated_at": "2026-10-26T07:26:47+00:00"}];
     const sorted = [...statesData].sort((a, b) => b.elec_rate_cents - a.elec_rate_cents);
     const top5High = sorted.slice(0, 5);
     const top5Low = sorted.slice(-5).reverse();
     
     const labels = [...top5High.map(s => s.abbr), ...top5Low.map(s => s.abbr)];
     const data = [...top5High.map(s => s.elec_rate_cents), ...top5Low.map(s => s.elec_rate_cents)];
-    const colors = [...Array(5).fill('#ef4444'), ...Array(5).fill('#22c55e')]; // 빨강(비쌈), 초록(쌈)
+    const colors = [...Array(5).fill('#1e40af'), ...Array(5).fill('#93c5fd')];
 
     const ctx = document.getElementById('rateChart').getContext('2d');
     new Chart(ctx, {
@@ -190,9 +189,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-<!-- 시장 스냅샷 & 퀵 계산기 (좌우 분할) -->
+
+<!-- 시장 스냅샷 & 퀵 계산기 -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-    <!-- 스냅샷 -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-xl font-bold text-brand mb-4">📈 Market Snapshot (2025)</h2>
         <div class="space-y-4">
@@ -216,7 +215,6 @@ document.addEventListener("DOMContentLoaded", function() {
         <p class="text-xs text-gray-400 mt-4">*Data fetched from EIA (2025) and official federal guidelines.</p>
     </div>
 
-    <!-- 퀵 계산기 -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-xl font-bold text-brand mb-4">🧮 Quick Payback Calculator</h2>
         <form id="quick-calc" class="space-y-4" onsubmit="calculateQuick(event)">
@@ -224,107 +222,311 @@ document.addEventListener("DOMContentLoaded", function() {
                 <label class="block text-sm font-medium text-gray-700">Select State (Rate)</label>
                 <select id="state-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-brand focus:ring-brand text-sm" onchange="updateRate()">
                     
-                    <option value="AL" data-rate="16.09">Alabama (16.09 ¢)</option>
+                    <option value="AL"
+                            data-rate="16.09"
+                            data-ac="1300.0625757575758">
+                        Alabama (16.09 ¢)
+                    </option>
                     
-                    <option value="AK" data-rate="26.11">Alaska (26.11 ¢)</option>
+                    <option value="AK"
+                            data-rate="26.11"
+                            data-ac="672.5764">
+                        Alaska (26.11 ¢)
+                    </option>
                     
-                    <option value="AZ" data-rate="15.26">Arizona (15.26 ¢)</option>
+                    <option value="AZ"
+                            data-rate="15.26"
+                            data-ac="1585.18">
+                        Arizona (15.26 ¢)
+                    </option>
                     
-                    <option value="AR" data-rate="12.87">Arkansas (12.87 ¢)</option>
+                    <option value="AR"
+                            data-rate="12.87"
+                            data-ac="1266.955">
+                        Arkansas (12.87 ¢)
+                    </option>
                     
-                    <option value="CA" data-rate="31.35">California (31.35 ¢)</option>
+                    <option value="CA"
+                            data-rate="31.35"
+                            data-ac="1431.985344827586">
+                        California (31.35 ¢)
+                    </option>
                     
-                    <option value="CO" data-rate="15.69">Colorado (15.69 ¢)</option>
+                    <option value="CO"
+                            data-rate="15.69"
+                            data-ac="1386.1096875">
+                        Colorado (15.69 ¢)
+                    </option>
                     
-                    <option value="CT" data-rate="29.31">Connecticut (29.31 ¢)</option>
+                    <option value="CT"
+                            data-rate="29.31"
+                            data-ac="1127.3528571428571">
+                        Connecticut (29.31 ¢)
+                    </option>
                     
-                    <option value="DE" data-rate="17.15">Delaware (17.15 ¢)</option>
+                    <option value="DE"
+                            data-rate="17.15"
+                            data-ac="1187.9850000000001">
+                        Delaware (17.15 ¢)
+                    </option>
                     
-                    <option value="DC" data-rate="21.92">District of Columbia (21.92 ¢)</option>
+                    <option value="DC"
+                            data-rate="21.92"
+                            data-ac="1173.07">
+                        District of Columbia (21.92 ¢)
+                    </option>
                     
-                    <option value="FL" data-rate="15.21">Florida (15.21 ¢)</option>
+                    <option value="FL"
+                            data-rate="15.21"
+                            data-ac="1380.5686153846154">
+                        Florida (15.21 ¢)
+                    </option>
                     
-                    <option value="GA" data-rate="14.74">Georgia (14.74 ¢)</option>
+                    <option value="GA"
+                            data-rate="14.74"
+                            data-ac="1314.9853333333333">
+                        Georgia (14.74 ¢)
+                    </option>
                     
-                    <option value="HI" data-rate="40.4">Hawaii (40.40 ¢)</option>
+                    <option value="HI"
+                            data-rate="40.4"
+                            data-ac="1450.1680000000001">
+                        Hawaii (40.40 ¢)
+                    </option>
                     
-                    <option value="ID" data-rate="11.83">Idaho (11.83 ¢)</option>
+                    <option value="ID"
+                            data-rate="11.83"
+                            data-ac="1193.6586046511627">
+                        Idaho (11.83 ¢)
+                    </option>
                     
-                    <option value="IL" data-rate="17.67">Illinois (17.67 ¢)</option>
+                    <option value="IL"
+                            data-rate="17.67"
+                            data-ac="1173.8513725490195">
+                        Illinois (17.67 ¢)
+                    </option>
                     
-                    <option value="IN" data-rate="15.96">Indiana (15.96 ¢)</option>
+                    <option value="IN"
+                            data-rate="15.96"
+                            data-ac="1148.597252747253">
+                        Indiana (15.96 ¢)
+                    </option>
                     
-                    <option value="IA" data-rate="13.62">Iowa (13.62 ¢)</option>
+                    <option value="IA"
+                            data-rate="13.62"
+                            data-ac="1156.6954166666667">
+                        Iowa (13.62 ¢)
+                    </option>
                     
-                    <option value="KS" data-rate="14.44">Kansas (14.44 ¢)</option>
+                    <option value="KS"
+                            data-rate="14.44"
+                            data-ac="1322.835673076923">
+                        Kansas (14.44 ¢)
+                    </option>
                     
-                    <option value="KY" data-rate="13.13">Kentucky (13.13 ¢)</option>
+                    <option value="KY"
+                            data-rate="13.13"
+                            data-ac="1169.263613445378">
+                        Kentucky (13.13 ¢)
+                    </option>
                     
-                    <option value="LA" data-rate="12.52">Louisiana (12.52 ¢)</option>
+                    <option value="LA"
+                            data-rate="12.52"
+                            data-ac="1326.0992063492063">
+                        Louisiana (12.52 ¢)
+                    </option>
                     
-                    <option value="ME" data-rate="27.69">Maine (27.69 ¢)</option>
+                    <option value="ME"
+                            data-rate="27.69"
+                            data-ac="1055.575">
+                        Maine (27.69 ¢)
+                    </option>
                     
-                    <option value="MD" data-rate="19.53">Maryland (19.53 ¢)</option>
+                    <option value="MD"
+                            data-rate="19.53"
+                            data-ac="1184.8627272727272">
+                        Maryland (19.53 ¢)
+                    </option>
                     
-                    <option value="MA" data-rate="30.41">Massachusetts (30.41 ¢)</option>
+                    <option value="MA"
+                            data-rate="30.41"
+                            data-ac="1125.26">
+                        Massachusetts (30.41 ¢)
+                    </option>
                     
-                    <option value="MI" data-rate="20.03">Michigan (20.03 ¢)</option>
+                    <option value="MI"
+                            data-rate="20.03"
+                            data-ac="1068.2117073170732">
+                        Michigan (20.03 ¢)
+                    </option>
                     
-                    <option value="MN" data-rate="15.83">Minnesota (15.83 ¢)</option>
+                    <option value="MN"
+                            data-rate="15.83"
+                            data-ac="1085.2982558139533">
+                        Minnesota (15.83 ¢)
+                    </option>
                     
-                    <option value="MS" data-rate="14.03">Mississippi (14.03 ¢)</option>
+                    <option value="MS"
+                            data-rate="14.03"
+                            data-ac="1301.246329113924">
+                        Mississippi (14.03 ¢)
+                    </option>
                     
-                    <option value="MO" data-rate="13.3">Missouri (13.30 ¢)</option>
+                    <option value="MO"
+                            data-rate="13.3"
+                            data-ac="1211.759818181818">
+                        Missouri (13.30 ¢)
+                    </option>
                     
-                    <option value="MT" data-rate="12.99">Montana (12.99 ¢)</option>
+                    <option value="MT"
+                            data-rate="12.99"
+                            data-ac="1101.0037037037036">
+                        Montana (12.99 ¢)
+                    </option>
                     
-                    <option value="NE" data-rate="12.05">Nebraska (12.05 ¢)</option>
+                    <option value="NE"
+                            data-rate="12.05"
+                            data-ac="1257.0811956521738">
+                        Nebraska (12.05 ¢)
+                    </option>
                     
-                    <option value="NV" data-rate="13.26">Nevada (13.26 ¢)</option>
+                    <option value="NV"
+                            data-rate="13.26"
+                            data-ac="1473.0247058823531">
+                        Nevada (13.26 ¢)
+                    </option>
                     
-                    <option value="NH" data-rate="24.53">New Hampshire (24.53 ¢)</option>
+                    <option value="NH"
+                            data-rate="24.53"
+                            data-ac="1073.416">
+                        New Hampshire (24.53 ¢)
+                    </option>
                     
-                    <option value="NJ" data-rate="22.48">New Jersey (22.48 ¢)</option>
+                    <option value="NJ"
+                            data-rate="22.48"
+                            data-ac="1155.8771428571429">
+                        New Jersey (22.48 ¢)
+                    </option>
                     
-                    <option value="NM" data-rate="14.85">New Mexico (14.85 ¢)</option>
+                    <option value="NM"
+                            data-rate="14.85"
+                            data-ac="1575.7036363636364">
+                        New Mexico (14.85 ¢)
+                    </option>
                     
-                    <option value="NY" data-rate="26.39">New York (26.39 ¢)</option>
+                    <option value="NY"
+                            data-rate="26.39"
+                            data-ac="1067.3803448275862">
+                        New York (26.39 ¢)
+                    </option>
                     
-                    <option value="NC" data-rate="14.0">North Carolina (14.00 ¢)</option>
+                    <option value="NC"
+                            data-rate="14.0"
+                            data-ac="1259.5010416666667">
+                        North Carolina (14.00 ¢)
+                    </option>
                     
-                    <option value="ND" data-rate="11.82">North Dakota (11.82 ¢)</option>
+                    <option value="ND"
+                            data-rate="11.82"
+                            data-ac="1080.443653846154">
+                        North Dakota (11.82 ¢)
+                    </option>
                     
-                    <option value="OH" data-rate="16.9">Ohio (16.90 ¢)</option>
+                    <option value="OH"
+                            data-rate="16.9"
+                            data-ac="1112.2987209302325">
+                        Ohio (16.90 ¢)
+                    </option>
                     
-                    <option value="OK" data-rate="13.21">Oklahoma (13.21 ¢)</option>
+                    <option value="OK"
+                            data-rate="13.21"
+                            data-ac="1342.4127777777778">
+                        Oklahoma (13.21 ¢)
+                    </option>
                     
-                    <option value="OR" data-rate="15.46">Oregon (15.46 ¢)</option>
+                    <option value="OR"
+                            data-rate="15.46"
+                            data-ac="1143.4945454545455">
+                        Oregon (15.46 ¢)
+                    </option>
                     
-                    <option value="PA" data-rate="19.29">Pennsylvania (19.29 ¢)</option>
+                    <option value="PA"
+                            data-rate="19.29"
+                            data-ac="1084.3015384615385">
+                        Pennsylvania (19.29 ¢)
+                    </option>
                     
-                    <option value="RI" data-rate="29.48">Rhode Island (29.48 ¢)</option>
+                    <option value="RI"
+                            data-rate="29.48"
+                            data-ac="1143.146">
+                        Rhode Island (29.48 ¢)
+                    </option>
                     
-                    <option value="SC" data-rate="15.12">South Carolina (15.12 ¢)</option>
+                    <option value="SC"
+                            data-rate="15.12"
+                            data-ac="1296.4077272727272">
+                        South Carolina (15.12 ¢)
+                    </option>
                     
-                    <option value="SD" data-rate="13.32">South Dakota (13.32 ¢)</option>
+                    <option value="SD"
+                            data-rate="13.32"
+                            data-ac="1171.3201538461537">
+                        South Dakota (13.32 ¢)
+                    </option>
                     
-                    <option value="TN" data-rate="13.22">Tennessee (13.22 ¢)</option>
+                    <option value="TN"
+                            data-rate="13.22"
+                            data-ac="1217.3034042553193">
+                        Tennessee (13.22 ¢)
+                    </option>
                     
-                    <option value="TX" data-rate="15.4">Texas (15.40 ¢)</option>
+                    <option value="TX"
+                            data-rate="15.4"
+                            data-ac="1432.4533466135458">
+                        Texas (15.40 ¢)
+                    </option>
                     
-                    <option value="UT" data-rate="13.02">Utah (13.02 ¢)</option>
+                    <option value="UT"
+                            data-rate="13.02"
+                            data-ac="1379.0475862068965">
+                        Utah (13.02 ¢)
+                    </option>
                     
-                    <option value="VT" data-rate="22.79">Vermont (22.79 ¢)</option>
+                    <option value="VT"
+                            data-rate="22.79"
+                            data-ac="1023.6107142857144">
+                        Vermont (22.79 ¢)
+                    </option>
                     
-                    <option value="VA" data-rate="15.28">Virginia (15.28 ¢)</option>
+                    <option value="VA"
+                            data-rate="15.28"
+                            data-ac="1209.006717557252">
+                        Virginia (15.28 ¢)
+                    </option>
                     
-                    <option value="WA" data-rate="13.17">Washington (13.17 ¢)</option>
+                    <option value="WA"
+                            data-rate="13.17"
+                            data-ac="1040.2214705882352">
+                        Washington (13.17 ¢)
+                    </option>
                     
-                    <option value="WV" data-rate="15.39">West Virginia (15.39 ¢)</option>
+                    <option value="WV"
+                            data-rate="15.39"
+                            data-ac="1114.2458181818183">
+                        West Virginia (15.39 ¢)
+                    </option>
                     
-                    <option value="WI" data-rate="18.08">Wisconsin (18.08 ¢)</option>
+                    <option value="WI"
+                            data-rate="18.08"
+                            data-ac="1091.938695652174">
+                        Wisconsin (18.08 ¢)
+                    </option>
                     
-                    <option value="WY" data-rate="13.37">Wyoming (13.37 ¢)</option>
+                    <option value="WY"
+                            data-rate="13.37"
+                            data-ac="1254.8313636363637">
+                        Wyoming (13.37 ¢)
+                    </option>
                     
                 </select>
             </div>
@@ -354,7 +556,7 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
-<!-- SEO 텍스트 영역 -->
+<!-- SEO 텍스트 -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-12">
     <h2 class="text-2xl font-bold text-brand mb-4">Current U.S. Solar Market Insights</h2>
     <p class="text-gray-700 mb-4">Navigating the solar market requires understanding the balance between installation costs, local electricity rates, and available incentives. In today's dynamic environment, homeowners must look beyond the sticker price to grasp the full financial picture.</p>
@@ -367,38 +569,49 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <script>
+    const P = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "years": 25};
+    
     function updateRate() {
         document.getElementById('calc-result').classList.add('hidden');
     }
 
     function calculateQuick(e) {
         e.preventDefault();
-        const select = document.getElementById('state-select');
-        const rate = parseFloat(select.options[select.selectedIndex].getAttribute('data-rate'));
+        const opt = document.getElementById('state-select').selectedOptions[0];
+        const rate = parseFloat(opt.dataset.rate);
+        const acPerKw = parseFloat(opt.dataset.ac);
         const kw = parseFloat(document.getElementById('sys-size').value);
-        
-        const costPerWatt = 2.70;
-        const grossCost = kw * 1000 * costPerWatt;
-        const netCost = grossCost * 0.70; // 30% ITC 적용
-        
-        const annualProd = kw * 1450; // 미국 평균 발전량 근사치
-        const annualSavings = annualProd * (rate / 100);
-        const payback = netCost / annualSavings;
 
+        const gross = kw * 1000 * P.cost_per_watt;
+        const netCost = gross * (1 - P.itc_rate);
+        const om = gross * P.om_pct;
+
+        let cumulative = 0, payback = null;
+        for (let t = 1; t <= P.years; t++) {
+            const prod = kw * acPerKw * Math.pow(1 - P.degradation, t - 1);
+            const r = (rate / 100) * Math.pow(1 + P.escalation, t - 1);
+            const save = prod * r - om;
+            cumulative += save;
+            if (payback === null && cumulative >= netCost && save > 0) {
+                payback = (t - 1) + (netCost - (cumulative - save)) / save;
+            }
+        }
+
+        const year1 = kw * acPerKw * (rate / 100) - om;
         document.getElementById('res-cost').innerText = '$' + netCost.toLocaleString(undefined, {maximumFractionDigits: 0});
-        document.getElementById('res-savings').innerText = '$' + annualSavings.toLocaleString(undefined, {maximumFractionDigits: 0});
-        document.getElementById('res-payback').innerText = payback.toFixed(1) + ' Years';
-        
+        document.getElementById('res-savings').innerText = '$' + year1.toLocaleString(undefined, {maximumFractionDigits: 0});
+        document.getElementById('res-payback').innerText = payback ? payback.toFixed(1) + ' Years' : '> 25 years';
         document.getElementById('calc-result').classList.remove('hidden');
     }
 </script>
-<!-- FAQ Section -->
+
+<!-- FAQ -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-12">
     <h2 class="text-2xl font-bold text-brand mb-4">Frequently Asked Questions (FAQ)</h2>
     <div class="space-y-4">
         <div>
             <h3 class="font-bold text-gray-900">How is the payback period calculated?</h3>
-            <p class="text-gray-600 text-sm mt-1">We calculate the net cost of the system (after the 30% federal ITC) and divide it by the estimated annual electricity savings, which are based on EIA state rates and PVGIS solar radiation data for your specific county.</p>
+            <p class="text-gray-600 text-sm mt-1">We calculate net cost after the 30% federal ITC, then accumulate annual savings year-by-year (accounting for 2.5% rate escalation and 0.5% panel degradation) until the cumulative savings equal the net cost.</p>
         </div>
         <div>
             <h3 class="font-bold text-gray-900">Why does the solar radiation data date back to 2015?</h3>
@@ -406,7 +619,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         <div>
             <h3 class="font-bold text-gray-900">Does this include state or local incentives?</h3>
-            <p class="text-gray-600 text-sm mt-1">Currently, our calculations factor in the 30% federal Investment Tax Credit (ITC). State and local incentives (DSIRE) are provided for reference, but you should consult a local installer for specific financial advice.</p>
+            <p class="text-gray-600 text-sm mt-1">Currently, our calculations factor in only the 30% federal Investment Tax Credit (ITC). State and local incentives (DSIRE) are provided for reference; consult a local installer for specific financial advice.</p>
         </div>
     </div>
 </div>

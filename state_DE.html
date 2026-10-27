@@ -69,7 +69,7 @@
         <thead>
             <tr class="bg-blue-50 text-brand text-sm">
                 <th class="p-3 border-b">County</th>
-                <th class="p-3 border-b">Annual Prod. (kWh)</th>
+                <th class="p-3 border-b">Annual Production (kWh, 6 kW)</th>
                 <th class="p-3 border-b">Est. Payback (Years)</th>
                 <th class="p-3 border-b">25-Year ROI (%)</th>
             </tr>
@@ -78,16 +78,16 @@
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/10005.html" class="text-brand hover:underline">Sussex County</a></td>
-                <td class="p-3 border-b">1200</td>
-                <td class="p-3 border-b">10.6</td>
-                <td class="p-3 border-b">212.4%</td>
+                <td class="p-3 border-b">7197</td>
+                <td class="p-3 border-b">9.6</td>
+                <td class="p-3 border-b">196.5%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/10003.html" class="text-brand hover:underline">New Castle County</a></td>
-                <td class="p-3 border-b">1176</td>
-                <td class="p-3 border-b">10.8</td>
-                <td class="p-3 border-b">205.7%</td>
+                <td class="p-3 border-b">7059</td>
+                <td class="p-3 border-b">9.8</td>
+                <td class="p-3 border-b">189.8%</td>
             </tr>
             
         </tbody>
@@ -96,28 +96,28 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1199.5, "fips": "10005", "name": "Sussex County", "payback": 10.58, "roi_25y": 212.36}, {"ac_annual": 1176.47, "fips": "10003", "name": "New Castle County", "payback": 10.81, "roi_25y": 205.68}];
+    const countyData = [{"ac_annual": 1199.5, "fips": "10005", "name": "Sussex County", "payback": 9.58, "roi_25y": 196.49}, {"ac_annual": 1176.47, "fips": "10003", "name": "New Castle County", "payback": 9.78, "roi_25y": 189.8}];
+    if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);
+    const lo = Math.min(...data), hi = Math.max(...data);
+    const pad = Math.max(0.3, (hi - lo) * 0.15);
+    const min = Math.max(0, Math.floor((lo - pad) * 10) / 10);
+    const max = Math.ceil((hi + pad) * 10) / 10;
 
-    const ctx = document.getElementById('countyChart').getContext('2d');
-    new Chart(ctx, {
+    new Chart(document.getElementById('countyChart').getContext('2d'), {
         type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Payback Period (Years)',
-                data: data,
-                backgroundColor: '#3b82f6',
-                borderRadius: 4
-            }]
-        },
+        data: { labels, datasets: [{
+            label: 'Payback (Years)', data,
+            backgroundColor: '#3b82f6', borderRadius: 4
+        }]},
         options: {
-            indexAxis: 'y', // 가로 막대
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { x: { beginAtZero: true, title: { display: true, text: 'Years to Break Even' } } }
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => `${ctx.parsed.x.toFixed(2)} years` } }
+            },
+            scales: { x: { min, max, title: { display: true, text: 'Years to Break Even' } } }
         }
     });
 });
