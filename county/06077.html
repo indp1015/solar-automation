@@ -125,34 +125,34 @@
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">4.0 kW</td>
-                <td class="p-3 border-b">$1694</td>
-                <td class="p-3 border-b font-medium">4.3 years</td>
-                <td class="p-3 border-b text-green-600">602.7%</td>
-                <td class="p-3 border-b">24.0%</td>
+                <td class="p-3 border-b">$883</td>
+                <td class="p-3 border-b font-medium">7.9 years</td>
+                <td class="p-3 border-b text-green-600">259.7%</td>
+                <td class="p-3 border-b">12.2%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">6.0 kW</td>
-                <td class="p-3 border-b">$2541</td>
-                <td class="p-3 border-b font-medium">4.3 years</td>
-                <td class="p-3 border-b text-green-600">610.6%</td>
-                <td class="p-3 border-b">24.1%</td>
+                <td class="p-3 border-b">$1325</td>
+                <td class="p-3 border-b font-medium">7.9 years</td>
+                <td class="p-3 border-b text-green-600">267.6%</td>
+                <td class="p-3 border-b">12.5%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">8.0 kW</td>
-                <td class="p-3 border-b">$3388</td>
-                <td class="p-3 border-b font-medium">4.3 years</td>
-                <td class="p-3 border-b text-green-600">614.6%</td>
-                <td class="p-3 border-b">24.2%</td>
+                <td class="p-3 border-b">$1766</td>
+                <td class="p-3 border-b font-medium">7.9 years</td>
+                <td class="p-3 border-b text-green-600">271.6%</td>
+                <td class="p-3 border-b">12.6%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b">10.0 kW</td>
-                <td class="p-3 border-b">$4235</td>
-                <td class="p-3 border-b font-medium">4.3 years</td>
-                <td class="p-3 border-b text-green-600">617.0%</td>
-                <td class="p-3 border-b">24.2%</td>
+                <td class="p-3 border-b">$2208</td>
+                <td class="p-3 border-b font-medium">7.9 years</td>
+                <td class="p-3 border-b text-green-600">274.0%</td>
+                <td class="p-3 border-b">12.7%</td>
             </tr>
             
         </tbody>
@@ -161,8 +161,8 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const results  = [{"annual_production": 5747.48, "irr": 0.2402, "kw": 4.0, "payback": 4.31, "roi": 602.66, "savings": 1693.83}, {"annual_production": 8621.22, "irr": 0.2413, "kw": 6.0, "payback": 4.31, "roi": 610.6, "savings": 2540.75}, {"annual_production": 11494.96, "irr": 0.2418, "kw": 8.0, "payback": 4.31, "roi": 614.57, "savings": 3387.67}, {"annual_production": 14368.699999999999, "irr": 0.2422, "kw": 10.0, "payback": 4.31, "roi": 616.95, "savings": 4234.59}];
-    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "years": 25};
+    const results  = [{"annual_production": 5747.48, "irr": 0.1222, "kw": 4.0, "payback": 7.92, "roi": 259.68, "savings": 883.01}, {"annual_production": 8621.22, "irr": 0.1246, "kw": 6.0, "payback": 7.92, "roi": 267.62, "savings": 1324.51}, {"annual_production": 11494.96, "irr": 0.1258, "kw": 8.0, "payback": 7.92, "roi": 271.58, "savings": 1766.02}, {"annual_production": 14368.699999999999, "irr": 0.1265, "kw": 10.0, "payback": 7.92, "roi": 273.96, "savings": 2207.52}];
+    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
     const baseData = results.find(r => r.kw === 6.0) || results[0];
     if (!baseData) return;
 

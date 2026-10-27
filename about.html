@@ -59,22 +59,52 @@
     </div>
 
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
-    <h2 class="text-2xl font-bold text-brand mb-6">Our Assumptions (and Why)</h2>
-    <div class="space-y-4 text-gray-700">
-        <p><strong>System cost: $2.70/W.</strong> Based on the U.S. median installed cost for residential solar in 2024–2025 (NREL Q1 2025 benchmark: $2.50–$2.90/W before incentives).</p>
-        <p><strong>Federal ITC: 30%.</strong> The Inflation Reduction Act extended the 30% residential tax credit through 2032. We assume the full credit is usable in year 1; if you have no federal tax liability, a carry-forward or reduced benefit applies.</p>
-        <p><strong>Electricity rate escalation: 2.5% per year.</strong> The EIA Annual Energy Outlook projects 2–3% long-term residential escalation. We use 2.5% as a conservative midpoint.</p>
-        <p><strong>Panel degradation: 0.5% per year.</strong> Matches the median of Tier-1 manufacturer warranties (0.5%/yr linear) and NREL long-term field studies.</p>
-        <p><strong>Operations & maintenance: 1.0% of gross system cost per year.</strong> Covers cleaning, monitoring, and minor repairs. Inverter replacement (~$1800) is included in year 13.</p>
-        <p><strong>Net metering:</strong> Our baseline assumes 1:1 retail-rate credit for exported production. <em>This is optimistic for states that have moved to NEM 3.0 (e.g., California since April 2023) — actual payback there may be 30–50% longer.</em> We plan to add state-specific NEM modeling.</p>
-        <p><strong>Discount rate for NPV: 5%.</strong> Reflects the opportunity cost of capital at current Treasury yields.</p>
+        <h2 class="text-2xl font-bold text-brand mb-6">Our Assumptions (and Why)</h2>
+        <div class="space-y-4 text-gray-700">
+            <p><strong>System cost: $2.70/W.</strong> Based on the U.S. median installed cost for residential solar in 2024–2025 (NREL Q1 2025 benchmark: $2.50–$2.90/W before incentives).</p>
+            <p><strong>Federal ITC: 30%.</strong> The Inflation Reduction Act extended the 30% residential tax credit through 2032. We assume the full credit is usable in year 1; if you have no federal tax liability, a carry-forward or reduced benefit applies.</p>
+            <p><strong>Electricity rate escalation: 2.5% per year.</strong> The EIA Annual Energy Outlook projects 2–3% long-term residential escalation. We use 2.5% as a conservative midpoint.</p>
+            <p><strong>Panel degradation: 0.5% per year.</strong> Matches the median of Tier-1 manufacturer warranties (0.5%/yr linear) and NREL long-term field studies.</p>
+            <p><strong>Operations &amp; maintenance: 1.0% of gross system cost per year.</strong> Covers cleaning, monitoring, and minor repairs. Inverter replacement (~$1800) is modeled in year 13.</p>
+            <p><strong>Net metering:</strong> Our baseline assumes 1:1 retail-rate credit for exported production. See the state-specific notes below — two states are modeled differently due to policy changes.</p>
+            <p><strong>Discount rate for NPV: 5%.</strong> Reflects the opportunity cost of capital at current Treasury yields.</p>
+        </div>
     </div>
+
+    
+    
+    
+    <div class="p-4 bg-yellow-50 rounded-md border border-yellow-200 mb-4">
+        <h3 class="font-bold text-gray-900 mb-2">⚠️ State-Specific Net Metering Assumptions</h3>
+        <p class="text-sm text-gray-700">
+            Net metering rules vary by state and utility. Our baseline assumes 1:1 retail-rate credit for exported solar production.
+            Two states are modeled differently based on current policy:
+        </p>
+        <ul class="list-disc ml-6 mt-2 text-sm text-gray-700 space-y-1">
+            <li><strong>California (NEM 3.0, since April 2023):</strong> export credit ≈ 25% of retail rate. Payback periods are correspondingly longer.</li>
+            <li><strong>Hawaii (CGS+/NEM+):</strong> export credit ≈ 50% of retail rate.</li>
+        </ul>
+        <p class="text-xs text-gray-500 mt-2">
+            Other states use 1:1 retail credit as the default. Actual credits depend on your utility, interconnection date, and system size — consult your installer.
+        </p>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded-md border border-gray-200 mb-8">
+        <h3 class="font-bold text-gray-900 mb-2">🔧 Inverter Replacement</h3>
+        <p class="text-sm text-gray-700">
+            Standard string inverters have a useful life of 10–15 years. We model a $1800 inverter replacement in year 13
+            (~$300/kW for a 6kW system). This reduces the 25-year ROI by 5–15 percentage points.
+        </p>
+        <p class="text-xs text-gray-500 mt-2">
+            ⓘ Note: Because payback periods in most states occur before year 13, the inverter replacement does not extend payback
+            — it only reduces total 25-year ROI. Microinverter systems (e.g., Enphase) typically avoid this mid-life cost.
+        </p>
     </div>
 
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
         <h2 class="text-xl font-bold text-brand mb-2">Contact Us</h2>
         <p class="text-gray-600">If you have questions or feedback, please email us at:</p>
-        <a href="mailto:contact@dataindp.com" class="text-lg font-bold text-blue-600 hover:underline">indp1015@gmail.com</a>
+        <a href="mailto:indp1015@gmail.com" class="text-lg font-bold text-blue-600 hover:underline">indp1015@gmail.com</a>
     </div>
 </div>
 

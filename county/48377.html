@@ -162,7 +162,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const results  = [{"annual_production": 6632.12, "irr": 0.127, "kw": 4.0, "payback": 7.68, "roi": 272.51, "savings": 913.35}, {"annual_production": 9948.18, "irr": 0.1293, "kw": 6.0, "payback": 7.68, "roi": 280.45, "savings": 1370.02}, {"annual_production": 13264.24, "irr": 0.1305, "kw": 8.0, "payback": 7.68, "roi": 284.42, "savings": 1826.69}, {"annual_production": 16580.3, "irr": 0.1311, "kw": 10.0, "payback": 7.68, "roi": 286.8, "savings": 2283.37}];
-    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "years": 25};
+    const PARAMS   = {"cost_per_watt": 2.7, "degradation": 0.005, "discount": 0.05, "escalation": 0.025, "export_rate_frac": 0.4, "inverter_cost_usd": 1800, "inverter_replace_year": 13, "itc_rate": 0.3, "nm_retail_share": 1.0, "om_pct": 0.01, "scenarios_kw": [4, 6, 8, 10], "state_nm_override": {"CA": 0.25, "HI": 0.5}, "years": 25};
     const baseData = results.find(r => r.kw === 6.0) || results[0];
     if (!baseData) return;
 

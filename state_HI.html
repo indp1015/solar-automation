@@ -79,36 +79,36 @@
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15003.html" class="text-brand hover:underline">Honolulu County</a></td>
                 <td class="p-3 border-b">9027</td>
-                <td class="p-3 border-b">3.2</td>
-                <td class="p-3 border-b">876.8%</td>
+                <td class="p-3 border-b">4.6</td>
+                <td class="p-3 border-b">568.3%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15001.html" class="text-brand hover:underline">Hawaii County</a></td>
                 <td class="p-3 border-b">9031</td>
-                <td class="p-3 border-b">3.2</td>
-                <td class="p-3 border-b">877.3%</td>
+                <td class="p-3 border-b">4.6</td>
+                <td class="p-3 border-b">568.6%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15009.html" class="text-brand hover:underline">Maui County</a></td>
                 <td class="p-3 border-b">8948</td>
-                <td class="p-3 border-b">3.2</td>
-                <td class="p-3 border-b">867.9%</td>
+                <td class="p-3 border-b">4.6</td>
+                <td class="p-3 border-b">562.0%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15005.html" class="text-brand hover:underline">Kalawao County</a></td>
                 <td class="p-3 border-b">8832</td>
-                <td class="p-3 border-b">3.2</td>
-                <td class="p-3 border-b">854.7%</td>
+                <td class="p-3 border-b">4.7</td>
+                <td class="p-3 border-b">552.8%</td>
             </tr>
             
             <tr class="hover:bg-gray-50">
                 <td class="p-3 border-b"><a href="/county/15007.html" class="text-brand hover:underline">Kauai County</a></td>
                 <td class="p-3 border-b">7667</td>
-                <td class="p-3 border-b">3.8</td>
-                <td class="p-3 border-b">722.0%</td>
+                <td class="p-3 border-b">5.4</td>
+                <td class="p-3 border-b">459.9%</td>
             </tr>
             
         </tbody>
@@ -117,7 +117,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const countyData = [{"ac_annual": 1504.42, "fips": "15003", "name": "Honolulu County", "payback": 3.18, "roi_25y": 876.8}, {"ac_annual": 1505.13, "fips": "15001", "name": "Hawaii County", "payback": 3.18, "roi_25y": 877.28}, {"ac_annual": 1491.37, "fips": "15009", "name": "Maui County", "payback": 3.21, "roi_25y": 867.88}, {"ac_annual": 1472.03, "fips": "15005", "name": "Kalawao County", "payback": 3.25, "roi_25y": 854.66}, {"ac_annual": 1277.89, "fips": "15007", "name": "Kauai County", "payback": 3.75, "roi_25y": 721.95}];
+    const countyData = [{"ac_annual": 1504.42, "fips": "15003", "name": "Honolulu County", "payback": 4.56, "roi_25y": 568.28}, {"ac_annual": 1505.13, "fips": "15001", "name": "Hawaii County", "payback": 4.56, "roi_25y": 568.62}, {"ac_annual": 1491.37, "fips": "15009", "name": "Maui County", "payback": 4.61, "roi_25y": 562.04}, {"ac_annual": 1472.03, "fips": "15005", "name": "Kalawao County", "payback": 4.67, "roi_25y": 552.78}, {"ac_annual": 1277.89, "fips": "15007", "name": "Kauai County", "payback": 5.39, "roi_25y": 459.89}];
     if (!countyData.length) return;
     const labels = countyData.map(c => c.name);
     const data = countyData.map(c => c.payback);
