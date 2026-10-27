@@ -269,7 +269,9 @@ function compute({ kw, usageKwh, rateCents, avgAcPerKw, escPct, stateAbbr }) {
             payback = (t - 1) + (net - prev) / save;
         }
         flows.push({ year: t, cumulative: cumulative - net });
-        annuals.push({ year: t, save: save });
+        const invCost = inv;
+        const pureSave = save + invCost;  // 인버터 비용 제외한 순수 절감
+        annuals.push({ year: t, save: pureSave, inv: invCost });
     }
     const roi = ((cumulative - net) / net) * 100;
     return { net, year1, payback, roi, flows, annuals, nmShare };
@@ -336,12 +338,24 @@ async function recalc() {
                 {
                     type: 'bar',
                     label: 'Annual savings ($)',
-                    data: annualValues,
+                    data: r.annuals.map(a => Math.round(a.save)),
                     backgroundColor: 'rgba(147,197,253,0.7)',
                     borderColor: 'rgba(59,130,246,0.8)',
                     borderWidth: 1,
                     yAxisID: 'y1',
-                    order: 2
+                    order: 3,
+                    stack: 'costs'
+                },
+                {
+                    type: 'bar',
+                    label: 'Inverter replacement ($)',
+                    data: r.annuals.map(a => Math.round(a.inv)),
+                    backgroundColor: 'rgba(239,68,68,0.5)',
+                    borderColor: 'rgba(220,38,38,0.9)',
+                    borderWidth: 1,
+                    yAxisID: 'y1',
+                    order: 2,
+                    stack: 'costs'
                 },
                 {
                     type: 'line',
@@ -352,7 +366,6 @@ async function recalc() {
                     fill: true,
                     tension: 0.3,
                     pointRadius: 0,
-                    pointHoverRadius: 4,
                     yAxisID: 'y',
                     order: 1
                 }
