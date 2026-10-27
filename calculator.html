@@ -210,9 +210,9 @@
         <h2 class="text-lg font-bold text-brand mb-3">25-Year Cash Flow</h2>
         <div class="relative w-full h-72"><canvas id="cfChart"></canvas></div>
         <p class="text-xs text-gray-500 mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span><span class="inline-block w-3 h-3 bg-orange-400 rounded-sm mr-1 align-middle"></span>Cumulative net</span>
-            <span><span class="inline-block w-3 h-3 bg-blue-300 rounded-sm mr-1 align-middle"></span>Annual gain</span>
-            <span><span class="inline-block w-3 h-3 bg-red-400 rounded-sm mr-1 align-middle"></span>Annual loss</span>
+            <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:#f97316"></span>Cumulative net</span>
+            <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:rgba(59,130,246,0.85)"></span>Annual savings</span>
+            <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:rgba(220,38,38,0.9)"></span>Inverter cost</span>
             <span><span class="inline-block w-3 h-0.5 align-middle" style="border-top:2px dashed #22c55e;"></span>Payback</span>
         </p>
     </div>
@@ -327,13 +327,12 @@ async function recalc() {
         nmNote.classList.add('hidden');
     }
 
-    const labels = r.flows.map(f => f.year);
+     const labels = r.flows.map(f => f.year);
     const cumValues = r.flows.map(f => Math.round(f.cumulative));
-    const annualValues = r.annuals.map(a => Math.round(a.net));
-
-    // 양수는 파랑, 음수는 빨강
-    const barColors  = annualValues.map(v => v >= 0 ? 'rgba(59,130,246,0.85)' : 'rgba(220,38,38,0.85)');
-    const barBorders = annualValues.map(v => v >= 0 ? '#1d4ed8' : '#b91c1c');
+    // 파란 막대: 순수 절감액 (인버터 제외, 항상 양수)
+    const savingValues = r.annuals.map(a => Math.round(a.net + a.inv_paid));
+    // 빨간 막대: 인버터 비용 (음수, Year 13만)
+    const inverterValues = r.annuals.map(a => a.inv_paid ? -Math.round(a.inv_paid) : 0);
 
     if (cfChart) cfChart.destroy();
     cfChart = new Chart(document.getElementById('cfChart'), {
@@ -342,10 +341,20 @@ async function recalc() {
             datasets: [
                 {
                     type: 'bar',
-                    label: 'Annual cashflow ($)',
-                    data: annualValues,
-                    backgroundColor: barColors,
-                    borderColor: barBorders,
+                    label: 'Annual savings ($)',
+                    data: savingValues,
+                    backgroundColor: 'rgba(59,130,246,0.85)',
+                    borderColor: '#1d4ed8',
+                    borderWidth: 1,
+                    yAxisID: 'y1',
+                    order: 3
+                },
+                {
+                    type: 'bar',
+                    label: 'Inverter replacement ($)',
+                    data: inverterValues,
+                    backgroundColor: 'rgba(220,38,38,0.90)',
+                    borderColor: '#991b1b',
                     borderWidth: 1,
                     yAxisID: 'y1',
                     order: 2
@@ -355,7 +364,7 @@ async function recalc() {
                     label: 'Cumulative net ($)',
                     data: cumValues,
                     borderColor: '#f97316',
-                    backgroundColor: 'rgba(249,115,22,0.05)',  // 0.1 → 0.05
+                    backgroundColor: 'rgba(249,115,22,0.05)',
                     fill: true,
                     tension: 0.3,
                     pointRadius: 0,
@@ -377,16 +386,20 @@ async function recalc() {
                         label: item => {
                             const v = item.parsed.y;
                             const ds = item.dataset.label;
-                            const year = +item.label;
-                            const yearData = r.annuals[year - 1];
                             if (ds.includes('Cumulative')) {
                                 return `Cumulative: $${v.toLocaleString()}${v >= 0 ? ' ✅' : ''}`;
                             }
-                            const lines = [`Annual: $${v.toLocaleString()}${v >= 0 ? '' : ' (loss)'}`];
-                            if (yearData && yearData.inv_paid) {
-                                lines.push(`  ↳ includes −$${yearData.inv_paid.toLocaleString()} inverter replacement`);
+                            if (ds.includes('Inverter')) {
+                                return `🔧 Inverter: $${v.toLocaleString()}`;
                             }
-                            return lines;
+                            return `Savings: $${v.toLocaleString()}`;
+                        },
+                        footer: items => {
+                            const year = +items[0].label;
+                            const a = r.annuals[year - 1];
+                            if (!a) return '';
+                            const netVal = Math.round(a.net);
+                            return `────────\nNet this year: $${netVal.toLocaleString()}${netVal < 0 ? ' ⚠️' : ''}`;
                         }
                     }
                 }
@@ -398,7 +411,7 @@ async function recalc() {
                 },
                 y1: {
                     position: 'right',
-                    title: { display: true, text: 'Annual cashflow ($)' },
+                    title: { display: true, text: 'Annual ($)' },
                     grid: { drawOnChartArea: false }
                 }
             }
