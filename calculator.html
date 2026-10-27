@@ -205,15 +205,19 @@
         </div>
     </div>
 
-    <!-- 25년 차트 -->
+    <!-- 25년 차트 (2개로 분리) -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-6">
-        <h2 class="text-lg font-bold text-brand mb-3">25-Year Cash Flow</h2>
-        <div class="relative w-full h-72"><canvas id="cfChart"></canvas></div>
-        <p class="text-xs text-gray-500 mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:#f97316"></span>Cumulative net</span>
+        <div class="relative w-full h-56 mb-6">
+            <canvas id="cumChart"></canvas>
+        </div>
+        <div class="relative w-full h-56">
+            <canvas id="annualChart"></canvas>
+        </div>
+        <p class="text-xs text-gray-500 mt-4 flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span><span class="inline-block w-4 h-0.5 align-middle mr-1" style="border-top:2px solid #f97316;"></span>Cumulative net</span>
+            <span><span class="inline-block w-4 h-0.5 align-middle mr-1" style="border-top:2px dashed #22c55e;"></span>Payback</span>
             <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:rgba(59,130,246,0.85)"></span>Annual savings</span>
-            <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:rgba(220,38,38,0.9)"></span>Inverter cost</span>
-            <span><span class="inline-block w-3 h-0.5 align-middle" style="border-top:2px dashed #22c55e;"></span>Payback</span>
+            <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:rgba(220,38,38,0.9)"></span>Inverter replacement</span>
         </p>
     </div>
 </div>
@@ -224,14 +228,13 @@ const COST_PER_WATT = P.cost_per_watt;
 const ITC          = P.itc_rate;
 const DEGRADATION  = P.degradation;
 const OM_PCT       = P.om_pct;
-const ESC_DEFAULT  = P.escalation;
 const INV_YEAR     = Number(P.inverter_replace_year) || null;
 const INV_COST     = Number(P.inverter_cost_usd) || 0;
 const EXPORT_FRAC  = Number(P.export_rate_frac) || 0.4;
 const NM_DEFAULT   = Number(P.nm_retail_share) || 1.0;
 const NM_OVERRIDES = (P.state_nm_override && typeof P.state_nm_override === 'object') ? P.state_nm_override : {};
 
-let stateCache = {}, cfChart;
+let stateCache = {}, cumChart = null, annualChart = null;
 
 async function loadStateData(abbr) {
     if (stateCache[abbr]) return stateCache[abbr];
@@ -262,7 +265,7 @@ function compute({ kw, usageKwh, rateCents, avgAcPerKw, escPct, stateAbbr }) {
         const retailRate = (rateCents / 100) * Math.pow(1 + esc, t - 1);
         const effectiveRate = retailRate * (nmShare + (1 - nmShare) * EXPORT_FRAC);
         const inv = (INV_YEAR && t === INV_YEAR) ? INV_COST : 0;
-        const save = prod * effectiveRate - om - inv;   // 이미 net (인버터 차감됨)
+        const save = prod * effectiveRate - om - inv;
 
         if (t === 1) year1 = save;
         cumulative += save;
@@ -271,36 +274,11 @@ function compute({ kw, usageKwh, rateCents, avgAcPerKw, escPct, stateAbbr }) {
             payback = (t - 1) + (net - prev) / save;
         }
         flows.push({ year: t, cumulative: cumulative - net });
-        // annuals: 순액 + 그 해에 지출된 인버터 비용(양수)
         annuals.push({ year: t, net: save, inv_paid: inv });
     }
     const roi = ((cumulative - net) / net) * 100;
     return { net, year1, payback, roi, flows, annuals, nmShare };
 }
-
-const paybackPlugin = {
-    id: 'paybackLine',
-    afterDatasetsDraw(chart) {
-        const r = chart.$lastResult;
-        if (!r || !r.payback || r.payback > 25) return;
-        const x = chart.scales.x.getPixelForValue(r.payback - 1);
-        const yZero = chart.scales.y.getPixelForValue(0);
-        const yTop = chart.chartArea.top;
-        const ctx = chart.ctx;
-        ctx.save();
-        ctx.strokeStyle = '#22c55e';
-        ctx.setLineDash([6, 4]);
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(x, Math.max(yZero, chart.chartArea.bottom));
-        ctx.lineTo(x, yTop);
-        ctx.stroke();
-        ctx.fillStyle = '#16a34a';
-        ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(`Payback ${r.payback.toFixed(1)} yrs`, x + 6, yTop + 16);
-        ctx.restore();
-    }
-};
 
 async function recalc() {
     const abbr = document.getElementById('stateSelect').value;
@@ -327,30 +305,99 @@ async function recalc() {
         nmNote.classList.add('hidden');
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    // 데이터 준비
+    // ═══════════════════════════════════════════════════════════════
     const labels = r.flows.map(f => f.year);
     const cumValues = r.flows.map(f => Math.round(f.cumulative));
-    const savingValues = r.annuals.map(a => Math.round(a.net + a.inv_paid));
-    const inverterValues = r.annuals.map(a => a.inv_paid ? -Math.round(a.inv_paid) : 0);
+    const savingValues = r.annuals.map(a => Math.round(a.net + a.inv_paid));   // 순수 절감액 (항상 양수)
+    const inverterValues = r.annuals.map(a => a.inv_paid ? -Math.round(a.inv_paid) : 0);  // 인버터 비용 (음수)
 
-    // ─── 두 축의 0선을 일치시키기 위한 min/max 계산 ───
-    const cumMinRaw = Math.min(0, ...cumValues);
-    const cumMaxRaw = Math.max(0, ...cumValues);
-    const cumRange = cumMaxRaw - cumMinRaw || 1;
-    const zeroPct = (-cumMinRaw) / cumRange;   // 왼쪽 축의 0 위치 비율
+    // ═══════════════════════════════════════════════════════════════
+    // 차트 1: 누적 라인 + Payback 수직선
+    // ═══════════════════════════════════════════════════════════════
+    const paybackPlugin = {
+        id: 'paybackLine',
+        afterDatasetsDraw(chart) {
+            if (!r.payback || r.payback > 25) return;
+            const x = chart.scales.x.getPixelForValue(r.payback - 1);
+            const yZero = chart.scales.y.getPixelForValue(0);
+            const yTop = chart.chartArea.top;
+            const ctx = chart.ctx;
+            ctx.save();
+            ctx.strokeStyle = '#22c55e';
+            ctx.setLineDash([6, 4]);
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x, Math.max(yZero, chart.chartArea.bottom));
+            ctx.lineTo(x, yTop);
+            ctx.stroke();
+            ctx.fillStyle = '#16a34a';
+            ctx.font = 'bold 11px sans-serif';
+            ctx.fillText(`Payback ${r.payback.toFixed(1)} yrs`, x + 6, yTop + 14);
+            ctx.restore();
+        }
+    };
 
-    const annMinRaw = Math.min(0, ...inverterValues);
-    const annMaxRaw = Math.max(0, ...savingValues);
-    // y1의 0이 왼쪽과 같은 위치에 오도록 확장
-    const K = Math.max(
-        annMaxRaw / Math.max(1e-6, 1 - zeroPct),
-        (-annMinRaw) / Math.max(1e-6, zeroPct),
-        1
-    );
-    const y1Min = -zeroPct * K;
-    const y1Max = (1 - zeroPct) * K;
+    if (cumChart) cumChart.destroy();
+    cumChart = new Chart(document.getElementById('cumChart'), {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Cumulative net ($)',
+                data: cumValues,
+                borderColor: '#f97316',
+                backgroundColor: 'rgba(249,115,22,0.08)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 0,
+                pointHoverRadius: 5,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: '25-Year Cumulative Net Cash Flow ($)',
+                    align: 'start',
+                    font: { size: 13, weight: 'bold' },
+                    color: '#1e3a8a',
+                    padding: { bottom: 8 }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: items => `Year ${items[0].label}`,
+                        label: item => {
+                            const v = item.parsed.y;
+                            return `Cumulative: $${v.toLocaleString()}${v >= 0 ? ' ✅' : ''}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    title: { display: true, text: 'Cumulative ($)' },
+                    ticks: { callback: v => '$' + v.toLocaleString() },
+                    grid: {
+                        color: ctx => ctx.tick.value === 0 ? '#94a3b8' : '#e5e7eb'
+                    }
+                }
+            }
+        },
+        plugins: [paybackPlugin]
+    });
 
-    if (cfChart) cfChart.destroy();
-    cfChart = new Chart(document.getElementById('cfChart'), {
+    // ═══════════════════════════════════════════════════════════════
+    // 차트 2: 연간 막대 (파랑↑ 절감, 빨강↓ 인버터)
+    // ═══════════════════════════════════════════════════════════════
+    if (annualChart) annualChart.destroy();
+    annualChart = new Chart(document.getElementById('annualChart'), {
         data: {
             labels,
             datasets: [
@@ -361,8 +408,7 @@ async function recalc() {
                     backgroundColor: 'rgba(59,130,246,0.85)',
                     borderColor: '#1d4ed8',
                     borderWidth: 1,
-                    yAxisID: 'y1',
-                    order: 3
+                    order: 2
                 },
                 {
                     type: 'bar',
@@ -371,20 +417,6 @@ async function recalc() {
                     backgroundColor: 'rgba(220,38,38,0.90)',
                     borderColor: '#991b1b',
                     borderWidth: 1,
-                    yAxisID: 'y1',
-                    order: 2
-                },
-                {
-                    type: 'line',
-                    label: 'Cumulative net ($)',
-                    data: cumValues,
-                    borderColor: '#f97316',
-                    backgroundColor: 'rgba(249,115,22,0.05)',
-                    fill: true,
-                    tension: 0.3,
-                    pointRadius: 0,
-                    pointHoverRadius: 4,
-                    yAxisID: 'y',
                     order: 1
                 }
             ]
@@ -394,16 +426,21 @@ async function recalc() {
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             plugins: {
-                legend: { position: 'top', labels: { boxWidth: 12 } },
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Annual Cashflow ($)',
+                    align: 'start',
+                    font: { size: 13, weight: 'bold' },
+                    color: '#1e3a8a',
+                    padding: { bottom: 8 }
+                },
                 tooltip: {
                     callbacks: {
                         title: items => `Year ${items[0].label}`,
                         label: item => {
                             const v = item.parsed.y;
                             const ds = item.dataset.label;
-                            if (ds.includes('Cumulative')) {
-                                return `Cumulative: $${v.toLocaleString()}${v >= 0 ? ' ✅' : ''}`;
-                            }
                             if (ds.includes('Inverter')) {
                                 return `🔧 Inverter: -$${Math.abs(v).toLocaleString()}`;
                             }
@@ -414,31 +451,22 @@ async function recalc() {
                             const a = r.annuals[year - 1];
                             if (!a) return '';
                             const netVal = Math.round(a.net);
-                            return `────────\nNet this year: $${netVal.toLocaleString()}${netVal < 0 ? ' ⚠️' : ''}`;
+                            return `Net this year: $${netVal.toLocaleString()}${netVal < 0 ? ' ⚠️' : ''}`;
                         }
                     }
                 }
             },
             scales: {
                 y: {
-                    position: 'left',
-                    min: cumMinRaw,
-                    max: cumMaxRaw,
-                    title: { display: true, text: 'Cumulative net ($)' }
-                },
-                y1: {
-                    position: 'right',
-                    min: y1Min,
-                    max: y1Max,
                     title: { display: true, text: 'Annual ($)' },
-                    grid: { drawOnChartArea: false }
+                    ticks: { callback: v => '$' + v.toLocaleString() },
+                    grid: {
+                        color: ctx => ctx.tick.value === 0 ? '#94a3b8' : '#e5e7eb'
+                    }
                 }
             }
-        },
-        plugins: [paybackPlugin]
+        }
     });
-    cfChart.$lastResult = r;
-    cfChart.update('none');
 }
 
 ['kwSlider','usageSlider','escSlider'].forEach(id => {
